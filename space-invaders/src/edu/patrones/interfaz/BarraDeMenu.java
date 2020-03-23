@@ -8,51 +8,65 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class BarraDeMenu extends JMenuBar implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JMenu menuJuego = new JMenu("Juego");
 	private JMenuItem itemNuevoJugador = new JMenuItem("Nuevo Jugador");  
-	private JMenuItem itemSeleccionarJugador = new JMenuItem("Seleccionar Jugador");
+	private JMenuItem itemSeleccJugador = new JMenuItem("Seleccionar Jugador");
 	private JMenuItem itemIngresoRapido = new JMenuItem("Ingreso Rápido");
 	private JMenuItem itemCrearPartida = new JMenuItem("Crear Partida");  
 	private JMenuItem itemCargarPartida = new JMenuItem("Cargar Partida");
-	private JMenuItem itemMejoresPuntajes = new JMenuItem("Mejores Puntajes");
+	private JMenuItem itemMejPuntajes = new JMenuItem(Const.T_PUNT);
 	private JMenu menuAyuda = new JMenu("Ayuda");
-	private JMenuItem itemInstrucciones = new JMenuItem(Constantes.TITULO_INSTRUCCIONES);  
-	private JMenuItem itemAcercaDe = new JMenuItem("Acerca de...");
-
-	private DialogoInstrucciones dialogoInstrucciones = new DialogoInstrucciones();
+	private JMenuItem itemInstrucc = new JMenuItem(Const.T_INSTRUCC);  
+	private JMenuItem itemAcercaDe = new JMenuItem(Const.T_ACERCA);
+	private DialogoMejoresPuntajes dmp = new DialogoMejoresPuntajes();
+	private JOptionPane dialogoInstrucc = new JOptionPane(Const.INSTRUCC);
+	private JOptionPane dialogoAcercaDe = new JOptionPane(Const.ACERCA);
 	private JDialog dialogo;
 	private JFrame ventana;
 
 	public BarraDeMenu(JFrame ventana) throws HeadlessException {
 		this.ventana = ventana;
 		menuJuego.add(itemNuevoJugador);
-		menuJuego.add(itemSeleccionarJugador);
+		menuJuego.add(itemSeleccJugador);
 		menuJuego.add(itemIngresoRapido);
 		menuJuego.add(itemCrearPartida);  
 		menuJuego.add(itemCargarPartida); 
-		menuJuego.add(itemMejoresPuntajes); 
+		menuJuego.add(itemMejPuntajes);
+		itemMejPuntajes.addActionListener(this);
 		this.add(menuJuego); 
-		menuAyuda.add(itemInstrucciones);
-		itemInstrucciones.addActionListener(this);
+		menuAyuda.add(itemInstrucc);
+		itemInstrucc.addActionListener(this);
 		menuAyuda.add(itemAcercaDe);
+		itemAcercaDe.addActionListener(this);
 		this.add(menuAyuda); 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-		case Constantes.TITULO_INSTRUCCIONES:
-			dialogo = dialogoInstrucciones.createDialog(this, Constantes.TITULO_INSTRUCCIONES);
-			dialogo.setLocationRelativeTo(this.ventana);
-			dialogo.setVisible(true);
+		case Const.T_PUNT:
+			dialogo = dmp.createDialog(this, Const.T_PUNT);
+			break;
+		case Const.T_INSTRUCC:
+			dialogo = dialogoInstrucc.createDialog(this, Const.T_INSTRUCC);
+			break;
+		case Const.T_ACERCA:
+			dialogo = dialogoAcercaDe.createDialog(this, Const.T_ACERCA);
 			break;
 		default:
-			System.out.println("nada");
+			dialogo = null;
 		}
+
+		if (dialogo != null) {
+			dialogo.setLocationRelativeTo(this.ventana);
+			dialogo.setVisible(true);
+		}
+		
 	}
 
 }
