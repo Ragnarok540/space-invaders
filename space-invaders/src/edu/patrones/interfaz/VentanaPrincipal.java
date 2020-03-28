@@ -17,12 +17,14 @@ public class VentanaPrincipal {
 
 	public static void main(String[] args) {
 		//ventana.add(panel);
+		
 		ventana.setLayout(new BorderLayout());
 		ventana.setJMenuBar(barraMenu);
 		ventana.add(barraEstado, BorderLayout.SOUTH);
 		ventana.setSize(400, 300);
 		ventana.setVisible(true);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ventana.setLocationRelativeTo(null);
 
 
 	}

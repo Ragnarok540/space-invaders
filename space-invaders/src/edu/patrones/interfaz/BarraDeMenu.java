@@ -16,7 +16,7 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 	private JMenu menuJuego = new JMenu("Juego");
 	private JMenuItem itemNuevoJugador = new JMenuItem("Nuevo Jugador");  
 	private JMenuItem itemSeleccJugador = new JMenuItem("Seleccionar Jugador");
-	private JMenuItem itemIngresoRapido = new JMenuItem("Ingreso RÃ¡pido");
+	private JMenuItem itemIngresoRapido = new JMenuItem("Ingreso Rápido");
 	private JMenuItem itemCrearPartida = new JMenuItem("Crear Partida");  
 	private JMenuItem itemCargarPartida = new JMenuItem("Cargar Partida");
 	private JMenuItem itemMejPuntajes = new JMenuItem(Const.T_PUNT);
