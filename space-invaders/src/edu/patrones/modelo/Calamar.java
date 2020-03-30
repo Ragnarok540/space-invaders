@@ -1,7 +1,11 @@
 package edu.patrones.modelo;
 
 public class Calamar extends Enemigo {
-
+		
+	public Calamar() {
+		super.puntaje = 30;
+	}
+	
 	@Override
 	public void instante() {
 		// TODO Auto-generated method stub
