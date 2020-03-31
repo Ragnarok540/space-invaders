@@ -1,4 +1,4 @@
-package edu.patrones.interfaz;
+package edu.patrones.vista;
 
 public final class Const {
 

@@ -1,11 +1,11 @@
 package edu.patrones.modelo;
 
-import edu.patrones.intefaces.INaveFactoryMethod;
+import edu.patrones.intefaces.IEnemigoFactoryMethod;
 
-public class NaveFactoryMethod implements INaveFactoryMethod{
+public class EnemigoFactoryMethod implements IEnemigoFactoryMethod{
 
 	@Override
-	public Nave crearNave(int tipo) {
+	public Enemigo crearEnemigo(int tipo) {
 		// TODO Auto-generated method stub
 		if(tipo == 1) {
 			return new Pulpo();

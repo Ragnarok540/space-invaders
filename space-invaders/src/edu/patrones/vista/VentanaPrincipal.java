@@ -1,4 +1,4 @@
-package edu.patrones.interfaz;
+package edu.patrones.vista;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;

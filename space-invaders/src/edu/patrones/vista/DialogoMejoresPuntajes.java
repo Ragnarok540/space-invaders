@@ -1,4 +1,4 @@
-package edu.patrones.interfaz;
+package edu.patrones.vista;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
