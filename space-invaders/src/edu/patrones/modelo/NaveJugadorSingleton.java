@@ -1,19 +1,19 @@
 package edu.patrones.modelo;
 
-public class NaveJugador extends Nave {
+public class NaveJugadorSingleton extends Nave {
 
 	private int vidas = 3;
-	private NaveJugador navejugador = null;
+	private NaveJugadorSingleton navejugador = null;
 	
-	private NaveJugador() {
+	private NaveJugadorSingleton() {
 		
 	}
 	
-	public NaveJugador instancia() {
+	public NaveJugadorSingleton instancia() {
 		if (navejugador != null) {
 			return navejugador;
 		} else {
-			navejugador = new NaveJugador();
+			navejugador = new NaveJugadorSingleton();
 			return navejugador;
 		}
 	}

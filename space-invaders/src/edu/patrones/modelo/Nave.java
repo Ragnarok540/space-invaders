@@ -1,7 +1,7 @@
 package edu.patrones.modelo;
 
 public abstract class Nave extends Entidad {
-
+	
 	@Override
 	public abstract void instante();
 

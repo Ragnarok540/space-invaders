@@ -2,6 +2,10 @@ package edu.patrones.modelo;
 
 public class Pulpo extends Enemigo {
 
+	public Pulpo() {
+		super.puntaje = 10;
+	}
+	
 	@Override
 	public void instante() {
 		// TODO Auto-generated method stub
