@@ -2,11 +2,10 @@ package edu.patrones.modelo;
 
 import edu.patrones.intefaces.IEnemigoFactoryMethod;
 
-public class EnemigoFactoryMethod implements IEnemigoFactoryMethod{
+public class EnemigoFactoryMethod implements IEnemigoFactoryMethod {
 
 	@Override
 	public Enemigo crearEnemigo(int tipo) {
-		// TODO Auto-generated method stub
 		if(tipo == 1) {
 			return new Pulpo();
 		}

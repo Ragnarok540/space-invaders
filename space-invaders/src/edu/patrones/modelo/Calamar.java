@@ -2,6 +2,8 @@ package edu.patrones.modelo;
 
 public class Calamar extends Enemigo {
 		
+	private ModeloFlyweightCalamar modelo;
+	
 	public Calamar() {
 		super.puntaje = 30;
 	}
@@ -22,6 +24,14 @@ public class Calamar extends Enemigo {
 	public void mover(String direccion) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public ModeloFlyweightCalamar getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(ModeloFlyweightCalamar modelo) {
+		this.modelo = modelo;
 	}
 
 }

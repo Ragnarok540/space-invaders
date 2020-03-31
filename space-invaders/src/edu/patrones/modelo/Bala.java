@@ -7,7 +7,7 @@ public class Bala extends Entidad implements IBala {
 	boolean tipo;
 	int posX;
 	int posY;
-	
+	private ModeloFlyweightBala modelo;
 	
 	public Bala(boolean tipo, int posX, int posY) {
 		super();
@@ -40,6 +40,14 @@ public class Bala extends Entidad implements IBala {
 		this.posY = posY;
 	}
 
+	public ModeloFlyweightBala getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(ModeloFlyweightBala modelo) {
+		this.modelo = modelo;
+	}
+	
 	@Override
 	public void instante() {
 		// TODO Auto-generated method stub

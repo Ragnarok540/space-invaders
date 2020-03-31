@@ -2,6 +2,8 @@ package edu.patrones.modelo;
 
 public class Cangrejo extends Enemigo {
 
+	private ModeloFlyweightCangrejo modelo;
+	
 	public Cangrejo() {
 		super.puntaje = 20;
 	}
@@ -22,6 +24,14 @@ public class Cangrejo extends Enemigo {
 	public void mover(String direccion) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public ModeloFlyweightCangrejo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(ModeloFlyweightCangrejo modelo) {
+		this.modelo = modelo;
 	}
 
 }

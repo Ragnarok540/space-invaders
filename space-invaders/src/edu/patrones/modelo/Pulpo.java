@@ -2,6 +2,8 @@ package edu.patrones.modelo;
 
 public class Pulpo extends Enemigo {
 
+	private ModeloFlyweightPulpo modelo;
+	
 	public Pulpo() {
 		super.puntaje = 10;
 	}
@@ -22,6 +24,14 @@ public class Pulpo extends Enemigo {
 	public void mover(String direccion) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public ModeloFlyweightPulpo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(ModeloFlyweightPulpo modelo) {
+		this.modelo = modelo;
 	}
 
 }

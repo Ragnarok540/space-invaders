@@ -3,18 +3,18 @@ package edu.patrones.modelo;
 public class NaveJugadorSingleton extends Nave {
 
 	private int vidas = 3;
-	private NaveJugadorSingleton navejugador = null;
+	private NaveJugadorSingleton naveJugador = null;
 	
 	private NaveJugadorSingleton() {
 		
 	}
 	
 	public NaveJugadorSingleton instancia() {
-		if (navejugador != null) {
-			return navejugador;
+		if (naveJugador != null) {
+			return naveJugador;
 		} else {
-			navejugador = new NaveJugadorSingleton();
-			return navejugador;
+			naveJugador = new NaveJugadorSingleton();
+			return naveJugador;
 		}
 	}
 	

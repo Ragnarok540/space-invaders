@@ -14,9 +14,9 @@ public abstract class Entidad {
 	
 	public boolean colision(int x0, int y0, int x1, int y1) {
 		return !(posX + ancho < x0 || 
-				 posY + alto < y0 || 
+				 posY + alto  < y0 || 
 				 posX - ancho > x1 || 
-				 posY - alto > y1);
+				 posY - alto  > y1);
 	}
 	
 	public void eliminar() {
