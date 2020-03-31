@@ -1,20 +1,12 @@
 package edu.patrones.modelo;
 
-import edu.patrones.intefaces.IBala;
+import edu.patrones.intefaces.IBalaPrototype;
 
-public class Bala extends Entidad implements IBala {
+public class BalaPrototype extends Entidad implements IBalaPrototype {
 
-	boolean tipo;
-	int posX;
-	int posY;
+	private boolean tipo;
 	private ModeloFlyweightBala modelo;
 	
-	public Bala(boolean tipo, int posX, int posY) {
-		super();
-		this.tipo = tipo;
-		this.posX = posX;
-		this.posY = posY;
-	}
 
 	public boolean isTipo() {
 		return tipo;
@@ -22,22 +14,6 @@ public class Bala extends Entidad implements IBala {
 
 	public void setTipo(boolean tipo) {
 		this.tipo = tipo;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
 	}
 
 	public ModeloFlyweightBala getModelo() {
@@ -67,12 +43,12 @@ public class Bala extends Entidad implements IBala {
 	}
 
 	@Override
-	public IBala clonar() {
-		// TODO Auto-generated method stub
-		Bala bala = null;
+	public IBalaPrototype clonar() {
+
+		BalaPrototype bala = null;
 
 		try {
-			bala = (Bala) clone();
+			bala = (BalaPrototype) clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
