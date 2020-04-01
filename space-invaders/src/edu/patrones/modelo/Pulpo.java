@@ -1,5 +1,6 @@
 package edu.patrones.modelo;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Pulpo extends Enemigo {
@@ -8,23 +9,15 @@ public class Pulpo extends Enemigo {
 	
 	public Pulpo() {
 		super.puntaje = 10;
-	}
-	
-	@Override
-	public void instante() {
-		// TODO Auto-generated method stub
-
+		ancho = 20;
+		alto = 20;
 	}
 
 	@Override
 	public void dibujar(Graphics g) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mover(String direccion) {
-		// TODO Auto-generated method stub
+		g.setColor(Color.RED);
+		
+		g.fillRect(posX, posY, ancho, alto);
 
 	}
 

@@ -10,7 +10,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-import edu.patrones.modelo.NaveJugadorSingleton;
+import edu.patrones.modelo.Entidad;
+import edu.patrones.modelo.PartidaMediator;
 
 
 public class Juego extends Canvas implements Runnable {
@@ -20,7 +21,7 @@ public class Juego extends Canvas implements Runnable {
 	private static final int ANCHO = 480;
 	private static BarraDeEstado barraEstado;
 	private boolean corriendo = false;
-	private NaveJugadorSingleton naveJugador;
+	private PartidaMediator partida;
 
 	private BufferedImage image;
 
@@ -30,17 +31,24 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	public void inicializar() {
-		naveJugador = NaveJugadorSingleton.instancia();
+		partida = new PartidaMediator();
 	}
 	
 	public void instante() {
-		naveJugador.instante();
+		for (Entidad entidad: partida.getEntidades()) {
+			if (entidad.isEliminada()) {
+				return;
+			} else {
+				entidad.instante();
+			}
+		}
 	}
 	
 	public void dibujar() {
 		BufferStrategy bs = getBufferStrategy();
+		
 		if (bs == null) {
-			createBufferStrategy(3);
+			createBufferStrategy(2);
 			return;
 		}
 		
@@ -48,7 +56,13 @@ public class Juego extends Canvas implements Runnable {
 
 		g.drawImage(image, 0, 0, ANCHO, ALTO, null);
 				
-		naveJugador.dibujar(g);
+		for (Entidad entidad: partida.getEntidades()) {
+			if (entidad.isEliminada()) {
+				return;
+			} else {
+				entidad.dibujar(g);
+			}
+		}
 		
 		Toolkit.getDefaultToolkit().sync();
 		
@@ -106,7 +120,7 @@ public class Juego extends Canvas implements Runnable {
 			ahora = System.nanoTime();
 			noProcesado += (ahora - ultimoTiempo) / nsPorInstante;
 			ultimoTiempo = ahora;
-			debeDibujar = false;
+			debeDibujar = true;
 			
 			while (noProcesado >= 1) {
 				instantes++;
