@@ -1,5 +1,7 @@
 package edu.patrones.modelo;
 
+import java.awt.Graphics;
+
 public class Cangrejo extends Enemigo {
 
 	private ModeloFlyweightCangrejo modelo;
@@ -15,7 +17,7 @@ public class Cangrejo extends Enemigo {
 	}
 
 	@Override
-	public void dibujar() {
+	public void dibujar(Graphics g) {
 		// TODO Auto-generated method stub
 
 	}

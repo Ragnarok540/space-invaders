@@ -1,15 +1,21 @@
 package edu.patrones.modelo;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class NaveJugadorSingleton extends Nave {
 
 	private int vidas = 3;
-	private NaveJugadorSingleton naveJugador = null;
+	private static NaveJugadorSingleton naveJugador = null;
 	
 	private NaveJugadorSingleton() {
-		
+		posX = 240;
+		posY = 300;
+		ancho = 30;
+		alto = 15;
 	}
 	
-	public NaveJugadorSingleton instancia() {
+	public static NaveJugadorSingleton instancia() {
 		if (naveJugador != null) {
 			return naveJugador;
 		} else {
@@ -20,19 +26,33 @@ public class NaveJugadorSingleton extends Nave {
 	
 	@Override
 	public void instante() {
-		// TODO Auto-generated method stub
+		
+		mover("E");
 
 	}
 
 	@Override
-	public void dibujar() {
-		// TODO Auto-generated method stub
+	public void dibujar(Graphics g) {
+		
+		g.setColor(Color.GREEN);
+		
+		g.fillRect(posX, posY, ancho, alto);
 
 	}
 
 	@Override
 	public void mover(String direccion) {
-		// TODO Auto-generated method stub
+		
+		switch (direccion) {
+		case "E":
+			posX += 1;
+			break;
+		case "W":
+			posX -= 1;
+			break;
+		default:
+			
+		}
 
 	}
 

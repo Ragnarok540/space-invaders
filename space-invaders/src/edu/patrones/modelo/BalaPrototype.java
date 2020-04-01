@@ -1,5 +1,7 @@
 package edu.patrones.modelo;
 
+import java.awt.Graphics;
+
 import edu.patrones.intefaces.IBalaPrototype;
 
 public class BalaPrototype extends Entidad implements IBalaPrototype {
@@ -31,7 +33,7 @@ public class BalaPrototype extends Entidad implements IBalaPrototype {
 	}
 
 	@Override
-	public void dibujar() {
+	public void dibujar(Graphics g) {
 		// TODO Auto-generated method stub
 
 	}

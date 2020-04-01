@@ -1,5 +1,7 @@
 package edu.patrones.modelo;
 
+import java.awt.Graphics;
+
 public abstract class Enemigo extends Nave {
 	
 	protected int velocidad;
@@ -9,7 +11,7 @@ public abstract class Enemigo extends Nave {
 	public abstract void instante();
 
 	@Override
-	public abstract void dibujar();
+	public abstract void dibujar(Graphics g);
 
 	@Override
 	public abstract void mover(String direccion);
@@ -17,6 +19,7 @@ public abstract class Enemigo extends Nave {
 	public int getPuntaje() {
 		return puntaje;
 	}
+
 	public int getVelocidad() {
 		return velocidad;
 	}

@@ -1,5 +1,7 @@
 package edu.patrones.modelo;
 
+import java.awt.Graphics;
+
 public class Calamar extends Enemigo {
 		
 	private ModeloFlyweightCalamar modelo;
@@ -15,7 +17,7 @@ public class Calamar extends Enemigo {
 	}
 
 	@Override
-	public void dibujar() {
+	public void dibujar(Graphics g) {
 		// TODO Auto-generated method stub
 
 	}

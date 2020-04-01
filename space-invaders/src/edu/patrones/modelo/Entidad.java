@@ -1,5 +1,7 @@
 package edu.patrones.modelo;
 
+import java.awt.Graphics;
+
 public abstract class Entidad {
 
 	protected int posX, posY, alto, ancho;
@@ -8,7 +10,7 @@ public abstract class Entidad {
 	
 	public abstract void instante();
 	
-	public abstract void dibujar();
+	public abstract void dibujar(Graphics g);
 	
 	public abstract void mover(String direccion);
 	
