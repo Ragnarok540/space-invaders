@@ -69,5 +69,5 @@ public abstract class Enemigo extends Nave {
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
-
+	
 }

@@ -1,6 +1,7 @@
 package edu.patrones.modelo;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public abstract class Entidad {
 
@@ -13,13 +14,6 @@ public abstract class Entidad {
 	public abstract void dibujar(Graphics g);
 	
 	public abstract void mover(String direccion);
-	
-	public boolean colision(int x0, int y0, int x1, int y1) {
-		return !(posX + ancho < x0 || 
-				 posY + alto  < y0 || 
-				 posX - ancho > x1 || 
-				 posY - alto  > y1);
-	}
 	
 	public void eliminar() {
 		eliminada = true;
@@ -60,5 +54,9 @@ public abstract class Entidad {
 	public boolean isEliminada() {
 		return eliminada;
 	}
+	
+    public Rectangle getRectangulo() {
+        return new Rectangle(posX, posY, ancho, alto);
+    }
 	
 }

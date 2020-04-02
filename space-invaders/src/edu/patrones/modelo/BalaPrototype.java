@@ -1,5 +1,6 @@
 package edu.patrones.modelo;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import edu.patrones.intefaces.IBalaPrototype;
@@ -9,6 +10,10 @@ public class BalaPrototype extends Entidad implements IBalaPrototype {
 	private boolean tipo;
 	private ModeloFlyweightBala modelo;
 	
+	public BalaPrototype() {
+		ancho = 2;
+		alto = 20;
+	}
 
 	public boolean isTipo() {
 		return tipo;
@@ -28,20 +33,22 @@ public class BalaPrototype extends Entidad implements IBalaPrototype {
 	
 	@Override
 	public void instante() {
-		// TODO Auto-generated method stub
-
+		mover(null);
 	}
 
 	@Override
 	public void dibujar(Graphics g) {
-		// TODO Auto-generated method stub
-
+		g.setColor(Color.GRAY);
+		g.fillRect(posX, posY, ancho, alto);
 	}
 
 	@Override
 	public void mover(String direccion) {
-		// TODO Auto-generated method stub
-
+		if (tipo) {
+			posY--;
+		} else {
+			posY++;
+		}
 	}
 
 	@Override

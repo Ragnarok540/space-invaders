@@ -32,16 +32,19 @@ public class Juego extends Canvas implements Runnable {
 
 	public void inicializar() {
 		partida = new PartidaMediator();
+		partida.disparoJugador();
 	}
 	
 	public void instante() {
 		for (Entidad entidad: partida.getEntidades()) {
 			if (entidad.isEliminada()) {
-				return;
+				continue;
 			} else {
 				entidad.instante();
 			}
 		}
+		partida.verificarColisionesEnemigos();
+		partida.verificarColisionesJugador();
 	}
 	
 	public void dibujar() {
@@ -58,7 +61,7 @@ public class Juego extends Canvas implements Runnable {
 				
 		for (Entidad entidad: partida.getEntidades()) {
 			if (entidad.isEliminada()) {
-				return;
+				continue;
 			} else {
 				entidad.dibujar(g);
 			}
