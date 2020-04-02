@@ -19,16 +19,27 @@ public class PartidaMediator {
 		
 		Enemigo enemigo;
 		
-		int posX = 30;
-		int posY = 30;
+		int posX = 5;
+		int posY = 5;
+		int tipo = 0;
 		
-		// Crear Pulpos
-		for(int i = 0; i < 10; i++) {
-			enemigo = fabrica.crearEnemigo(1);
-			enemigo.setPosX(posX);
-			enemigo.setPosY(posY);
-			entidades.add(enemigo);
-			posX += 35;
+		for (int i = 5; i > 0; i--) {
+			for (int j = 0; j < 10; j++) {
+				if (i == 5) {
+					tipo = 3;
+				} else if (i == 4 || i == 3) {
+					tipo = 2;
+				} else if (i == 2 || i == 1) {
+					tipo = 1;
+				}
+				enemigo = fabrica.crearEnemigo(tipo);
+				enemigo.setPosX(posX);
+				enemigo.setPosY(posY);
+				entidades.add(enemigo);
+				posX += 40;
+			} 
+			posX = 5;
+			posY += 30;
 		}
 		
 	}

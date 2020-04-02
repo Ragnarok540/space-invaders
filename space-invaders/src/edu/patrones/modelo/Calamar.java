@@ -1,5 +1,6 @@
 package edu.patrones.modelo;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Calamar extends Enemigo {
@@ -7,25 +8,14 @@ public class Calamar extends Enemigo {
 	private ModeloFlyweightCalamar modelo;
 	
 	public Calamar() {
+		super();
 		super.puntaje = 30;
-	}
-	
-	@Override
-	public void instante() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void dibujar(Graphics g) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mover(String direccion) {
-		// TODO Auto-generated method stub
-
+		g.setColor(Color.YELLOW);
+		g.fillRect(posX, posY, ancho, alto);
 	}
 
 	public ModeloFlyweightCalamar getModelo() {

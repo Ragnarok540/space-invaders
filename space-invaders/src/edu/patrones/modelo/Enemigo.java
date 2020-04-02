@@ -4,11 +4,16 @@ import java.awt.Graphics;
 
 public abstract class Enemigo extends Nave {
 	
-	protected int velocidad = 8;
+	protected int velocidad = 10;
 	protected int puntaje;
 	private int acumulador = 0;
 	private boolean dir = true;
 	private int acumuladorVelocidad = 0;
+	
+	public Enemigo() {
+		ancho = 32;
+		alto = 22;
+	}
 	
 	@Override
 	public void instante() {

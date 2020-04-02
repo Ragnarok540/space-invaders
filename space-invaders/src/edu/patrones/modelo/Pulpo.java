@@ -8,17 +8,14 @@ public class Pulpo extends Enemigo {
 	private ModeloFlyweightPulpo modelo;
 	
 	public Pulpo() {
+		super();
 		super.puntaje = 10;
-		ancho = 20;
-		alto = 20;
 	}
 
 	@Override
 	public void dibujar(Graphics g) {
 		g.setColor(Color.RED);
-		
 		g.fillRect(posX, posY, ancho, alto);
-
 	}
 
 	public ModeloFlyweightPulpo getModelo() {

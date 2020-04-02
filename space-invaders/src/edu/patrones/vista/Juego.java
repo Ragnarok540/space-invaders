@@ -17,8 +17,8 @@ import edu.patrones.modelo.PartidaMediator;
 public class Juego extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private static final int ALTO = 360;
 	private static final int ANCHO = 480;
+	private static final int ALTO = 360;
 	private static BarraDeEstado barraEstado;
 	private boolean corriendo = false;
 	private PartidaMediator partida;
@@ -48,7 +48,7 @@ public class Juego extends Canvas implements Runnable {
 		BufferStrategy bs = getBufferStrategy();
 		
 		if (bs == null) {
-			createBufferStrategy(2);
+			createBufferStrategy(3);
 			return;
 		}
 		

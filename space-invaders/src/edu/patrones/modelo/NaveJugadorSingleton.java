@@ -27,7 +27,7 @@ public class NaveJugadorSingleton extends Nave {
 	@Override
 	public void instante() {
 		
-		mover("E");
+		//mover("E");
 
 	}
 
