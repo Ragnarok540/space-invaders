@@ -33,6 +33,7 @@ public class Juego extends Canvas implements Runnable {
 	public void inicializar() {
 		partida = new PartidaMediator();
 		partida.disparoJugador();
+		partida.disparoEnemigo();
 	}
 	
 	public void instante() {

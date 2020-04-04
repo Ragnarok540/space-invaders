@@ -1,6 +1,7 @@
 package edu.patrones.modelo;
 
 import java.awt.Rectangle;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,14 +67,35 @@ public class PartidaMediator {
 		entidades.add(balaClonada);
 	}
 	
+	private Enemigo enemigoAleatorio() {
+		List<Entidad> enemigos = entidades.stream()
+				.filter(x -> x instanceof Enemigo)
+				.filter(x -> x.isEliminada() == false)
+				.collect(Collectors.toList());
+		
+		SecureRandom rand = new SecureRandom();
+	    return (Enemigo) enemigos.get(rand.nextInt(enemigos.size()));
+	}
+	
+	public void disparoEnemigo() {
+		Enemigo enemigo = enemigoAleatorio();
+		BalaPrototype balaClonada = (BalaPrototype) bala.clonar();
+		balaClonada.setPosX(enemigo.getPosX() + enemigo.getAncho() / 2);
+		balaClonada.setPosY(enemigo.getPosY() + bala.getAlto() + 5);
+		balaClonada.setTipo(false);
+		entidades.add(balaClonada);
+	}
+	
 	public void verificarColisionesEnemigos() {
 		
 		List<Entidad> balas = entidades.stream()
 				.filter(x -> x instanceof BalaPrototype)
+				.filter(x -> x.isEliminada() == false)
 				.collect(Collectors.toList()); 
 		
 		List<Entidad> enemigos = entidades.stream()
 				.filter(x -> x instanceof Enemigo)
+				.filter(x -> x.isEliminada() == false)
 				.collect(Collectors.toList()); 
 		
 		Rectangle r1;
@@ -83,15 +105,13 @@ public class PartidaMediator {
 			
 			BalaPrototype b = (BalaPrototype) bala;
 			
-			if (b.isEliminada() || b.isTipo() == false) continue;
+			if (b.isTipo() == false) continue;
 			
 			r1 = b.getRectangulo();
 			
 			for (Entidad enemigo: enemigos) {
 				
 				Enemigo e = (Enemigo) enemigo;
-				
-				if (e.isEliminada()) continue;
 				
 				r2 = e.getRectangulo();
 				
@@ -111,6 +131,7 @@ public class PartidaMediator {
 		
 		List<Entidad> balas = entidades.stream()
 				.filter(x -> x instanceof BalaPrototype)
+				.filter(x -> x.isEliminada() == false)
 				.collect(Collectors.toList()); 
 		
 		Rectangle r1;
@@ -120,7 +141,7 @@ public class PartidaMediator {
 			
 			BalaPrototype b = (BalaPrototype) bala;
 			
-			if (b.isEliminada() || b.isTipo() == true) continue;
+			if (b.isTipo() == true) continue;
 			
 			r1 = b.getRectangulo();
 			
