@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Calamar extends Enemigo {
 		
-	private ModeloFlyweightCalamar modelo;
+	private CalamarFlyweight modelo;
 	
 	public Calamar() {
 		super();
@@ -18,11 +18,11 @@ public class Calamar extends Enemigo {
 		g.fillRect(posX, posY, ancho, alto);
 	}
 
-	public ModeloFlyweightCalamar getModelo() {
+	public CalamarFlyweight getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(ModeloFlyweightCalamar modelo) {
+	public void setModelo(CalamarFlyweight modelo) {
 		this.modelo = modelo;
 	}
 

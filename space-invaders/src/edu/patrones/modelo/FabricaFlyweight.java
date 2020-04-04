@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 import edu.patrones.intefaces.IModeloFlyweight;
 
-public class FabricaDeModelosFlyweight {
+public class FabricaFlyweight {
 
 	private HashMap<String, IModeloFlyweight> modelos;
 	
-	public FabricaDeModelosFlyweight() {
+	public FabricaFlyweight() {
 		modelos = new HashMap<>();
 	}
 	
@@ -19,16 +19,16 @@ public class FabricaDeModelosFlyweight {
 			IModeloFlyweight modelo;
 			switch (tipo) {
 			case "bala":
-				modelo = new ModeloFlyweightBala();
+				modelo = new BalaFlyweight();
 			break;
 			case "calamar":
-				modelo = new ModeloFlyweightCalamar();
+				modelo = new CalamarFlyweight();
 			break;
 			case "cangrejo":
-				modelo = new ModeloFlyweightCangrejo();
+				modelo = new CangrejoFlyweight();
 			break;
 			case "pulpo":
-				modelo = new ModeloFlyweightPulpo();
+				modelo = new PulpoFlyweight();
 			break;
 			default:
 				return null;

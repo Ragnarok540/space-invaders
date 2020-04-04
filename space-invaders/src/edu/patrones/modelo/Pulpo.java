@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Pulpo extends Enemigo {
 
-	private ModeloFlyweightPulpo modelo;
+	private PulpoFlyweight modelo;
 	
 	public Pulpo() {
 		super();
@@ -18,11 +18,11 @@ public class Pulpo extends Enemigo {
 		g.fillRect(posX, posY, ancho, alto);
 	}
 
-	public ModeloFlyweightPulpo getModelo() {
+	public PulpoFlyweight getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(ModeloFlyweightPulpo modelo) {
+	public void setModelo(PulpoFlyweight modelo) {
 		this.modelo = modelo;
 	}
 

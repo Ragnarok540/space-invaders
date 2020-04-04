@@ -124,7 +124,7 @@ public class Juego extends Canvas implements Runnable {
 			ahora = System.nanoTime();
 			noProcesado += (ahora - ultimoTiempo) / nsPorInstante;
 			ultimoTiempo = ahora;
-			debeDibujar = true;
+			debeDibujar = false;
 			
 			while (noProcesado >= 1) {
 				instantes++;

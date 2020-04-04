@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Cangrejo extends Enemigo {
 
-	private ModeloFlyweightCangrejo modelo;
+	private CangrejoFlyweight modelo;
 	
 	public Cangrejo() {
 		super();
@@ -18,11 +18,11 @@ public class Cangrejo extends Enemigo {
 		g.fillRect(posX, posY, ancho, alto);
 	}
 
-	public ModeloFlyweightCangrejo getModelo() {
+	public CangrejoFlyweight getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(ModeloFlyweightCangrejo modelo) {
+	public void setModelo(CangrejoFlyweight modelo) {
 		this.modelo = modelo;
 	}
 

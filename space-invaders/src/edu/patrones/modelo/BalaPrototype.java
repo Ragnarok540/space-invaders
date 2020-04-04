@@ -8,7 +8,7 @@ import edu.patrones.intefaces.IBalaPrototype;
 public class BalaPrototype extends Entidad implements IBalaPrototype {
 
 	private boolean tipo;
-	private ModeloFlyweightBala modelo;
+	private BalaFlyweight modelo;
 	
 	public BalaPrototype() {
 		ancho = 2;
@@ -23,11 +23,11 @@ public class BalaPrototype extends Entidad implements IBalaPrototype {
 		this.tipo = tipo;
 	}
 
-	public ModeloFlyweightBala getModelo() {
+	public BalaFlyweight getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(ModeloFlyweightBala modelo) {
+	public void setModelo(BalaFlyweight modelo) {
 		this.modelo = modelo;
 	}
 	

@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 import edu.patrones.intefaces.IModeloFlyweight;
 
-public class ModeloFlyweightBala implements IModeloFlyweight {
+public class BalaFlyweight implements IModeloFlyweight {
 
 	private ImageIcon imagenA;
 	private ImageIcon imagenB;
