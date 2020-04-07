@@ -66,6 +66,7 @@ public class NaveJugadorSingleton extends Nave {
 	
 	public void restaurar() {
 		vidas = 3;
+		eliminada = false;
 	}
 
 	public int getVidas() {

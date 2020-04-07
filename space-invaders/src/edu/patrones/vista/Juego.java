@@ -7,12 +7,16 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import edu.patrones.modelo.Entidad;
-import edu.patrones.modelo.PartidaMediator;
-
+import edu.patrones.modelo.PartidaFachada;
+import edu.patrones.jugador.ArchivoJugador;
+import edu.patrones.jugador.JugadorEdgar;
+import edu.patrones.jugador.JugadorMemento;
 
 public class Juego extends Canvas implements Runnable {
 
@@ -21,7 +25,7 @@ public class Juego extends Canvas implements Runnable {
 	private static final int ALTO = 360;
 	private static BarraDeEstado barraEstado;
 	private boolean corriendo = false;
-	private PartidaMediator partida;
+	private PartidaFachada partida;
 
 	private BufferedImage image;
 
@@ -31,9 +35,10 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	public void inicializar() {
-		partida = new PartidaMediator();
+		partida = new PartidaFachada();
 		partida.disparoJugador();
-		partida.disparoEnemigo();
+		ArchivoJugador aj = new ArchivoJugador();
+		System.out.println(aj.getData());
 	}
 	
 	public void instante() {
@@ -44,6 +49,7 @@ public class Juego extends Canvas implements Runnable {
 				entidad.instante();
 			}
 		}
+		partida.disparoEnemigo();
 		partida.verificarColisionesEnemigos();
 		partida.verificarColisionesJugador();
 	}

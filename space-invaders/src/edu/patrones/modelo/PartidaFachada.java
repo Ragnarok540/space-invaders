@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class PartidaMediator {
+public class PartidaFachada {
 
+	private int disparos = 60;
 	private ArrayList<Entidad> entidades;
 	private NaveJugadorSingleton naveJugador;
 	private BalaPrototype bala;
+	private int acumuladorDisparosEnemigo = 0;
 	
-	public PartidaMediator() {
+	public PartidaFachada() {
 		entidades = new ArrayList<>();
 		naveJugador = NaveJugadorSingleton.instancia();
 		entidades.add(naveJugador);
@@ -78,12 +80,20 @@ public class PartidaMediator {
 	}
 	
 	public void disparoEnemigo() {
+		acumuladorDisparosEnemigo++;
+		
+		if (acumuladorDisparosEnemigo < disparos) {
+			return;
+		}
+		
 		Enemigo enemigo = enemigoAleatorio();
 		BalaPrototype balaClonada = (BalaPrototype) bala.clonar();
 		balaClonada.setPosX(enemigo.getPosX() + enemigo.getAncho() / 2);
 		balaClonada.setPosY(enemigo.getPosY() + bala.getAlto() + 5);
 		balaClonada.setTipo(false);
 		entidades.add(balaClonada);
+		
+		acumuladorDisparosEnemigo = 0;
 	}
 	
 	public void verificarColisionesEnemigos() {
