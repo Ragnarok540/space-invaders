@@ -17,8 +17,7 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 	private JMenuItem itemNuevoJugador = new JMenuItem("Nuevo Jugador");  
 	private JMenuItem itemSeleccJugador = new JMenuItem("Seleccionar Jugador");
 	private JMenuItem itemIngresoRapido = new JMenuItem("Ingreso Rapido");
-	private JMenuItem itemCrearPartida = new JMenuItem("Crear Partida");  
-	private JMenuItem itemCargarPartida = new JMenuItem("Cargar Partida");
+	private JMenuItem itemIniciarJuego = new JMenuItem("Iniciar Juego");  
 	private JMenuItem itemMejPuntajes = new JMenuItem(Const.T_PUNT);
 	private JMenu menuAyuda = new JMenu("Ayuda");
 	private JMenuItem itemInstrucc = new JMenuItem(Const.T_INSTRUCC);  
@@ -34,8 +33,7 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 		menuJuego.add(itemNuevoJugador);
 		menuJuego.add(itemSeleccJugador);
 		menuJuego.add(itemIngresoRapido);
-		menuJuego.add(itemCrearPartida);  
-		menuJuego.add(itemCargarPartida); 
+		menuJuego.add(itemIniciarJuego);   
 		menuJuego.add(itemMejPuntajes);
 		itemMejPuntajes.addActionListener(this);
 		this.add(menuJuego); 

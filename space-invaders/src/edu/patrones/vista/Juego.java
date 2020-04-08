@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 
 import edu.patrones.modelo.Entidad;
 import edu.patrones.modelo.PartidaFachada;
+import edu.patrones.teclado.TecladoReceiver;
 import edu.patrones.jugador.ArchivoJugador;
 import edu.patrones.jugador.JugadorEdgar;
 import edu.patrones.jugador.JugadorMemento;
@@ -25,18 +26,23 @@ public class Juego extends Canvas implements Runnable {
 	private static final int ALTO = 360;
 	private static BarraDeEstado barraEstado;
 	private boolean corriendo = false;
+	private boolean pausar = false;
 	private PartidaFachada partida;
+	private TecladoReceiver teclado;
+	private boolean disparando = false;
+	private int disparos = 60;
+	private int acumuladorDisparos = 0;
 
 	private BufferedImage image;
 
 	public Juego() {
 		super();
 		image = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
+		teclado = new TecladoReceiver(this);
 	}
 
 	public void inicializar() {
 		partida = new PartidaFachada();
-		partida.disparoJugador();
 		ArchivoJugador aj = new ArchivoJugador();
 		System.out.println(aj.getData());
 	}
@@ -49,9 +55,40 @@ public class Juego extends Canvas implements Runnable {
 				entidad.instante();
 			}
 		}
+		
+		manejarTeclado();
+		
 		partida.disparoEnemigo();
 		partida.verificarColisionesEnemigos();
 		partida.verificarColisionesJugador();
+		
+		acumuladorDisparos++;
+		
+		if (acumuladorDisparos < disparos) {	
+			return;
+		}
+		
+		disparando = false;
+		acumuladorDisparos = 0;
+	}
+	
+	private void manejarTeclado() {
+		if (teclado.getPau().isDown()) {
+			pausar = !pausar;
+		}
+		
+		if (teclado.getDer().isDown()) {
+			partida.getNaveJugador().mover("E");
+		}
+		
+		if (teclado.getIzq().isDown()) {
+			partida.getNaveJugador().mover("W");
+		} 
+		
+		if (teclado.getDis().isDown() && !disparando) {
+			partida.disparoJugador();
+			disparando = true;
+		}
 	}
 	
 	public void dibujar() {
@@ -127,6 +164,7 @@ public class Juego extends Canvas implements Runnable {
 		inicializar();
 
 		while (corriendo) {
+			
 			ahora = System.nanoTime();
 			noProcesado += (ahora - ultimoTiempo) / nsPorInstante;
 			ultimoTiempo = ahora;

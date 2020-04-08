@@ -2,6 +2,8 @@ package edu.patrones.intefaces;
 
 public interface IMovimientoCommand {
 	
-	void execute();
+	public void execute(boolean pressed);
+	
+	public boolean isDown();
 
 }

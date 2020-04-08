@@ -61,7 +61,13 @@ public class ArchivoJugador {
     	try {
 			data = leerArchivo();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			data = new ArrayList<>();
+			try {
+				escribirArchivo();
+				data = leerArchivo();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
