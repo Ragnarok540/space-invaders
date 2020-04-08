@@ -16,7 +16,7 @@ import edu.patrones.modelo.Entidad;
 import edu.patrones.modelo.PartidaFachada;
 import edu.patrones.teclado.TecladoReceiver;
 import edu.patrones.jugador.ArchivoJugador;
-import edu.patrones.jugador.JugadorEdgar;
+import edu.patrones.jugador.Jugador;
 import edu.patrones.jugador.JugadorMemento;
 
 public class Juego extends Canvas implements Runnable {

@@ -1,23 +1,25 @@
 package edu.patrones.jugador;
 
-public class JugadorEdgar {
+import edu.patrones.intefaces.IJugadorNullObject;
+
+public class Jugador implements IJugadorNullObject {
 	
 	private String nickname;
 	private String nombre;
 	private int puntuacionMaxima;
 
-	public JugadorEdgar(String nickname, String nombre) {
+	public Jugador(String nickname, String nombre) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.puntuacionMaxima = 0;
 	}
 
-	public JugadorEdgar() {
+	public Jugador() {
 
 	}
 
-	public String getNickname() {
+	public String getNickName() {
 		return nickname;
 	}
 
@@ -25,7 +27,7 @@ public class JugadorEdgar {
 		return nombre;
 	}
 
-	public int getPuntuacionMaxima() {
+	public int getPuntajeMaximo() {
 		return puntuacionMaxima;
 	}
 
@@ -44,5 +46,13 @@ public class JugadorEdgar {
 		this.nombre = jugadorMemento.getNombre();
 		this.puntuacionMaxima = Integer.parseInt(jugadorMemento.getPuntuacionMaxima());
     }
+
+	@Override
+	public boolean isNull() {
+		
+		return false;
+	}
+
+	
 	
 }
