@@ -13,13 +13,13 @@ import javax.swing.JOptionPane;
 public class BarraDeMenu extends JMenuBar implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private JMenu menuJuego = new JMenu("Juego");
-	private JMenuItem itemNuevoJugador = new JMenuItem("Nuevo Jugador");  
-	private JMenuItem itemSeleccJugador = new JMenuItem("Seleccionar Jugador");
-	private JMenuItem itemIngresoRapido = new JMenuItem("Ingreso Rapido");
-	private JMenuItem itemIniciarJuego = new JMenuItem("Iniciar Juego");  
+	private JMenu menuJuego = new JMenu(Const.JUEGO);
+	private JMenuItem itemNuevoJugador = new JMenuItem(Const.T_NUEVO);  
+	private JMenuItem itemSeleccJugador = new JMenuItem(Const.T_SELECC);
+	private JMenuItem itemIngresoRapido = new JMenuItem(Const.T_INGR);
+	private JMenuItem itemIniciarJuego = new JMenuItem(Const.T_INIC);  
 	private JMenuItem itemMejPuntajes = new JMenuItem(Const.T_PUNT);
-	private JMenu menuAyuda = new JMenu("Ayuda");
+	private JMenu menuAyuda = new JMenu(Const.AYUDA);
 	private JMenuItem itemInstrucc = new JMenuItem(Const.T_INSTRUCC);  
 	private JMenuItem itemAcercaDe = new JMenuItem(Const.T_ACERCA);
 	private DialogoMejoresPuntajes dmp = new DialogoMejoresPuntajes();

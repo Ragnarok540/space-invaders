@@ -11,7 +11,7 @@ import javax.swing.border.BevelBorder;
 public class BarraDeEstado extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel labelEstado = new JLabel("Cree o seleccione un jugador para empezar...");
+	private JLabel labelEstado = new JLabel(Const.ESTADO_INI);
 
 	public BarraDeEstado() {
 		super();
