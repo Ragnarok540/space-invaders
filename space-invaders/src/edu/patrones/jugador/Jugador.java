@@ -15,10 +15,6 @@ public class Jugador implements IJugadorNullObject {
 		this.puntuacionMaxima = 0;
 	}
 
-	public Jugador() {
-
-	}
-
 	public String getNickName() {
 		return nickname;
 	}
@@ -53,6 +49,4 @@ public class Jugador implements IJugadorNullObject {
 		return false;
 	}
 
-	
-	
 }

@@ -7,9 +7,11 @@ public class ArchivoJugadorProxy {
 
 	private ArchivoJugador aj;
 	
-	public Object[][] datosOrdenados() {
+	public ArchivoJugadorProxy() {
 		aj = new ArchivoJugador();
-		
+	}
+	
+	public Object[][] datosOrdenados() {
 		List<String[]> data = aj.getData();
 		
 		Collections.sort(data, (e1, e2) -> {

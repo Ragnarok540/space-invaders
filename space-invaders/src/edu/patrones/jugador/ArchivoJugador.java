@@ -57,6 +57,15 @@ public class ArchivoJugador {
 		return data;
 	}
     
+	public boolean jugadorExiste(String nickname) {
+    	for (String[] registro: data) {
+    		if (registro[0].equals(nickname)) {
+    			return true;
+    		}
+    	}
+		return false;
+	}
+	
     private void cargarArchivo() {
     	try {
 			data = leerArchivo();

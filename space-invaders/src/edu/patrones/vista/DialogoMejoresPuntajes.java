@@ -9,9 +9,10 @@ import edu.patrones.jugador.ArchivoJugadorProxy;
 public class DialogoMejoresPuntajes extends JOptionPane {
 
 	private static final long serialVersionUID = 1L;
+	private ArchivoJugadorProxy ajp;
 
 	public DialogoMejoresPuntajes() {
-		ArchivoJugadorProxy ajp = new ArchivoJugadorProxy();
+		ajp = new ArchivoJugadorProxy();
 		Object[][] datos = ajp.datosOrdenados();
 		JTable tabla = new JTable(datos, Const.COL_NAMES);
 		JScrollPane scroll = new JScrollPane(tabla);

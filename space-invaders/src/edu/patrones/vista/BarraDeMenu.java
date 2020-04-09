@@ -22,7 +22,8 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 	private JMenu menuAyuda = new JMenu(Const.AYUDA);
 	private JMenuItem itemInstrucc = new JMenuItem(Const.T_INSTRUCC);  
 	private JMenuItem itemAcercaDe = new JMenuItem(Const.T_ACERCA);
-	private DialogoMejoresPuntajes dmp = new DialogoMejoresPuntajes();
+	private DialogoNuevoJugador dnj;
+	private DialogoMejoresPuntajes dmp;
 	private JOptionPane dialogoInstrucc = new JOptionPane(Const.INSTRUCC);
 	private JOptionPane dialogoAcercaDe = new JOptionPane(Const.ACERCA);
 	private JDialog dialogo;
@@ -31,6 +32,7 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 	public BarraDeMenu(JFrame ventana) throws HeadlessException {
 		this.ventana = ventana;
 		menuJuego.add(itemNuevoJugador);
+		itemNuevoJugador.addActionListener(this);
 		menuJuego.add(itemSeleccJugador);
 		menuJuego.add(itemIngresoRapido);
 		menuJuego.add(itemIniciarJuego);   
@@ -41,13 +43,20 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 		itemInstrucc.addActionListener(this);
 		menuAyuda.add(itemAcercaDe);
 		itemAcercaDe.addActionListener(this);
-		this.add(menuAyuda); 
+		this.add(menuAyuda);
+		
+		dnj = new DialogoNuevoJugador(this.ventana);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
+		case Const.T_NUEVO:
+			dnj.setVisible(true);
+			dialogo = null;
+			break;
 		case Const.T_PUNT:
+			dmp = new DialogoMejoresPuntajes();
 			dialogo = dmp.createDialog(this, Const.T_PUNT);
 			break;
 		case Const.T_INSTRUCC:
