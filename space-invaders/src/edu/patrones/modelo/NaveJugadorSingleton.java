@@ -1,6 +1,5 @@
 package edu.patrones.modelo;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class NaveJugadorSingleton extends Nave {
@@ -9,10 +8,10 @@ public class NaveJugadorSingleton extends Nave {
 	private static NaveJugadorSingleton naveJugador = null;
 	
 	private NaveJugadorSingleton() {
-		posX = 240;
-		posY = 300;
-		ancho = 30;
-		alto = 15;
+		posX = 230;
+		posY = 330;
+		ancho = 35;
+		alto = 19;
 	}
 	
 	public static NaveJugadorSingleton instancia() {
@@ -27,17 +26,11 @@ public class NaveJugadorSingleton extends Nave {
 	@Override
 	public void instante() {
 		
-		//mover("E");
-
 	}
 
 	@Override
 	public void dibujar(Graphics g) {
-		
-		g.setColor(Color.GREEN);
-		
-		g.fillRect(posX, posY, ancho, alto);
-
+		g.drawImage(modelo.getImagenA(), posX, posY, null);
 	}
 
 	@Override

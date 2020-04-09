@@ -18,6 +18,9 @@ public class FabricaFlyweight {
 		} else {
 			IModeloFlyweight modelo;
 			switch (tipo) {
+			case "nave":
+				modelo = new NaveJugadorFlyweight();
+			break;
 			case "bala":
 				modelo = new BalaFlyweight();
 			break;

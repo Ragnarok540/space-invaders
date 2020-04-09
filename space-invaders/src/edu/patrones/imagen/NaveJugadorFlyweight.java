@@ -8,20 +8,20 @@ import javax.imageio.ImageIO;
 
 import edu.patrones.intefaces.IModeloFlyweight;
 
-public class BalaFlyweight implements IModeloFlyweight {
+public class NaveJugadorFlyweight implements IModeloFlyweight {
 
 	private BufferedImage imagenA;
 	private BufferedImage imagenB;
 	
-	public BalaFlyweight() {
+	public NaveJugadorFlyweight() {
 		try {
-			imagenA = ImageIO.read(new File("res/missile.png"));
-			imagenB = ImageIO.read(new File("res/laser.png"));
+			imagenA = ImageIO.read(new File("res/nave.png"));
+			imagenB = ImageIO.read(new File("res/nave.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}	
+	}
 	
 	@Override
 	public BufferedImage getImagenA() {

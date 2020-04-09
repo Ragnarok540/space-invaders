@@ -16,19 +16,30 @@ public class PartidaFachada {
 	private ArrayList<Entidad> entidades;
 	private NaveJugadorSingleton naveJugador;
 	private BalaPrototype bala;
+	private FabricaFlyweight fabricaF;
 	private int acumuladorDisparosEnemigo = 0;
 	
 	public PartidaFachada() {
+		fabricaF = new FabricaFlyweight();
+		
+		IModeloFlyweight modelo = null;
+		
 		entidades = new ArrayList<>();
+
 		naveJugador = NaveJugadorSingleton.instancia();
+		modelo = fabricaF.obtenerModelo("nave");
+		naveJugador.setModelo(modelo);
 		entidades.add(naveJugador);
+
 		bala = new BalaPrototype();
+		modelo = fabricaF.obtenerModelo("bala");
+		bala.setModelo(modelo);
+		
 		crearEnemigos();
 	}
 
 	private void crearEnemigos() {
 		EnemigoFactoryMethod fabrica = new EnemigoFactoryMethod();
-		FabricaFlyweight fabricaF = new FabricaFlyweight();
 		
 		Enemigo enemigo;
 		IModeloFlyweight modelo = null;
@@ -73,7 +84,7 @@ public class PartidaFachada {
 	
 	public void disparoJugador() {
 		BalaPrototype balaClonada = (BalaPrototype) bala.clonar();
-		balaClonada.setPosX(naveJugador.getPosX() + naveJugador.getAncho() / 2);
+		balaClonada.setPosX(naveJugador.getPosX() + (naveJugador.getAncho() / 2) - 5);
 		balaClonada.setPosY(naveJugador.getPosY() - bala.getAlto() - 5);
 		balaClonada.setTipo(true);
 		entidades.add(balaClonada);
@@ -98,7 +109,7 @@ public class PartidaFachada {
 		
 		Enemigo enemigo = enemigoAleatorio();
 		BalaPrototype balaClonada = (BalaPrototype) bala.clonar();
-		balaClonada.setPosX(enemigo.getPosX() + enemigo.getAncho() / 2);
+		balaClonada.setPosX(enemigo.getPosX() + (enemigo.getAncho() / 2) - 5);
 		balaClonada.setPosY(enemigo.getPosY() + bala.getAlto() + 5);
 		balaClonada.setTipo(false);
 		entidades.add(balaClonada);
