@@ -1,14 +1,11 @@
 package edu.patrones.intefaces;
 
-import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
 
 public interface IModeloFlyweight {
 
-	public ImageIcon getImagenA();
+	public BufferedImage getImagenA();
 	
-	public ImageIcon getImagenB();
+	public BufferedImage getImagenB();
 	
-	public void setImagenA(ImageIcon imagenA);
-	
-	public void setImagenB(ImageIcon imagenB);
 }

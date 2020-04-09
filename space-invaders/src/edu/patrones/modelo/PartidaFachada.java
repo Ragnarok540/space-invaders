@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import edu.patrones.imagen.FabricaFlyweight;
+import edu.patrones.intefaces.IModeloFlyweight;
+
 
 public class PartidaFachada {
 
@@ -25,8 +28,10 @@ public class PartidaFachada {
 
 	private void crearEnemigos() {
 		EnemigoFactoryMethod fabrica = new EnemigoFactoryMethod();
+		FabricaFlyweight fabricaF = new FabricaFlyweight();
 		
 		Enemigo enemigo;
+		IModeloFlyweight modelo = null;
 		
 		int posX = 5;
 		int posY = 5;
@@ -36,16 +41,21 @@ public class PartidaFachada {
 			for (int j = 0; j < 10; j++) {
 				if (i == 5) {
 					tipo = 3;
+					modelo = fabricaF.obtenerModelo("calamar");
 				} else if (i == 4 || i == 3) {
 					tipo = 2;
+					modelo = fabricaF.obtenerModelo("cangrejo");
 				} else if (i == 2 || i == 1) {
 					tipo = 1;
+					modelo = fabricaF.obtenerModelo("pulpo");
 				}
 				enemigo = fabrica.crearEnemigo(tipo);
 				enemigo.setPosX(posX);
 				enemigo.setPosY(posY);
+				if (modelo != null) enemigo.setModelo(modelo);
 				entidades.add(enemigo);
 				posX += 40;
+				modelo = null;
 			} 
 			posX = 5;
 			posY += 30;

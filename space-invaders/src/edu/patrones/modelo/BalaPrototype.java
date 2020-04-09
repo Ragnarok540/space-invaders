@@ -3,6 +3,7 @@ package edu.patrones.modelo;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import edu.patrones.imagen.BalaFlyweight;
 import edu.patrones.intefaces.IBalaPrototype;
 
 public class BalaPrototype extends Entidad implements IBalaPrototype {

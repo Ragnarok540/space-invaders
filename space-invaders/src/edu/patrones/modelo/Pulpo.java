@@ -1,11 +1,8 @@
 package edu.patrones.modelo;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Pulpo extends Enemigo {
-
-	private PulpoFlyweight modelo;
 	
 	public Pulpo() {
 		super();
@@ -14,16 +11,11 @@ public class Pulpo extends Enemigo {
 
 	@Override
 	public void dibujar(Graphics g) {
-		g.setColor(Color.RED);
-		g.fillRect(posX, posY, ancho, alto);
-	}
-
-	public PulpoFlyweight getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(PulpoFlyweight modelo) {
-		this.modelo = modelo;
+		if (estado) {
+			g.drawImage(modelo.getImagenA(), posX, posY, null);
+		} else {
+			g.drawImage(modelo.getImagenB(), posX, posY, null);
+		}
 	}
 
 }

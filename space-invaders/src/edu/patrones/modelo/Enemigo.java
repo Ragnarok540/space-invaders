@@ -10,6 +10,8 @@ public abstract class Enemigo extends Nave {
 	private boolean dir = true;
 	private int acumuladorVelocidad = 0;
 	
+	protected boolean estado = true; 
+	
 	public Enemigo() {
 		ancho = 32;
 		alto = 22;
@@ -24,6 +26,7 @@ public abstract class Enemigo extends Nave {
 		}
 		
 		mover(null);
+		estado = !estado;
 		
 		acumuladorVelocidad = 0;
 	}

@@ -1,4 +1,4 @@
-package edu.patrones.modelo;
+package edu.patrones.imagen;
 
 import java.util.HashMap;
 
