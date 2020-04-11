@@ -1,5 +1,7 @@
 package edu.patrones.vista;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -13,7 +15,8 @@ public class DialogoMejoresPuntajes extends JOptionPane {
 
 	public DialogoMejoresPuntajes() {
 		ajp = new ArchivoJugadorProxy();
-		Object[][] datos = ajp.datosOrdenados();
+		List<String[]> data = ajp.getData();
+		Object[][] datos = ajp.convertir(data);
 		JTable tabla = new JTable(datos, Const.COL_NAMES);
 		JScrollPane scroll = new JScrollPane(tabla);
 		this.setMessage(scroll);

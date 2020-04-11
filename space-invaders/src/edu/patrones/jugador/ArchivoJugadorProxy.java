@@ -3,7 +3,9 @@ package edu.patrones.jugador;
 import java.util.Collections;
 import java.util.List;
 
-public class ArchivoJugadorProxy {
+import edu.patrones.intefaces.IArchivoJugadorProxy;
+
+public class ArchivoJugadorProxy implements IArchivoJugadorProxy {
 
 	private ArchivoJugador aj;
 	
@@ -11,20 +13,25 @@ public class ArchivoJugadorProxy {
 		aj = new ArchivoJugador();
 	}
 	
-	public Object[][] datosOrdenados() {
+	@Override
+	public List<String[]> getData() {
 		List<String[]> data = aj.getData();
 		
 		Collections.sort(data, (e1, e2) -> {
 			return Integer.parseInt(e2[2]) - Integer.parseInt(e1[2]);
 		});
 		
-		Object[][] salida = new Object[data.size()][4];
-		
-		for (int i = 0; i < data.size(); i++) {
+		return data;
+	}
+	
+	public Object[][] convertir(List<String[]> lista) {
+		Object[][] salida = new Object[lista.size()][4];
+				
+		for (int i = 0; i < lista.size(); i++) {
 			salida[i] = new Object[] {i + 1, 
-					                  data.get(i)[2], 
-					                  data.get(i)[0], 
-					                  data.get(i)[1]};
+					lista.get(i)[2], 
+					lista.get(i)[0], 
+					lista.get(i)[1]};
 		}
 		
 		return salida;

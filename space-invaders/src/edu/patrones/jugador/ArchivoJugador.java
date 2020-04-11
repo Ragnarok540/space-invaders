@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ArchivoJugador {
+import edu.patrones.intefaces.IArchivoJugadorProxy;
+
+public class ArchivoJugador implements IArchivoJugadorProxy {
 
     private static final String NOMBRE_ARCHIVO_CSV = "res/database.csv";
     private static final String DELIMITADOR = ",";
@@ -53,6 +55,7 @@ public class ArchivoJugador {
         }
     }
     
+    @Override
 	public List<String[]> getData() {
 		return data;
 	}
