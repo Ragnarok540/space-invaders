@@ -28,14 +28,17 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 	private JOptionPane dialogoAcercaDe = new JOptionPane(Const.ACERCA);
 	private JDialog dialogo;
 	private JFrame ventana;
+	private Juego juego;
 
-	public BarraDeMenu(JFrame ventana) throws HeadlessException {
+	public BarraDeMenu(JFrame ventana, Juego juego) throws HeadlessException {
 		this.ventana = ventana;
+		this.juego = juego;
 		menuJuego.add(itemNuevoJugador);
 		itemNuevoJugador.addActionListener(this);
 		menuJuego.add(itemSeleccJugador);
 		menuJuego.add(itemIngresoRapido);
 		menuJuego.add(itemIniciarJuego);   
+		itemIniciarJuego.addActionListener(this);
 		menuJuego.add(itemMejPuntajes);
 		itemMejPuntajes.addActionListener(this);
 		this.add(menuJuego); 
@@ -53,6 +56,10 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 		switch (e.getActionCommand()) {
 		case Const.T_NUEVO:
 			dnj.setVisible(true);
+			dialogo = null;
+			break;
+		case Const.T_INIC:
+			juego.iniciar();
 			dialogo = null;
 			break;
 		case Const.T_PUNT:

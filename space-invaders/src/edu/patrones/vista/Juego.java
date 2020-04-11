@@ -41,13 +41,13 @@ public class Juego extends Canvas implements Runnable {
 		teclado = new TecladoReceiver(this);
 	}
 
-	public void inicializar() {
+	private void inicializar() {
 		partida = new PartidaFachada();
 		ArchivoJugador aj = new ArchivoJugador();
 		System.out.println(aj.getData());
 	}
 	
-	public void instante() {
+	private void instante() {
 		for (Entidad entidad: partida.getEntidades()) {
 			if (entidad.isEliminada()) {
 				continue;
@@ -61,6 +61,11 @@ public class Juego extends Canvas implements Runnable {
 		partida.disparoEnemigo();
 		partida.verificarColisionesEnemigos();
 		partida.verificarColisionesJugador();
+		
+		barraEstado.setEstado(partida.getJugador().getNickName(),
+				partida.getPuntaje(), 
+				partida.getNaveJugador().getVidas(),
+				disparando);
 		
 		acumuladorDisparos++;
 		
@@ -91,7 +96,7 @@ public class Juego extends Canvas implements Runnable {
 		}
 	}
 	
-	public void dibujar() {
+	private void dibujar() {
 		BufferStrategy bs = getBufferStrategy();
 		
 		if (bs == null) {
@@ -127,7 +132,7 @@ public class Juego extends Canvas implements Runnable {
 
 		JFrame ventana = new JFrame("Space Invaders");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setJMenuBar(new BarraDeMenu(ventana));
+		ventana.setJMenuBar(new BarraDeMenu(ventana, juego));
 		ventana.setLayout(new BorderLayout());
 		barraEstado = new BarraDeEstado();
 		ventana.add(barraEstado, BorderLayout.SOUTH);
@@ -137,11 +142,9 @@ public class Juego extends Canvas implements Runnable {
 		ventana.setResizable(false);
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
-
-		juego.iniciar();
 	}
 
-	private void iniciar() {
+	public void iniciar() {
 		corriendo = true;
 		new Thread(this).start();
 	}

@@ -50,7 +50,7 @@ public class NaveJugadorSingleton extends Nave {
 	}
 
 	public void herir() {
-		if (vidas > 0) {
+		if (vidas > 1) {
 			vidas--;
 		} else {
 			super.destruir();

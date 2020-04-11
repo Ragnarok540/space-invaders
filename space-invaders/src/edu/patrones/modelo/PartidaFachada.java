@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import edu.patrones.imagen.FabricaFlyweight;
 import edu.patrones.intefaces.IModeloFlyweight;
+import edu.patrones.jugador.Jugador;
 
 
 public class PartidaFachada {
@@ -18,6 +19,8 @@ public class PartidaFachada {
 	private BalaPrototype bala;
 	private FabricaFlyweight fabricaF;
 	private int acumuladorDisparosEnemigo = 0;
+	private Jugador jugador;
+	private int puntaje;
 	
 	public PartidaFachada() {
 		fabricaF = new FabricaFlyweight();
@@ -36,6 +39,8 @@ public class PartidaFachada {
 		bala.setModelo(modelo);
 		
 		crearEnemigos();
+		
+		jugador = new Jugador("nova5", "Edgar Nova");
 	}
 
 	private void crearEnemigos() {
@@ -80,6 +85,18 @@ public class PartidaFachada {
 
 	public NaveJugadorSingleton getNaveJugador() {
 		return naveJugador;
+	}
+	
+	public Jugador getJugador() {
+		return jugador;
+	}
+	
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
+	
+	public int getPuntaje() {
+		return puntaje;
 	}
 	
 	public void disparoJugador() {
@@ -149,6 +166,7 @@ public class PartidaFachada {
 				if (r1.intersects(r2)) {
 					b.eliminar();
 					e.destruir();
+					puntaje += e.getPuntaje();
 					System.out.println("colision enemigo!!!");
 				}
 				
