@@ -1,6 +1,5 @@
 package edu.patrones.modelo;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import edu.patrones.intefaces.IBalaPrototype;

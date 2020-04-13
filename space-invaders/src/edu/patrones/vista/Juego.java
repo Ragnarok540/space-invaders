@@ -15,9 +15,11 @@ import javax.swing.JFrame;
 import edu.patrones.modelo.Entidad;
 import edu.patrones.modelo.PartidaFachada;
 import edu.patrones.teclado.TecladoReceiver;
+import edu.patrones.intefaces.IJugadorNullObject;
 import edu.patrones.jugador.ArchivoJugador;
 import edu.patrones.jugador.Jugador;
 import edu.patrones.jugador.JugadorMemento;
+import edu.patrones.jugador.JugadorNull;
 
 public class Juego extends Canvas implements Runnable {
 
@@ -28,6 +30,7 @@ public class Juego extends Canvas implements Runnable {
 	private boolean corriendo = false;
 	private boolean pausar = false;
 	private PartidaFachada partida;
+	private IJugadorNullObject jugador = new JugadorNull();
 	private TecladoReceiver teclado;
 	private boolean disparando = false;
 	private int disparos = 60;
@@ -43,8 +46,7 @@ public class Juego extends Canvas implements Runnable {
 
 	private void inicializar() {
 		partida = new PartidaFachada();
-		ArchivoJugador aj = new ArchivoJugador();
-		System.out.println(aj.getData());
+		partida.setJugador(jugador);
 	}
 	
 	private void instante() {
@@ -120,6 +122,11 @@ public class Juego extends Canvas implements Runnable {
 		
 		g.dispose();
 		bs.show();
+	}
+	
+	public void setJugador(JugadorMemento jugadorMemento) {
+		this.jugador = new Jugador();
+		this.jugador.abrirJugador(jugadorMemento);
 	}
 	
 	public static void main(String[] args) {

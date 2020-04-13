@@ -28,4 +28,10 @@ public class JugadorNull implements IJugadorNullObject{
 		return -1;
 	}
 
+	@Override
+	public void abrirJugador(JugadorMemento jugadorMemento) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

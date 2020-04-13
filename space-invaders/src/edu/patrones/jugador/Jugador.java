@@ -15,14 +15,21 @@ public class Jugador implements IJugadorNullObject {
 		this.puntuacionMaxima = 0;
 	}
 
+	public Jugador() {
+		
+	}
+	
+	@Override
 	public String getNickName() {
 		return nickname;
 	}
 
+	@Override
 	public String getNombre() {
 		return nombre;
 	}
 
+	@Override
 	public int getPuntajeMaximo() {
 		return puntuacionMaxima;
 	}
@@ -37,6 +44,7 @@ public class Jugador implements IJugadorNullObject {
         return new JugadorMemento(nickname, nombre, puntuacionMaxima + "");
     }
 
+    @Override
     public void abrirJugador(JugadorMemento jugadorMemento) {
 		this.nickname = jugadorMemento.getNickname();
 		this.nombre = jugadorMemento.getNombre();
