@@ -13,7 +13,7 @@ public class JugadorNull implements IJugadorNullObject{
 	@Override
 	public String getNombre() {
 		
-		return "el jugador no existe";
+		return "El jugador no existe";
 	}
 
 	@Override
