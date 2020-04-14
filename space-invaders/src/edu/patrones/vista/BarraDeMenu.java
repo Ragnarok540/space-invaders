@@ -25,6 +25,7 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 	private DialogoNuevoJugador dnj;
 	private DialogoSeleccionarJugador dsj;
 	private DialogoMejoresPuntajes dmp;
+	private DialogoIngresoRapido dir;
 	private JOptionPane dialogoInstrucc = new JOptionPane(Const.INSTRUCC);
 	private JOptionPane dialogoAcercaDe = new JOptionPane(Const.ACERCA);
 	private JDialog dialogo;
@@ -39,6 +40,7 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 		menuJuego.add(itemSeleccJugador);
 		itemSeleccJugador.addActionListener(this);
 		menuJuego.add(itemIngresoRapido);
+		itemIngresoRapido.addActionListener(this);
 		menuJuego.add(itemIniciarJuego);   
 		itemIniciarJuego.addActionListener(this);
 		menuJuego.add(itemMejPuntajes);
@@ -52,6 +54,7 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 		
 		dnj = new DialogoNuevoJugador(this.ventana);
 		dsj = new DialogoSeleccionarJugador(this.ventana, this.juego);
+		dir = new DialogoIngresoRapido(this.ventana, this.juego);
 	}
 
 	@Override
@@ -78,6 +81,11 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 			break;
 		case Const.T_ACERCA:
 			dialogo = dialogoAcercaDe.createDialog(this, Const.T_ACERCA);
+			break;
+		case Const.T_INGR:
+			dir.setVisible(true);
+			
+			dialogo = null;
 			break;
 		default:
 			dialogo = null;

@@ -16,6 +16,9 @@ public final class Const {
                                              "\n- El Nickname puede tener letras y numeros," +
                                              " y maximo 6 caracteres." +
                                              "\n- No se permiten caracteres especiales ni tildes.";
+	public static final String E_NICK_V = "- El Nickname puede tener letras y numeros," +
+            " y maximo 6 caracteres." +
+            "\n- No se permiten caracteres especiales ni tildes.";
 	public static final String T_ACERCA = "Acerca de...";
 	public static final String ACERCA = "(C) 2020\nYuli Garces\nCarolina Camacho\nEdgar Nova";
 	public static final String T_PUNT = "Mejores Puntajes";
@@ -25,6 +28,7 @@ public final class Const {
 	public static final String T_NUEVO = "Nuevo Jugador";
 	public static final String T_SELECC = "Seleccionar Jugador";
 	public static final String T_INGR = "Ingreso Rapido";
+	public static final String T_NICKRAPIDO = "Nickname del jugador";
 	public static final String T_INIC = "Iniciar Juego";
 	public static final String AYUDA = "Ayuda";
 	public static final String CREAR = "Crear Jugador";
