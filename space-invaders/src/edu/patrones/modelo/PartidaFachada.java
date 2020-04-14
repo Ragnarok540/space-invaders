@@ -7,10 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import edu.patrones.imagen.FabricaFlyweight;
-import edu.patrones.intefaces.IJugadorNullObject;
 import edu.patrones.intefaces.IModeloFlyweight;
-import edu.patrones.jugador.Jugador;
-import edu.patrones.jugador.JugadorNull;
 
 
 public class PartidaFachada {
@@ -21,7 +18,6 @@ public class PartidaFachada {
 	private BalaPrototype bala;
 	private FabricaFlyweight fabricaF;
 	private int acumuladorDisparosEnemigo = 0;
-	private IJugadorNullObject jugador = new JugadorNull();
 	private int puntaje;
 	
 	public PartidaFachada() {
@@ -41,11 +37,6 @@ public class PartidaFachada {
 		bala.setModelo(modelo);
 		
 		crearEnemigos();
-		
-		if (jugador.isNull()) {
-			// No deberia iniciar el juego, la opcion deberia estar inactivda
-			jugador = new Jugador("nova5", "Edgar Nova");
-		}
 		
 	}
 
@@ -91,14 +82,6 @@ public class PartidaFachada {
 
 	public NaveJugadorSingleton getNaveJugador() {
 		return naveJugador;
-	}
-	
-	public IJugadorNullObject getJugador() {
-		return jugador;
-	}
-	
-	public void setJugador(IJugadorNullObject jugador) {
-		this.jugador = jugador;
 	}
 	
 	public int getPuntaje() {

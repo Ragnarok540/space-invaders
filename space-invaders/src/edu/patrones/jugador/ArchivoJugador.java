@@ -25,7 +25,7 @@ public class ArchivoJugador implements IArchivoJugadorProxy {
     
 	public void guardar(JugadorMemento jugador) {
     	for (String[] registro: data) {
-    		if (registro[0] == jugador.getNickname()) {
+    		if (registro[0].contentEquals(jugador.getNickname())) {
     			registro[2] = jugador.getPuntuacionMaxima();
     			return;		
     		}

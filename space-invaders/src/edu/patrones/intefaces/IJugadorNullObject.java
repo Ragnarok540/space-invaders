@@ -4,14 +4,18 @@ import edu.patrones.jugador.JugadorMemento;
 
 public interface IJugadorNullObject {
 
-	public abstract boolean isNull();
+	public boolean isNull();
 	
-	public abstract String getNombre();
+	public String getNombre();
 	
-	public abstract String getNickName();
+	public String getNickName();
 	
-	public abstract int getPuntajeMaximo();
+	public int getPuntajeMaximo();
 	
-	public abstract void abrirJugador(JugadorMemento jugadorMemento);
+	public void abrirJugador(JugadorMemento jugadorMemento);
+	
+	public JugadorMemento guardarJugador();
+	
+	public void setPuntuacionMaxima(int puntuacionMaxima);
 	
 }

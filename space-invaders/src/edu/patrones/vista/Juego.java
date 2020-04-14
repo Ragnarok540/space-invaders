@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -46,10 +45,33 @@ public class Juego extends Canvas implements Runnable {
 
 	private void inicializar() {
 		partida = new PartidaFachada();
-		partida.setJugador(jugador);
+	}
+	
+	private void finalizar() {
+		if (partida.getNaveJugador().isEliminada()) {
+			this.parar();
+			this.actualizarPuntaje();
+			barraEstado.setEstado(" GAME OVER - " + partida.getPuntaje() + " Puntos");
+		}
+	}
+	
+	private void actualizarPuntaje() {
+		if (!jugador.isNull()) {
+			jugador.setPuntuacionMaxima(partida.getPuntaje());
+			JugadorMemento jm = jugador.guardarJugador();
+			ArchivoJugador aj = new ArchivoJugador();
+			aj.guardar(jm);
+			try {
+				aj.escribirArchivo();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
 	}
 	
 	private void instante() {
+		
 		for (Entidad entidad: partida.getEntidades()) {
 			if (entidad.isEliminada()) {
 				continue;
@@ -64,10 +86,12 @@ public class Juego extends Canvas implements Runnable {
 		partida.verificarColisionesEnemigos();
 		partida.verificarColisionesJugador();
 		
-		barraEstado.setEstado(partida.getJugador().getNickName(),
+		barraEstado.setEstado(jugador.getNickName(),
 				partida.getPuntaje(), 
 				partida.getNaveJugador().getVidas(),
 				disparando);
+		
+		finalizar();
 		
 		acumuladorDisparos++;
 		
@@ -167,9 +191,6 @@ public class Juego extends Canvas implements Runnable {
 		double noProcesado = 0;
 		double nsPorInstante = 1000000000.0 / 60;
 		boolean debeDibujar = false;
-		int frames = 0;
-		int instantes = 0;
-		long ultimoTimer = System.currentTimeMillis();
 
 		inicializar();
 
@@ -181,7 +202,6 @@ public class Juego extends Canvas implements Runnable {
 			debeDibujar = false;
 			
 			while (noProcesado >= 1) {
-				instantes++;
 				instante();
 				noProcesado -= 1;
 				debeDibujar = true;
@@ -194,16 +214,9 @@ public class Juego extends Canvas implements Runnable {
 			}
 
 			if (debeDibujar) {
-				frames++;
 				dibujar();
 			}
 
-			if (System.currentTimeMillis() - ultimoTimer > 1000) {
-				ultimoTimer += 1000;
-				System.out.println(instantes + " ticks, " + frames + " fps");
-				frames = 0;
-				instantes = 0;
-			}
 		}
 	}
 	

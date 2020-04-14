@@ -34,4 +34,16 @@ public class JugadorNull implements IJugadorNullObject{
 		
 	}
 
+	@Override
+	public JugadorMemento guardarJugador() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPuntuacionMaxima(int puntuacionMaxima) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

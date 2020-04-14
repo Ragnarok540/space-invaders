@@ -34,12 +34,14 @@ public class Jugador implements IJugadorNullObject {
 		return puntuacionMaxima;
 	}
 
+	@Override
 	public void setPuntuacionMaxima(int puntuacionMaxima) {
 		if (puntuacionMaxima > this.puntuacionMaxima) {
 			this.puntuacionMaxima = puntuacionMaxima;
 		}
 	}
 
+	@Override
     public JugadorMemento guardarJugador() {
         return new JugadorMemento(nickname, nombre, puntuacionMaxima + "");
     }
