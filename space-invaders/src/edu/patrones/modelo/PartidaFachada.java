@@ -19,6 +19,7 @@ public class PartidaFachada {
 	private FabricaFlyweight fabricaF;
 	private int acumuladorDisparosEnemigo = 0;
 	private int puntaje;
+	private boolean ultimoEnemigo = false;
 	
 	public PartidaFachada() {
 		fabricaF = new FabricaFlyweight();
@@ -86,6 +87,14 @@ public class PartidaFachada {
 	
 	public int getPuntaje() {
 		return puntaje;
+	}
+	
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
+	}
+	
+	public boolean isUltimoEnemigo() {
+		return ultimoEnemigo;
 	}
 	
 	public void disparoJugador() {
@@ -156,6 +165,11 @@ public class PartidaFachada {
 					b.eliminar();
 					e.destruir();
 					puntaje += e.getPuntaje();
+					
+					if (enemigos.size() == 1) {
+						ultimoEnemigo = true;
+					}
+					
 					System.out.println("colision enemigo!!!");
 				}
 				

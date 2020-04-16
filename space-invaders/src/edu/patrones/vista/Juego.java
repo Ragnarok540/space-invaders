@@ -8,9 +8,12 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JFrame;
 
+import edu.patrones.modelo.Enemigo;
 import edu.patrones.modelo.Entidad;
 import edu.patrones.modelo.PartidaFachada;
 import edu.patrones.teclado.TecladoReceiver;
@@ -27,13 +30,13 @@ public class Juego extends Canvas implements Runnable {
 	private static final int ALTO = 360;
 	private static BarraDeEstado barraEstado;
 	private boolean corriendo = false;
-	private boolean pausar = false;
 	private PartidaFachada partida;
 	private IJugadorNullObject jugador = new JugadorNull();
 	private TecladoReceiver teclado;
 	private boolean disparando = false;
 	private int disparos = 60;
 	private int acumuladorDisparos = 0;
+	private int nivel = 10;
 
 	private BufferedImage image;
 
@@ -53,6 +56,26 @@ public class Juego extends Canvas implements Runnable {
 			this.actualizarPuntaje();
 			barraEstado.setEstado(" GAME OVER - " + partida.getPuntaje() + " Puntos");
 		}
+	}
+	
+	private void siguienteNivel() {
+		nivel -= 3;
+		
+		int puntajeActual = partida.getPuntaje();
+		
+		partida = new PartidaFachada();
+		partida.setPuntaje(puntajeActual);
+		partida.getNaveJugador().restaurar();
+		
+		List<Entidad> entidades = partida.getEntidades().stream()
+			.filter(x -> x instanceof Enemigo)
+			.collect(Collectors.toList());
+		
+		for (Entidad entidad: entidades) {
+			Enemigo enemigo = (Enemigo) entidad;
+			enemigo.setVelocidad(nivel);
+		}
+		
 	}
 	
 	private void actualizarPuntaje() {
@@ -93,6 +116,10 @@ public class Juego extends Canvas implements Runnable {
 		
 		finalizar();
 		
+		if (partida.isUltimoEnemigo()) {
+			siguienteNivel();
+		}
+		
 		acumuladorDisparos++;
 		
 		if (acumuladorDisparos < disparos) {	
@@ -105,7 +132,7 @@ public class Juego extends Canvas implements Runnable {
 	
 	private void manejarTeclado() {
 		if (teclado.getPau().isDown()) {
-			pausar = !pausar;
+
 		}
 		
 		if (teclado.getDer().isDown()) {
@@ -151,6 +178,10 @@ public class Juego extends Canvas implements Runnable {
 	public void setJugador(JugadorMemento jugadorMemento) {
 		this.jugador = new Jugador();
 		this.jugador.abrirJugador(jugadorMemento);
+	}
+	
+	public TecladoReceiver getTeclado() {
+		return teclado;
 	}
 	
 	public static void main(String[] args) {

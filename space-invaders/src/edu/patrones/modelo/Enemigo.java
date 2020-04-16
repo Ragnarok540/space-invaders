@@ -32,7 +32,13 @@ public abstract class Enemigo extends Nave {
 	}
 
 	@Override
-	public abstract void dibujar(Graphics g);
+	public void dibujar(Graphics g) {
+		if (estado) {
+			g.drawImage(modelo.getImagenA(), posX, posY, null);
+		} else {
+			g.drawImage(modelo.getImagenB(), posX, posY, null);
+		}
+	}
 
 	@Override
 	public void mover(String direccion)	{
