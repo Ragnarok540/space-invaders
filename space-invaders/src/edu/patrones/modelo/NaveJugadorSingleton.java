@@ -37,10 +37,10 @@ public class NaveJugadorSingleton extends Nave {
 	public void mover(String direccion) {
 		
 		switch (direccion) {
-		case "E":
+		case "D":
 			posX += 1;
 			break;
-		case "W":
+		case "I":
 			posX -= 1;
 			break;
 		default:

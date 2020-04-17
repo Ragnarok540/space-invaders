@@ -26,10 +26,10 @@ public class BarraDeEstado extends JPanel {
 	}
 	
 	public void setEstado(String nick, int puntaje, int vidas, boolean disparando) {
-		this.labelEstado.setText(" Jugador: " + nick + 
-				" - Puntaje: " + puntaje +  
-				" - Vidas: " + vidas + 
-				" - " + (disparando?"Cargando Misil...":"Misil Listo") );
+		this.labelEstado.setText(Const.ESTADO[0] + nick + 
+				Const.ESTADO[1] + puntaje +  
+				Const.ESTADO[2] + vidas + 
+				Const.ESTADO[3] + (disparando?Const.ESTADO[4]:Const.ESTADO[5]) );
 	}
 
 }

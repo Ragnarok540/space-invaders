@@ -3,6 +3,7 @@ package edu.patrones.vista;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -72,6 +73,10 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 			dsj.setVisible(true);
 			dialogo = null;
 			break;
+		case Const.T_INGR:
+			dir.setVisible(true);
+			dialogo = null;
+			break;
 		case Const.T_PUNT:
 			dmp = new DialogoMejoresPuntajes();
 			dialogo = dmp.createDialog(this, Const.T_PUNT);
@@ -81,11 +86,6 @@ public class BarraDeMenu extends JMenuBar implements ActionListener {
 			break;
 		case Const.T_ACERCA:
 			dialogo = dialogoAcercaDe.createDialog(this, Const.T_ACERCA);
-			break;
-		case Const.T_INGR:
-			dir.setVisible(true);
-			
-			dialogo = null;
 			break;
 		default:
 			dialogo = null;

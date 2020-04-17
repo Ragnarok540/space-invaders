@@ -38,5 +38,8 @@ public final class Const {
 	public static final String NAME_REGEX = "[a-zA-Z\\s]+";
 	public static final String NICK_REGEX = "[a-zA-Z0-9]+";
 	public static final String INTENTAR = "Intentar de Nuevo";
+	public static final String[] GAME_OVER = {" GAME OVER - ", " Puntos"};
+	public static final String TITULO = "Space Invaders";
+	public static final String[] ESTADO = {" Jugador: ", " - Puntos: ", " - Vidas: ", " - ", "Cargando Misil...", "Misil Listo"};
 	
 }

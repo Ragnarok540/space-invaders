@@ -54,7 +54,9 @@ public class Juego extends Canvas implements Runnable {
 		if (partida.getNaveJugador().isEliminada()) {
 			this.parar();
 			this.actualizarPuntaje();
-			barraEstado.setEstado(" GAME OVER - " + partida.getPuntaje() + " Puntos");
+			barraEstado.setEstado(Const.GAME_OVER[0] + 
+					partida.getPuntaje() + 
+					Const.GAME_OVER[1]);
 		}
 	}
 	
@@ -87,7 +89,6 @@ public class Juego extends Canvas implements Runnable {
 			try {
 				aj.escribirArchivo();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 		}
@@ -132,15 +133,15 @@ public class Juego extends Canvas implements Runnable {
 	
 	private void manejarTeclado() {
 		if (teclado.getPau().isDown()) {
-
+			// TODO
 		}
 		
 		if (teclado.getDer().isDown()) {
-			partida.getNaveJugador().mover("E");
+			partida.getNaveJugador().mover("D");
 		}
 		
 		if (teclado.getIzq().isDown()) {
-			partida.getNaveJugador().mover("W");
+			partida.getNaveJugador().mover("I");
 		} 
 		
 		if (teclado.getDis().isDown() && !disparando) {
@@ -180,10 +181,6 @@ public class Juego extends Canvas implements Runnable {
 		this.jugador.abrirJugador(jugadorMemento);
 	}
 	
-	public TecladoReceiver getTeclado() {
-		return teclado;
-	}
-	
 	public static void main(String[] args) {
 		Dimension dimension = new Dimension(ANCHO, ALTO);
 		
@@ -192,7 +189,7 @@ public class Juego extends Canvas implements Runnable {
 		juego.setMaximumSize(dimension);
 		juego.setPreferredSize(dimension);
 
-		JFrame ventana = new JFrame("Space Invaders");
+		JFrame ventana = new JFrame(Const.TITULO);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setJMenuBar(new BarraDeMenu(ventana, juego));
 		ventana.setLayout(new BorderLayout());
@@ -249,6 +246,7 @@ public class Juego extends Canvas implements Runnable {
 			}
 
 		}
+
 	}
 	
 }
