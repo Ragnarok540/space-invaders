@@ -5,7 +5,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -70,9 +69,9 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 		if (isVisible() && source && (vp || ivp)) {
 			Object value = optionPane.getValue();
 
-		if (value == JOptionPane.UNINITIALIZED_VALUE) {
-				return;
-		}
+			if (value == JOptionPane.UNINITIALIZED_VALUE) {
+					return;
+			}
 
 			optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
 
@@ -87,9 +86,11 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 				} else {
 					errorNick();
 				}
+
 			} else {
 				cerrarDialogo();
 			}
+
 		}
 
 	}
@@ -127,21 +128,12 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 		
 		if (aj.jugadorExiste(nickName)) {
 			jugador = new Jugador();
-			//jugador.abrirJugador(aj.abrir(nickName));
-			juego.setJugador(aj.abrir(nickName));
+			JugadorMemento jm = aj.abrir(nickName);
+			juego.setJugador(jm);
 			juego.iniciar();
 		} else {
 			jugador = new JugadorNull();
 			errorNickNoExiste(jugador);
-			//Jugador jugador = new Jugador(nickName, nombre);
-			//JugadorMemento memento = jugador.guardarJugador();
-			//aj.guardar(memento);
-			/*try {
-				aj.escribirArchivo();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
 		}
 		
 	}

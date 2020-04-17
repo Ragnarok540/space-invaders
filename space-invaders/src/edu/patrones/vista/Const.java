@@ -41,5 +41,7 @@ public final class Const {
 	public static final String[] GAME_OVER = {" GAME OVER - ", " Puntos"};
 	public static final String TITULO = "Space Invaders";
 	public static final String[] ESTADO = {" Jugador: ", " - Puntos: ", " - Vidas: ", " - ", "Cargando Misil...", "Misil Listo"};
+	public static final String SELECC_J = "Seleccione el Jugador";
+	public static final String SELECC = "Seleccionar";
 	
 }

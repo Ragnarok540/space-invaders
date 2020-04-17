@@ -44,6 +44,7 @@ public class Juego extends Canvas implements Runnable {
 		super();
 		image = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
 		teclado = new TecladoReceiver(this);
+		setFocusable(true);
 	}
 
 	private void inicializar() {

@@ -33,8 +33,8 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 		
 		combo = new JComboBox<>();
 		
-		Object[] msg = {"Seleccione el Jugador", combo};
-		Object[] options = {"Seleccionar", Const.CANCELAR};
+		Object[] msg = {Const.SELECC_J, combo};
+		Object[] options = {Const.SELECC, Const.CANCELAR};
 
 		optionPane = new JOptionPane(msg,
 				JOptionPane.QUESTION_MESSAGE,
@@ -46,6 +46,7 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 		setContentPane(optionPane);
 
 		addComponentListener(new ComponentAdapter() {
+			
 			public void componentShown(ComponentEvent ce) {
 				ArchivoJugadorProxy ajp = new ArchivoJugadorProxy();
 				List<String[]> data = ajp.getData();
@@ -60,6 +61,7 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 				combo.setSelectedIndex(0);
 				combo.requestFocusInWindow();
 			}
+			
 		});
 
 		optionPane.addPropertyChangeListener(this);
@@ -85,12 +87,10 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 
 			optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
 
-			if (value.equals("Seleccionar")) {
+			if (value.equals(Const.SELECC)) {
 				
 				String seleccion = (String) combo.getSelectedItem();
-				ArchivoJugador aj = new ArchivoJugador();
-				JugadorMemento jm = aj.abrir(seleccion);
-				juego.setJugador(jm);
+				cargarJugador(seleccion);
 				cerrarDialogo();
 				
 			} else {
@@ -104,4 +104,11 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 		setVisible(false);
 	}
 
+	private void cargarJugador(String seleccion) {
+		ArchivoJugador aj = new ArchivoJugador();
+		JugadorMemento jm = aj.abrir(seleccion);
+		juego.setJugador(jm);
+		juego.iniciar();
+	}
+	
 }

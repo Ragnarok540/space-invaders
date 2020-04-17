@@ -136,7 +136,6 @@ public class DialogoNuevoJugador extends JDialog implements PropertyChangeListen
 			try {
 				aj.escribirArchivo();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
