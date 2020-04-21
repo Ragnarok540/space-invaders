@@ -38,13 +38,16 @@ public class NaveJugadorSingleton extends Nave {
 		
 		switch (direccion) {
 		case "D":
-			posX += 1;
+			if (posX < 440) {
+				posX += 1;
+			}
 			break;
 		case "I":
-			posX -= 1;
+			if (posX > 5) {
+				posX -= 1;
+			}
 			break;
 		default:
-			
 		}
 
 	}

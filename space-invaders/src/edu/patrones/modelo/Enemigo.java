@@ -9,7 +9,7 @@ public abstract class Enemigo extends Nave {
 	private int acumulador = 0;
 	private boolean dir = true;
 	private int acumuladorVelocidad = 0;
-	
+	private boolean gameOver = false;
 	protected boolean estado = true; 
 	
 	public Enemigo() {
@@ -65,6 +65,10 @@ public abstract class Enemigo extends Nave {
 			}
 			
 		}
+		
+		if (posY > (330 - alto)) {
+			gameOver = true;
+		}
 	}
 
 	public int getPuntaje() {
@@ -77,6 +81,10 @@ public abstract class Enemigo extends Nave {
 
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
+	}
+	
+	public boolean isGameOver() {
+		return gameOver;
 	}
 	
 }

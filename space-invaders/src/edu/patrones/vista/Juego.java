@@ -52,7 +52,22 @@ public class Juego extends Canvas implements Runnable {
 	}
 	
 	private void finalizar() {
-		if (partida.getNaveJugador().isEliminada()) {
+		List<Entidad> entidades = partida.getEntidades().stream()
+				.filter(x -> x instanceof Enemigo)
+				.filter(x -> x.isEliminada() == false)
+				.collect(Collectors.toList()); 
+		
+		boolean gameOver = false;
+		
+		for (Entidad entidad: entidades) {
+			Enemigo enemigo = (Enemigo) entidad;
+			if (enemigo.isGameOver()) {
+				gameOver = true;
+				break;
+			}
+		}
+		
+		if (partida.getNaveJugador().isEliminada() || gameOver) {
 			this.parar();
 			this.actualizarPuntaje();
 			barraEstado.setEstado(Const.GAME_OVER[0] + 
@@ -94,8 +109,10 @@ public class Juego extends Canvas implements Runnable {
 			} 
 		}
 	}
-	
+
 	private void instante() {
+		
+		manejarTeclado();
 		
 		for (Entidad entidad: partida.getEntidades()) {
 			if (entidad.isEliminada()) {
@@ -104,8 +121,6 @@ public class Juego extends Canvas implements Runnable {
 				entidad.instante();
 			}
 		}
-		
-		manejarTeclado();
 		
 		partida.disparoEnemigo();
 		partida.verificarColisionesEnemigos();
@@ -233,7 +248,7 @@ public class Juego extends Canvas implements Runnable {
 			while (noProcesado >= 1) {
 				instante();
 				noProcesado -= 1;
-				debeDibujar = true;
+				debeDibujar = true;				
 			}
 
 			try {
