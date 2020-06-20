@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import edu.patrones.modelo.Enemigo;
 import edu.patrones.modelo.Entidad;
 import edu.patrones.modelo.PartidaFachada;
-import edu.patrones.teclado.TecladoReceiver;
+import edu.patrones.teclado.KeyboardReceiver;
 import edu.patrones.intefaces.IJugadorNullObject;
 import edu.patrones.jugador.ArchivoJugador;
 import edu.patrones.jugador.Jugador;
@@ -32,7 +32,7 @@ public class Juego extends Canvas implements Runnable {
 	private boolean corriendo = false;
 	private PartidaFachada partida;
 	private IJugadorNullObject jugador = new JugadorNull();
-	private TecladoReceiver teclado;
+	private KeyboardReceiver teclado;
 	private boolean disparando = false;
 	private int disparos = 60;
 	private int acumuladorDisparos = 0;
@@ -43,7 +43,7 @@ public class Juego extends Canvas implements Runnable {
 	public Juego() {
 		super();
 		image = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
-		teclado = new TecladoReceiver(this);
+		teclado = new KeyboardReceiver(this);
 		setFocusable(true);
 	}
 
@@ -148,19 +148,19 @@ public class Juego extends Canvas implements Runnable {
 	}
 	
 	private void manejarTeclado() {
-		if (teclado.getPau().isDown()) {
+		if (teclado.getPause().isDown()) {
 			// TODO
 		}
 		
-		if (teclado.getDer().isDown()) {
+		if (teclado.getRight().isDown()) {
 			partida.getNaveJugador().mover("D");
 		}
 		
-		if (teclado.getIzq().isDown()) {
+		if (teclado.getLeft().isDown()) {
 			partida.getNaveJugador().mover("I");
 		} 
 		
-		if (teclado.getDis().isDown() && !disparando) {
+		if (teclado.getShoot().isDown() && !disparando) {
 			partida.disparoJugador();
 			disparando = true;
 		}
