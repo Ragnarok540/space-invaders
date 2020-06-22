@@ -30,7 +30,7 @@ public class NaveJugadorSingleton extends Nave {
 
 	@Override
 	public void dibujar(Graphics g) {
-		g.drawImage(modelo.getImagenA(), posX, posY, null);
+		g.drawImage(model.getSprites()[0], posX, posY, null);
 	}
 
 	@Override

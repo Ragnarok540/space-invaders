@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import edu.patrones.imagen.FabricaFlyweight;
-import edu.patrones.intefaces.IModeloFlyweight;
+import edu.patrones.imagen.FlyweightFactory;
+import edu.patrones.imagen.FlyweightModel;
 
 
 public class PartidaFachada {
@@ -16,26 +16,26 @@ public class PartidaFachada {
 	private ArrayList<Entidad> entidades;
 	private NaveJugadorSingleton naveJugador;
 	private BalaPrototype bala;
-	private FabricaFlyweight fabricaF;
+	private FlyweightFactory fabricaF;
 	private int acumuladorDisparosEnemigo = 0;
 	private int puntaje;
 	private boolean ultimoEnemigo = false;
 	
 	public PartidaFachada() {
-		fabricaF = new FabricaFlyweight();
+		fabricaF = new FlyweightFactory();
 		
-		IModeloFlyweight modelo = null;
+		FlyweightModel modelo = null;
 		
 		entidades = new ArrayList<>();
 
 		naveJugador = NaveJugadorSingleton.instancia();
 		modelo = fabricaF.obtenerModelo("nave");
-		naveJugador.setModelo(modelo);
+		naveJugador.setModel(modelo);
 		entidades.add(naveJugador);
 
 		bala = new BalaPrototype();
 		modelo = fabricaF.obtenerModelo("bala");
-		bala.setModelo(modelo);
+		bala.setModel(modelo);
 		
 		crearEnemigos();
 		
@@ -45,7 +45,7 @@ public class PartidaFachada {
 		EnemigoFactoryMethod fabrica = new EnemigoFactoryMethod();
 		
 		Enemigo enemigo;
-		IModeloFlyweight modelo = null;
+		FlyweightModel modelo = null;
 		
 		int posX = 5;
 		int posY = 5;
@@ -66,7 +66,7 @@ public class PartidaFachada {
 				enemigo = fabrica.crearEnemigo(tipo);
 				enemigo.setPosX(posX);
 				enemigo.setPosY(posY);
-				if (modelo != null) enemigo.setModelo(modelo);
+				if (modelo != null) enemigo.setModel(modelo);
 				entidades.add(enemigo);
 				posX += 40;
 				modelo = null;

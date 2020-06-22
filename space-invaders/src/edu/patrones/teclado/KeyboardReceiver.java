@@ -13,10 +13,12 @@ public class KeyboardReceiver implements KeyListener {
 		juego.addKeyListener(this);
 	}
 
+	@Override
 	public void keyPressed(KeyEvent ke) {
 		invoker.invoke(ke, true);
 	}
 
+	@Override
 	public void keyReleased(KeyEvent ke) {
 		invoker.invoke(ke, false);
 	}

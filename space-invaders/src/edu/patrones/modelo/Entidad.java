@@ -3,13 +3,13 @@ package edu.patrones.modelo;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import edu.patrones.intefaces.IModeloFlyweight;
+import edu.patrones.imagen.FlyweightModel;
 
 public abstract class Entidad {
 
 	protected int posX, posY, alto, ancho;
 	
-	protected IModeloFlyweight modelo;
+	protected FlyweightModel model;
 	
 	protected boolean eliminada = false;
 	
@@ -54,13 +54,13 @@ public abstract class Entidad {
 	public void setAncho(int ancho) {
 		this.ancho = ancho;
 	}
-
-	public IModeloFlyweight getModelo() {
-		return modelo;
+	
+	public FlyweightModel getModel() {
+		return model;
 	}
 	
-	public void setModelo(IModeloFlyweight modelo) {
-		this.modelo = modelo;
+	public void setModel(FlyweightModel model) {
+		this.model = model;
 	}
 	
 	public boolean isEliminada() {

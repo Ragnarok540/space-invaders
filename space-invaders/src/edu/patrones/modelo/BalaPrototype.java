@@ -29,9 +29,9 @@ public class BalaPrototype extends Entidad implements IBalaPrototype {
 	@Override
 	public void dibujar(Graphics g) {
 		if (tipo) {
-			g.drawImage(modelo.getImagenA(), posX, posY, null);
+			g.drawImage(model.getSprites()[0], posX, posY, null);
 		} else {
-			g.drawImage(modelo.getImagenB(), posX, posY, null);
+			g.drawImage(model.getSprites()[1], posX, posY, null);
 		}
 	}
 
