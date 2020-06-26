@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 import javax.swing.JFrame;
 
-import edu.patrones.modelo.Enemigo;
-import edu.patrones.modelo.Entidad;
-import edu.patrones.modelo.PartidaFachada;
+import edu.patrones.modelo.Enemy;
+import edu.patrones.modelo.Entity;
+import edu.patrones.modelo.ModelFacade;
 import edu.patrones.teclado.KeyboardReceiver;
 import edu.patrones.intefaces.IJugadorNullObject;
 import edu.patrones.jugador.ArchivoJugador;
@@ -30,7 +30,7 @@ public class Juego extends Canvas implements Runnable {
 	private static final int ALTO = 360;
 	private static BarraDeEstado barraEstado;
 	private boolean corriendo = false;
-	private PartidaFachada partida;
+	private ModelFacade partida;
 	private IJugadorNullObject jugador = new JugadorNull();
 	private KeyboardReceiver teclado;
 	private boolean disparando = false;
@@ -48,30 +48,30 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	private void inicializar() {
-		partida = new PartidaFachada();
+		partida = new ModelFacade();
 	}
 	
 	private void finalizar() {
-		List<Entidad> entidades = partida.getEntidades().stream()
-				.filter(x -> x instanceof Enemigo)
-				.filter(x -> x.isEliminada() == false)
+		List<Entity> entidades = partida.getEntities().stream()
+				.filter(x -> x instanceof Enemy)
+				.filter(x -> x.isEliminated() == false)
 				.collect(Collectors.toList()); 
 		
 		boolean gameOver = false;
 		
-		for (Entidad entidad: entidades) {
-			Enemigo enemigo = (Enemigo) entidad;
+		for (Entity entidad: entidades) {
+			Enemy enemigo = (Enemy) entidad;
 			if (enemigo.isGameOver()) {
 				gameOver = true;
 				break;
 			}
 		}
 		
-		if (partida.getNaveJugador().isEliminada() || gameOver) {
+		if (partida.getPlayerShip().isEliminated() || gameOver) {
 			this.parar();
 			this.actualizarPuntaje();
 			barraEstado.setEstado(Const.GAME_OVER[0] + 
-					partida.getPuntaje() + 
+					partida.getScore() + 
 					Const.GAME_OVER[1]);
 		}
 	}
@@ -79,26 +79,26 @@ public class Juego extends Canvas implements Runnable {
 	private void siguienteNivel() {
 		nivel -= 3;
 		
-		int puntajeActual = partida.getPuntaje();
+		int puntajeActual = partida.getScore();
 		
-		partida = new PartidaFachada();
-		partida.setPuntaje(puntajeActual);
-		partida.getNaveJugador().restaurar();
+		partida = new ModelFacade();
+		partida.setScore(puntajeActual);
+		partida.getPlayerShip().restore();
 		
-		List<Entidad> entidades = partida.getEntidades().stream()
-			.filter(x -> x instanceof Enemigo)
+		List<Entity> entidades = partida.getEntities().stream()
+			.filter(x -> x instanceof Enemy)
 			.collect(Collectors.toList());
 		
-		for (Entidad entidad: entidades) {
-			Enemigo enemigo = (Enemigo) entidad;
-			enemigo.setVelocidad(nivel);
+		for (Entity entidad: entidades) {
+			Enemy enemigo = (Enemy) entidad;
+			enemigo.setVelocity(nivel);
 		}
 		
 	}
 	
 	private void actualizarPuntaje() {
 		if (!jugador.isNull()) {
-			jugador.setPuntuacionMaxima(partida.getPuntaje());
+			jugador.setPuntuacionMaxima(partida.getScore());
 			JugadorMemento jm = jugador.guardarJugador();
 			ArchivoJugador aj = new ArchivoJugador();
 			aj.guardar(jm);
@@ -114,26 +114,26 @@ public class Juego extends Canvas implements Runnable {
 		
 		manejarTeclado();
 		
-		for (Entidad entidad: partida.getEntidades()) {
-			if (entidad.isEliminada()) {
+		for (Entity entidad: partida.getEntities()) {
+			if (entidad.isEliminated()) {
 				continue;
 			} else {
-				entidad.instante();
+				entidad.instant();
 			}
 		}
 		
-		partida.disparoEnemigo();
-		partida.verificarColisionesEnemigos();
-		partida.verificarColisionesJugador();
+		partida.enemyShooting();
+		partida.verifyEnemyCollisions();
+		partida.verifyPlayerCollisions();
 		
 		barraEstado.setEstado(jugador.getNickName(),
-				partida.getPuntaje(), 
-				partida.getNaveJugador().getVidas(),
+				partida.getScore(), 
+				partida.getPlayerShip().getLives(),
 				disparando);
 		
 		finalizar();
 		
-		if (partida.isUltimoEnemigo()) {
+		if (partida.isLastEnemy()) {
 			siguienteNivel();
 		}
 		
@@ -153,15 +153,15 @@ public class Juego extends Canvas implements Runnable {
 		}
 		
 		if (teclado.getRight().isDown()) {
-			partida.getNaveJugador().mover("D");
+			partida.getPlayerShip().move("D");
 		}
 		
 		if (teclado.getLeft().isDown()) {
-			partida.getNaveJugador().mover("I");
+			partida.getPlayerShip().move("I");
 		} 
 		
 		if (teclado.getShoot().isDown() && !disparando) {
-			partida.disparoJugador();
+			partida.playerShooting();
 			disparando = true;
 		}
 	}
@@ -178,11 +178,11 @@ public class Juego extends Canvas implements Runnable {
 
 		g.drawImage(image, 0, 0, ANCHO, ALTO, null);
 				
-		for (Entidad entidad: partida.getEntidades()) {
-			if (entidad.isEliminada()) {
+		for (Entity entidad: partida.getEntities()) {
+			if (entidad.isEliminated()) {
 				continue;
 			} else {
-				entidad.dibujar(g);
+				entidad.draw(g);
 			}
 		}
 		
