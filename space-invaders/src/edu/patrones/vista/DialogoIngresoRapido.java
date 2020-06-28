@@ -11,11 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import edu.patrones.intefaces.IJugadorNullObject;
-import edu.patrones.jugador.ArchivoJugador;
-import edu.patrones.jugador.Jugador;
-import edu.patrones.jugador.JugadorMemento;
-import edu.patrones.jugador.JugadorNull;
+import edu.patrones.intefaces.IPlayerNullObject;
+import edu.patrones.jugador.PlayerFile;
+import edu.patrones.jugador.Player;
+import edu.patrones.jugador.MementoPlayer;
+import edu.patrones.jugador.NullPlayer;
 
 public class DialogoIngresoRapido extends JDialog implements PropertyChangeListener {
 
@@ -106,7 +106,7 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 		tfNickName.requestFocusInWindow();
 	}
 	
-	private void errorNickNoExiste(IJugadorNullObject jugador) {
+	private void errorNickNoExiste(IPlayerNullObject jugador) {
 		tfNickName.selectAll();
 		JOptionPane.showMessageDialog(
 				this,
@@ -123,16 +123,16 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 	}
 	
 	private void cargarJugador() {
-		ArchivoJugador aj = new ArchivoJugador();
-		IJugadorNullObject jugador;
+		PlayerFile aj = new PlayerFile();
+		IPlayerNullObject jugador;
 		
-		if (aj.jugadorExiste(nickName)) {
-			jugador = new Jugador();
-			JugadorMemento jm = aj.abrir(nickName);
+		if (aj.playerExists(nickName)) {
+			jugador = new Player();
+			MementoPlayer jm = aj.open(nickName);
 			juego.setJugador(jm);
 			juego.iniciar();
 		} else {
-			jugador = new JugadorNull();
+			jugador = new NullPlayer();
 			errorNickNoExiste(jugador);
 		}
 		

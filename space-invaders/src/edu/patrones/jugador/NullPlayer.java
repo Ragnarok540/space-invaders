@@ -2,48 +2,41 @@ package edu.patrones.jugador;
 
 import edu.patrones.intefaces.*;
 
-public class JugadorNull implements IJugadorNullObject{
+public class NullPlayer implements IPlayerNullObject {
 
 	@Override
 	public boolean isNull() {
-		
 		return true;
 	}
 
 	@Override
-	public String getNombre() {
-		
+	public String getName() {
 		return "El jugador no existe";
 	}
 
 	@Override
 	public String getNickName() {
-		
 		return "El jugador no existe";
 	}
 
 	@Override
-	public int getPuntajeMaximo() {
-		
+	public int getMaxScore() {
 		return -1;
 	}
 
 	@Override
-	public void abrirJugador(JugadorMemento jugadorMemento) {
+	public void openPlayer(MementoPlayer mementoPlayer) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public JugadorMemento guardarJugador() {
-		// TODO Auto-generated method stub
+	public MementoPlayer savePlayer() {
 		return null;
 	}
 
 	@Override
-	public void setPuntuacionMaxima(int puntuacionMaxima) {
+	public void setMaxScore(int maxScore) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

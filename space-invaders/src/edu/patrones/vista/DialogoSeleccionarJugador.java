@@ -13,9 +13,9 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import edu.patrones.jugador.ArchivoJugador;
-import edu.patrones.jugador.ArchivoJugadorProxy;
-import edu.patrones.jugador.JugadorMemento;
+import edu.patrones.jugador.PlayerFile;
+import edu.patrones.jugador.PlayerFileProxy;
+import edu.patrones.jugador.MementoPlayer;
 
 public class DialogoSeleccionarJugador extends JDialog implements PropertyChangeListener {
 
@@ -48,7 +48,7 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 		addComponentListener(new ComponentAdapter() {
 			
 			public void componentShown(ComponentEvent ce) {
-				ArchivoJugadorProxy ajp = new ArchivoJugadorProxy();
+				PlayerFileProxy ajp = new PlayerFileProxy();
 				List<String[]> data = ajp.getData();
 				SortedSet<String> nickNames = ajp.nickNames(data);
 				
@@ -105,8 +105,8 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 	}
 
 	private void cargarJugador(String seleccion) {
-		ArchivoJugador aj = new ArchivoJugador();
-		JugadorMemento jm = aj.abrir(seleccion);
+		PlayerFile aj = new PlayerFile();
+		MementoPlayer jm = aj.open(seleccion);
 		juego.setJugador(jm);
 		juego.iniciar();
 	}

@@ -12,9 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import edu.patrones.jugador.ArchivoJugador;
-import edu.patrones.jugador.Jugador;
-import edu.patrones.jugador.JugadorMemento;
+import edu.patrones.jugador.PlayerFile;
+import edu.patrones.jugador.Player;
+import edu.patrones.jugador.MementoPlayer;
 
 public class DialogoNuevoJugador extends JDialog implements PropertyChangeListener {
 
@@ -125,16 +125,16 @@ public class DialogoNuevoJugador extends JDialog implements PropertyChangeListen
 	}
 	
 	private void guardarJugador() {
-		ArchivoJugador aj = new ArchivoJugador();
+		PlayerFile aj = new PlayerFile();
 		
-		if (aj.jugadorExiste(nickName)) {
+		if (aj.playerExists(nickName)) {
 			errorNickYaExiste();
 		} else {
-			Jugador jugador = new Jugador(nickName, nombre);
-			JugadorMemento memento = jugador.guardarJugador();
-			aj.guardar(memento);
+			Player jugador = new Player(nickName, nombre);
+			MementoPlayer memento = jugador.savePlayer();
+			aj.save(memento);
 			try {
-				aj.escribirArchivo();
+				aj.writeFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -17,11 +17,11 @@ import edu.patrones.modelo.Enemy;
 import edu.patrones.modelo.Entity;
 import edu.patrones.modelo.ModelFacade;
 import edu.patrones.teclado.KeyboardReceiver;
-import edu.patrones.intefaces.IJugadorNullObject;
-import edu.patrones.jugador.ArchivoJugador;
-import edu.patrones.jugador.Jugador;
-import edu.patrones.jugador.JugadorMemento;
-import edu.patrones.jugador.JugadorNull;
+import edu.patrones.intefaces.IPlayerNullObject;
+import edu.patrones.jugador.PlayerFile;
+import edu.patrones.jugador.Player;
+import edu.patrones.jugador.MementoPlayer;
+import edu.patrones.jugador.NullPlayer;
 
 public class Juego extends Canvas implements Runnable {
 
@@ -31,7 +31,7 @@ public class Juego extends Canvas implements Runnable {
 	private static BarraDeEstado barraEstado;
 	private boolean corriendo = false;
 	private ModelFacade partida;
-	private IJugadorNullObject jugador = new JugadorNull();
+	private IPlayerNullObject jugador = new NullPlayer();
 	private KeyboardReceiver teclado;
 	private boolean disparando = false;
 	private int disparos = 60;
@@ -98,12 +98,12 @@ public class Juego extends Canvas implements Runnable {
 	
 	private void actualizarPuntaje() {
 		if (!jugador.isNull()) {
-			jugador.setPuntuacionMaxima(partida.getScore());
-			JugadorMemento jm = jugador.guardarJugador();
-			ArchivoJugador aj = new ArchivoJugador();
-			aj.guardar(jm);
+			jugador.setMaxScore(partida.getScore());
+			MementoPlayer jm = jugador.savePlayer();
+			PlayerFile aj = new PlayerFile();
+			aj.save(jm);
 			try {
-				aj.escribirArchivo();
+				aj.writeFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
@@ -192,9 +192,9 @@ public class Juego extends Canvas implements Runnable {
 		bs.show();
 	}
 	
-	public void setJugador(JugadorMemento jugadorMemento) {
-		this.jugador = new Jugador();
-		this.jugador.abrirJugador(jugadorMemento);
+	public void setJugador(MementoPlayer jugadorMemento) {
+		this.jugador = new Player();
+		this.jugador.openPlayer(jugadorMemento);
 	}
 	
 	public static void main(String[] args) {
