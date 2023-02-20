@@ -26,13 +26,13 @@ import edu.patrones.jugador.NullPlayer;
 public class Juego extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private static final int ANCHO = 480;
-	private static final int ALTO = 360;
-	private static BarraDeEstado barraEstado;
-	private boolean corriendo = false;
-	private ModelFacade partida;
-	private IPlayerNullObject jugador = new NullPlayer();
-	private KeyboardReceiver teclado;
+	private static final int WIDTH = 480;
+	private static final int HEIGHT = 360;
+	private static BarraDeEstado statusBar;
+	private boolean running = false;
+	private ModelFacade model;
+	private IPlayerNullObject player = new NullPlayer();
+	private KeyboardReceiver keyboard;
 	private boolean disparando = false;
 	private int disparos = 60;
 	private int acumuladorDisparos = 0;
@@ -42,17 +42,17 @@ public class Juego extends Canvas implements Runnable {
 
 	public Juego() {
 		super();
-		image = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
-		teclado = new KeyboardReceiver(this);
+		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		keyboard = new KeyboardReceiver(this);
 		setFocusable(true);
 	}
 
 	private void inicializar() {
-		partida = new ModelFacade();
+		model = new ModelFacade();
 	}
 	
 	private void finalizar() {
-		List<Entity> entidades = partida.getEntities().stream()
+		List<Entity> entidades = model.getEntities().stream()
 				.filter(x -> x instanceof Enemy)
 				.filter(x -> x.isEliminated() == false)
 				.collect(Collectors.toList()); 
@@ -67,11 +67,11 @@ public class Juego extends Canvas implements Runnable {
 			}
 		}
 		
-		if (partida.getPlayerShip().isEliminated() || gameOver) {
+		if (model.getPlayerShip().isEliminated() || gameOver) {
 			this.parar();
 			this.actualizarPuntaje();
-			barraEstado.setEstado(Const.GAME_OVER[0] + 
-					partida.getScore() + 
+			statusBar.setEstado(Const.GAME_OVER[0] + 
+					model.getScore() + 
 					Const.GAME_OVER[1]);
 		}
 	}
@@ -79,13 +79,13 @@ public class Juego extends Canvas implements Runnable {
 	private void siguienteNivel() {
 		nivel -= 3;
 		
-		int puntajeActual = partida.getScore();
+		int puntajeActual = model.getScore();
 		
-		partida = new ModelFacade();
-		partida.setScore(puntajeActual);
-		partida.getPlayerShip().restore();
+		model = new ModelFacade();
+		model.setScore(puntajeActual);
+		model.getPlayerShip().restore();
 		
-		List<Entity> entidades = partida.getEntities().stream()
+		List<Entity> entidades = model.getEntities().stream()
 			.filter(x -> x instanceof Enemy)
 			.collect(Collectors.toList());
 		
@@ -97,9 +97,9 @@ public class Juego extends Canvas implements Runnable {
 	}
 	
 	private void actualizarPuntaje() {
-		if (!jugador.isNull()) {
-			jugador.setMaxScore(partida.getScore());
-			MementoPlayer jm = jugador.savePlayer();
+		if (!player.isNull()) {
+			player.setMaxScore(model.getScore());
+			MementoPlayer jm = player.savePlayer();
 			PlayerFile aj = new PlayerFile();
 			aj.save(jm);
 			try {
@@ -114,7 +114,7 @@ public class Juego extends Canvas implements Runnable {
 		
 		manejarTeclado();
 		
-		for (Entity entidad: partida.getEntities()) {
+		for (Entity entidad: model.getEntities()) {
 			if (entidad.isEliminated()) {
 				continue;
 			} else {
@@ -122,18 +122,18 @@ public class Juego extends Canvas implements Runnable {
 			}
 		}
 		
-		partida.enemyShooting();
-		partida.verifyEnemyCollisions();
-		partida.verifyPlayerCollisions();
+		model.enemyShooting();
+		model.verifyEnemyCollisions();
+		model.verifyPlayerCollisions();
 		
-		barraEstado.setEstado(jugador.getNickName(),
-				partida.getScore(), 
-				partida.getPlayerShip().getLives(),
+		statusBar.setEstado(player.getNickName(),
+				model.getScore(), 
+				model.getPlayerShip().getLives(),
 				disparando);
 		
 		finalizar();
 		
-		if (partida.isLastEnemy()) {
+		if (model.isLastEnemy()) {
 			siguienteNivel();
 		}
 		
@@ -148,20 +148,20 @@ public class Juego extends Canvas implements Runnable {
 	}
 	
 	private void manejarTeclado() {
-		if (teclado.getPause().isDown()) {
+		if (keyboard.getPause().isDown()) {
 			// TODO
 		}
 		
-		if (teclado.getRight().isDown()) {
-			partida.getPlayerShip().move("D");
+		if (keyboard.getRight().isDown()) {
+			model.getPlayerShip().move("D");
 		}
 		
-		if (teclado.getLeft().isDown()) {
-			partida.getPlayerShip().move("I");
+		if (keyboard.getLeft().isDown()) {
+			model.getPlayerShip().move("I");
 		} 
 		
-		if (teclado.getShoot().isDown() && !disparando) {
-			partida.playerShooting();
+		if (keyboard.getShoot().isDown() && !disparando) {
+			model.playerShooting();
 			disparando = true;
 		}
 	}
@@ -176,9 +176,9 @@ public class Juego extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 
-		g.drawImage(image, 0, 0, ANCHO, ALTO, null);
+		g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
 				
-		for (Entity entidad: partida.getEntities()) {
+		for (Entity entidad: model.getEntities()) {
 			if (entidad.isEliminated()) {
 				continue;
 			} else {
@@ -193,12 +193,12 @@ public class Juego extends Canvas implements Runnable {
 	}
 	
 	public void setJugador(MementoPlayer jugadorMemento) {
-		this.jugador = new Player();
-		this.jugador.openPlayer(jugadorMemento);
+		player = new Player();
+		player.openPlayer(jugadorMemento);
 	}
 	
 	public static void main(String[] args) {
-		Dimension dimension = new Dimension(ANCHO, ALTO);
+		Dimension dimension = new Dimension(WIDTH, HEIGHT);
 		
 		Juego juego = new Juego();
 		juego.setMinimumSize(dimension);
@@ -209,8 +209,8 @@ public class Juego extends Canvas implements Runnable {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setJMenuBar(new BarraDeMenu(ventana, juego));
 		ventana.setLayout(new BorderLayout());
-		barraEstado = new BarraDeEstado();
-		ventana.add(barraEstado, BorderLayout.SOUTH);
+		statusBar = new BarraDeEstado();
+		ventana.add(statusBar, BorderLayout.SOUTH);
 		ventana.add(juego, BorderLayout.CENTER);
 		ventana.pack();
 
@@ -220,12 +220,12 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	public void iniciar() {
-		corriendo = true;
+		running = true;
 		new Thread(this).start();
 	}
 
 	public void parar() {
-		corriendo = false;
+		running = false;
 	}
 	
 	@Override
@@ -238,7 +238,7 @@ public class Juego extends Canvas implements Runnable {
 
 		inicializar();
 
-		while (corriendo) {
+		while (running) {
 			
 			ahora = System.nanoTime();
 			noProcesado += (ahora - ultimoTiempo) / nsPorInstante;
