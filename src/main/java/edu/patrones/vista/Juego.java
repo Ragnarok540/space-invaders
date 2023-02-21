@@ -28,15 +28,15 @@ public class Juego extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private static final int WIDTH = 480;
 	private static final int HEIGHT = 360;
-	private static BarraDeEstado statusBar;
+	private static StatusBar statusBar;
 	private boolean running = false;
 	private ModelFacade model;
 	private IPlayerNullObject player = new NullPlayer();
 	private KeyboardReceiver keyboard;
-	private boolean disparando = false;
-	private int disparos = 60;
-	private int acumuladorDisparos = 0;
-	private int nivel = 10;
+	private boolean launchingMissile = false;
+	private int missileDelay = 60;
+	private int missileAccumulator = 0;
+	private int level = 10;
 
 	private BufferedImage image;
 
@@ -47,78 +47,77 @@ public class Juego extends Canvas implements Runnable {
 		setFocusable(true);
 	}
 
-	private void inicializar() {
+	private void initialize() {
 		model = new ModelFacade();
 	}
 	
-	private void finalizar() {
-		List<Entity> entidades = model.getEntities().stream()
+	private void end() {
+		List<Entity> entities = model.getEntities().stream()
 				.filter(x -> x instanceof Enemy)
 				.filter(x -> x.isEliminated() == false)
 				.collect(Collectors.toList()); 
 		
 		boolean gameOver = false;
 		
-		for (Entity entidad: entidades) {
-			Enemy enemigo = (Enemy) entidad;
-			if (enemigo.isGameOver()) {
+		for (Entity entity: entities) {
+			Enemy enemy = (Enemy) entity;
+			if (enemy.isGameOver()) {
 				gameOver = true;
 				break;
 			}
 		}
 		
 		if (model.getPlayerShip().isEliminated() || gameOver) {
-			this.parar();
-			this.actualizarPuntaje();
-			statusBar.setEstado(Const.GAME_OVER[0] + 
+			this.stop();
+			this.updateScore();
+			statusBar.setStatus(Const.GAME_OVER[0] + 
 					model.getScore() + 
 					Const.GAME_OVER[1]);
 		}
 	}
 	
-	private void siguienteNivel() {
-		nivel -= 3;
+	private void nextLevel() {
+		level -= 3;
 		
-		int puntajeActual = model.getScore();
+		int currentScore = model.getScore();
 		
 		model = new ModelFacade();
-		model.setScore(puntajeActual);
+		model.setScore(currentScore);
 		model.getPlayerShip().restore();
 		
-		List<Entity> entidades = model.getEntities().stream()
+		List<Entity> entities = model.getEntities().stream()
 			.filter(x -> x instanceof Enemy)
 			.collect(Collectors.toList());
 		
-		for (Entity entidad: entidades) {
-			Enemy enemigo = (Enemy) entidad;
-			enemigo.setVelocity(nivel);
+		for (Entity entity: entities) {
+			Enemy enemy = (Enemy) entity;
+			enemy.setVelocity(level);
 		}
-		
+
 	}
 	
-	private void actualizarPuntaje() {
+	private void updateScore() {
 		if (!player.isNull()) {
 			player.setMaxScore(model.getScore());
-			MementoPlayer jm = player.savePlayer();
-			PlayerFile aj = new PlayerFile();
-			aj.save(jm);
+			MementoPlayer mp = player.savePlayer();
+			PlayerFile pf = new PlayerFile();
+			pf.save(mp);
 			try {
-				aj.writeFile();
+				pf.writeFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
 		}
 	}
 
-	private void instante() {
+	private void instant() {
+		handleKeyboard();
 		
-		manejarTeclado();
-		
-		for (Entity entidad: model.getEntities()) {
-			if (entidad.isEliminated()) {
+		for (Entity entity: model.getEntities()) {
+			if (entity.isEliminated()) {
 				continue;
 			} else {
-				entidad.instant();
+				entity.instant();
 			}
 		}
 		
@@ -126,28 +125,28 @@ public class Juego extends Canvas implements Runnable {
 		model.verifyEnemyCollisions();
 		model.verifyPlayerCollisions();
 		
-		statusBar.setEstado(player.getNickName(),
+		statusBar.setStatus(player.getNickName(),
 				model.getScore(), 
 				model.getPlayerShip().getLives(),
-				disparando);
+				launchingMissile);
 		
-		finalizar();
-		
+		end();
+
 		if (model.isLastEnemy()) {
-			siguienteNivel();
+			nextLevel();
 		}
-		
-		acumuladorDisparos++;
-		
-		if (acumuladorDisparos < disparos) {	
+
+		missileAccumulator++;
+
+		if (missileAccumulator < missileDelay) {	
 			return;
 		}
-		
-		disparando = false;
-		acumuladorDisparos = 0;
+
+		launchingMissile = false;
+		missileAccumulator = 0;
 	}
 	
-	private void manejarTeclado() {
+	private void handleKeyboard() {
 		if (keyboard.getPause().isDown()) {
 			// TODO
 		}
@@ -160,29 +159,29 @@ public class Juego extends Canvas implements Runnable {
 			model.getPlayerShip().move("I");
 		} 
 		
-		if (keyboard.getShoot().isDown() && !disparando) {
+		if (keyboard.getShoot().isDown() && !launchingMissile) {
 			model.playerShooting();
-			disparando = true;
+			launchingMissile = true;
 		}
 	}
 	
-	private void dibujar() {
+	private void draw() {
 		BufferStrategy bs = getBufferStrategy();
-		
+
 		if (bs == null) {
 			createBufferStrategy(3);
 			return;
 		}
-		
+
 		Graphics g = bs.getDrawGraphics();
 
 		g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
-				
-		for (Entity entidad: model.getEntities()) {
-			if (entidad.isEliminated()) {
+
+		for (Entity entity: model.getEntities()) {
+			if (entity.isEliminated()) {
 				continue;
 			} else {
-				entidad.draw(g);
+				entity.draw(g);
 			}
 		}
 		
@@ -192,26 +191,26 @@ public class Juego extends Canvas implements Runnable {
 		bs.show();
 	}
 	
-	public void setJugador(MementoPlayer jugadorMemento) {
+	public void setJugador(MementoPlayer mementoPlayer) {
 		player = new Player();
-		player.openPlayer(jugadorMemento);
+		player.openPlayer(mementoPlayer);
 	}
 	
 	public static void main(String[] args) {
 		Dimension dimension = new Dimension(WIDTH, HEIGHT);
 		
-		Juego juego = new Juego();
-		juego.setMinimumSize(dimension);
-		juego.setMaximumSize(dimension);
-		juego.setPreferredSize(dimension);
+		Juego game = new Juego();
+		game.setMinimumSize(dimension);
+		game.setMaximumSize(dimension);
+		game.setPreferredSize(dimension);
 
 		JFrame ventana = new JFrame(Const.TITULO);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setJMenuBar(new BarraDeMenu(ventana, juego));
+		ventana.setJMenuBar(new BarraDeMenu(ventana, game));
 		ventana.setLayout(new BorderLayout());
-		statusBar = new BarraDeEstado();
+		statusBar = new StatusBar();
 		ventana.add(statusBar, BorderLayout.SOUTH);
-		ventana.add(juego, BorderLayout.CENTER);
+		ventana.add(game, BorderLayout.CENTER);
 		ventana.pack();
 
 		ventana.setResizable(false);
@@ -224,31 +223,31 @@ public class Juego extends Canvas implements Runnable {
 		new Thread(this).start();
 	}
 
-	public void parar() {
+	public void stop() {
 		running = false;
 	}
 	
 	@Override
 	public void run() {
-		long ultimoTiempo = System.nanoTime();
-		long ahora = 0;
-		double noProcesado = 0;
-		double nsPorInstante = 1000000000.0 / 60;
-		boolean debeDibujar = false;
+		long lastTime = System.nanoTime();
+		long now = 0;
+		double notProcessed = 0;
+		double nsPerInstant = 1000000000.0 / 60;
+		boolean shouldDraw = false;
 
-		inicializar();
+		initialize();
 
 		while (running) {
 			
-			ahora = System.nanoTime();
-			noProcesado += (ahora - ultimoTiempo) / nsPorInstante;
-			ultimoTiempo = ahora;
-			debeDibujar = false;
+			now = System.nanoTime();
+			notProcessed += (now - lastTime) / nsPerInstant;
+			lastTime = now;
+			shouldDraw = false;
 			
-			while (noProcesado >= 1) {
-				instante();
-				noProcesado -= 1;
-				debeDibujar = true;				
+			while (notProcessed >= 1) {
+				instant();
+				notProcessed -= 1;
+				shouldDraw = true;				
 			}
 
 			try {
@@ -257,8 +256,8 @@ public class Juego extends Canvas implements Runnable {
 				e.printStackTrace();
 			}
 
-			if (debeDibujar) {
-				dibujar();
+			if (shouldDraw) {
+				draw();
 			}
 
 		}
