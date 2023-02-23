@@ -206,7 +206,7 @@ public class Juego extends Canvas implements Runnable {
 
 		JFrame ventana = new JFrame(Const.TITULO);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setJMenuBar(new BarraDeMenu(ventana, game));
+		ventana.setJMenuBar(new MenuBar(ventana, game));
 		ventana.setLayout(new BorderLayout());
 		statusBar = new StatusBar();
 		ventana.add(statusBar, BorderLayout.SOUTH);
@@ -218,7 +218,7 @@ public class Juego extends Canvas implements Runnable {
 		ventana.setVisible(true);
 	}
 
-	public void iniciar() {
+	public void start_game() {
 		running = true;
 		new Thread(this).start();
 	}

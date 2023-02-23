@@ -130,7 +130,7 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 			jugador = new Player();
 			MementoPlayer jm = aj.open(nickName);
 			juego.setJugador(jm);
-			juego.iniciar();
+			juego.start_game();
 		} else {
 			jugador = new NullPlayer();
 			errorNickNoExiste(jugador);

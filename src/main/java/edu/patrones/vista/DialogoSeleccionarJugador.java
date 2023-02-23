@@ -108,7 +108,7 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 		PlayerFile aj = new PlayerFile();
 		MementoPlayer jm = aj.open(seleccion);
 		juego.setJugador(jm);
-		juego.iniciar();
+		juego.start_game();
 	}
 	
 }
