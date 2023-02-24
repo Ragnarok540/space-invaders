@@ -17,18 +17,18 @@ import edu.patrones.jugador.Player;
 import edu.patrones.jugador.MementoPlayer;
 import edu.patrones.jugador.NullPlayer;
 
-public class DialogoIngresoRapido extends JDialog implements PropertyChangeListener {
+public class QuickStartDialog extends JDialog implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
 
 	private JOptionPane optionPane;
 	private JTextField tfNickName;
 	private String nickName;
-	private Juego juego;
+	private Juego game;
 
-	public DialogoIngresoRapido(JFrame ventana, Juego juego) {
-		super(ventana, true);
-		this.juego = juego;
+	public QuickStartDialog(JFrame window, Juego game) {
+		super(window, true);
+		this.game = game;
 		setTitle(Const.T_INGR);
 
 		
@@ -56,7 +56,7 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 
 		setSize(new Dimension(320, 160));
 		setResizable(false);
-		setLocationRelativeTo(ventana);
+		setLocationRelativeTo(window);
 	}
 
 	@Override
@@ -81,21 +81,18 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 				boolean lnickOk = nickName.length() < 6;
 
 				if (nickOk && lnickOk) {
-					cargarJugador();
-					cerrarDialogo();
+					loadPlayer();
+					closeDialog();
 				} else {
-					errorNick();
+					nickError();
 				}
-
 			} else {
-				cerrarDialogo();
+				closeDialog();
 			}
-
 		}
-
 	}
 
-	private void errorNick() {
+	private void nickError() {
 		tfNickName.selectAll();
 		JOptionPane.showMessageDialog(
 				this,
@@ -106,36 +103,34 @@ public class DialogoIngresoRapido extends JDialog implements PropertyChangeListe
 		tfNickName.requestFocusInWindow();
 	}
 	
-	private void errorNickNoExiste(IPlayerNullObject jugador) {
+	private void unexistentNickError(IPlayerNullObject player) {
 		tfNickName.selectAll();
 		JOptionPane.showMessageDialog(
 				this,
-				jugador.getNickName(),
+				player.getNickName(),
 				Const.INTENTAR,
 				JOptionPane.ERROR_MESSAGE);
 		nickName = null;
 		tfNickName.requestFocusInWindow();
 	}
 	
-	private void cerrarDialogo() {
+	private void closeDialog() {
 		tfNickName.setText(null);
 		setVisible(false);
 	}
 	
-	private void cargarJugador() {
+	private void loadPlayer() {
 		PlayerFile aj = new PlayerFile();
-		IPlayerNullObject jugador;
+		IPlayerNullObject player;
 		
 		if (aj.playerExists(nickName)) {
-			jugador = new Player();
+			player = new Player();
 			MementoPlayer jm = aj.open(nickName);
-			juego.setJugador(jm);
-			juego.start_game();
+			game.setJugador(jm);
+			game.start_game();
 		} else {
-			jugador = new NullPlayer();
-			errorNickNoExiste(jugador);
+			player = new NullPlayer();
+			unexistentNickError(player);
 		}
-		
 	}
-
 }

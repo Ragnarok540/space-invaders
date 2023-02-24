@@ -26,7 +26,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 	private DialogoNuevoJugador dnj;
 	private DialogoSeleccionarJugador dsj;
 	private DialogoMejoresPuntajes dmp;
-	private DialogoIngresoRapido dir;
+	private QuickStartDialog dir;
 	private JOptionPane helpDialog = new JOptionPane(Const.INSTRUCC);
 	private JOptionPane aboutDialog = new JOptionPane(Const.ACERCA);
 	private JDialog dialog;
@@ -55,7 +55,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		
 		dnj = new DialogoNuevoJugador(this.window);
 		dsj = new DialogoSeleccionarJugador(this.window, this.game);
-		dir = new DialogoIngresoRapido(this.window, this.game);
+		dir = new QuickStartDialog(this.window, this.game);
 	}
 
 	@Override
