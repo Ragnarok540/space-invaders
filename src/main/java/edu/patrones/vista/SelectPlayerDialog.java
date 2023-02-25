@@ -17,19 +17,18 @@ import edu.patrones.jugador.PlayerFile;
 import edu.patrones.jugador.PlayerFileProxy;
 import edu.patrones.jugador.MementoPlayer;
 
-public class DialogoSeleccionarJugador extends JDialog implements PropertyChangeListener {
+public class SelectPlayerDialog extends JDialog implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
-	
 	private JOptionPane optionPane;
 	private JComboBox<String> combo;
-	private Juego juego;
+	private Juego game;
 	
-	public DialogoSeleccionarJugador(JFrame ventana, Juego juego) {
-		super(ventana, true);
+	public SelectPlayerDialog(JFrame window, Juego game) {
+		super(window, true);
 		setTitle(Const.T_SELECC);
 
-		this.juego = juego;
+		this.game = game;
 		
 		combo = new JComboBox<>();
 		
@@ -46,11 +45,10 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 		setContentPane(optionPane);
 
 		addComponentListener(new ComponentAdapter() {
-			
 			public void componentShown(ComponentEvent ce) {
-				PlayerFileProxy ajp = new PlayerFileProxy();
-				List<String[]> data = ajp.getData();
-				SortedSet<String> nickNames = ajp.nickNames(data);
+				PlayerFileProxy pfp = new PlayerFileProxy();
+				List<String[]> data = pfp.getData();
+				SortedSet<String> nickNames = pfp.nickNames(data);
 				
 				combo.removeAllItems();
 				
@@ -61,14 +59,13 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 				combo.setSelectedIndex(0);
 				combo.requestFocusInWindow();
 			}
-			
 		});
 
 		optionPane.addPropertyChangeListener(this);
 
 		setSize(new Dimension(320, 160));
 		setResizable(false);
-		setLocationRelativeTo(ventana);
+		setLocationRelativeTo(window);
 	}
 	
 	@Override
@@ -89,26 +86,25 @@ public class DialogoSeleccionarJugador extends JDialog implements PropertyChange
 
 			if (value.equals(Const.SELECC)) {
 				
-				String seleccion = (String) combo.getSelectedItem();
-				cargarJugador(seleccion);
-				cerrarDialogo();
+				String selection = (String) combo.getSelectedItem();
+				loadPlayer(selection);
+				closeDialog();
 				
 			} else {
-				cerrarDialogo();
+				closeDialog();
 			}
-		}
-		
+		}	
 	}
 	
-	private void cerrarDialogo() {
+	private void closeDialog() {
 		setVisible(false);
 	}
 
-	private void cargarJugador(String seleccion) {
+	private void loadPlayer(String selection) {
 		PlayerFile aj = new PlayerFile();
-		MementoPlayer jm = aj.open(seleccion);
-		juego.setJugador(jm);
-		juego.start_game();
+		MementoPlayer jm = aj.open(selection);
+		game.setJugador(jm);
+		game.start_game();
 	}
 	
 }

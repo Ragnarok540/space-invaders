@@ -8,15 +8,15 @@ import javax.swing.JTable;
 
 import edu.patrones.jugador.PlayerFileProxy;
 
-public class DialogoMejoresPuntajes extends JOptionPane {
+public class BestScoresDialog extends JOptionPane {
 
 	private static final long serialVersionUID = 1L;
-	private PlayerFileProxy ajp;
+	private PlayerFileProxy pfp;
 
-	public DialogoMejoresPuntajes() {
-		ajp = new PlayerFileProxy();
-		List<String[]> data = ajp.getData();
-		Object[][] datos = ajp.convert(data);
+	public BestScoresDialog() {
+		pfp = new PlayerFileProxy();
+		List<String[]> data = pfp.getData();
+		Object[][] datos = pfp.convert(data);
 		JTable tabla = new JTable(datos, Const.COL_NAMES);
 		JScrollPane scroll = new JScrollPane(tabla);
 		this.setMessage(scroll);

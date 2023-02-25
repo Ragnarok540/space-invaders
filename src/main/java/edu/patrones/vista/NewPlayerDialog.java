@@ -16,22 +16,21 @@ import edu.patrones.jugador.PlayerFile;
 import edu.patrones.jugador.Player;
 import edu.patrones.jugador.MementoPlayer;
 
-public class DialogoNuevoJugador extends JDialog implements PropertyChangeListener {
+public class NewPlayerDialog extends JDialog implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
-
 	private JOptionPane optionPane;
-	private JTextField tfNombre, tfNickName;
-	private String nombre, nickName;
+	private JTextField nameTf, nickTf;
+	private String name, nickName;
 
-	public DialogoNuevoJugador(JFrame ventana) {
-		super(ventana, true);
+	public NewPlayerDialog(JFrame window) {
+		super(window, true);
 		setTitle(Const.T_NUEVO);
 
-		tfNombre = new JTextField(10);
-		tfNickName = new JTextField(10);
+		nameTf = new JTextField(10);
+		nickTf = new JTextField(10);
 
-		Object[] msg = {Const.M_NOMBRE, tfNombre, Const.M_NICK, tfNickName};
+		Object[] msg = {Const.M_NOMBRE, nameTf, Const.M_NICK, nickTf};
 		Object[] options = {Const.CREAR, Const.CANCELAR};
 
 		optionPane = new JOptionPane(msg,
@@ -45,7 +44,7 @@ public class DialogoNuevoJugador extends JDialog implements PropertyChangeListen
 
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent ce) {
-				tfNombre.requestFocusInWindow();
+				nameTf.requestFocusInWindow();
 			}
 		});	
 
@@ -53,7 +52,7 @@ public class DialogoNuevoJugador extends JDialog implements PropertyChangeListen
 
 		setSize(new Dimension(320, 160));
 		setResizable(false);
-		setLocationRelativeTo(ventana);
+		setLocationRelativeTo(window);
 	}
 
 	@Override
@@ -73,73 +72,70 @@ public class DialogoNuevoJugador extends JDialog implements PropertyChangeListen
 			optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
 
 			if (value.equals(Const.CREAR)) {
-				nombre = tfNombre.getText();
-				boolean nombOk = nombre.matches(Const.NAME_REGEX);
-				boolean lNombOk = nombre.length() < 25;
+				name = nameTf.getText();
+				boolean nombOk = name.matches(Const.NAME_REGEX);
+				boolean lNombOk = name.length() < 25;
 
-				nickName = tfNickName.getText();
+				nickName = nickTf.getText();
 				boolean nickOk = nickName.matches(Const.NICK_REGEX);
 				boolean lnickOk = nickName.length() < 6;
 
 				if (nombOk && lNombOk && nickOk && lnickOk) {
-					guardarJugador();
-					cerrarDialogo();
+					savePlayer();
+					closeDialog();
 				} else {
-					errorNombreNick();
+					nameNickError();
 				}
 			} else {
-				cerrarDialogo();
+				closeDialog();
 			}
 		}
-
 	}
 
-	private void errorNombreNick() {
-		tfNombre.selectAll();
+	private void nameNickError() {
+		nameTf.selectAll();
 		JOptionPane.showMessageDialog(
 				this,
 				Const.E_NUEVO_JUG,
 				Const.INTENTAR,
 				JOptionPane.WARNING_MESSAGE);
-		nombre = null;
+		name = null;
 		nickName = null;
-		tfNombre.requestFocusInWindow();
+		nameTf.requestFocusInWindow();
 	}
-	
-	private void errorNickYaExiste() {
-		tfNombre.selectAll();
+
+	private void nickAlreadyExistsError() {
+		nameTf.selectAll();
 		JOptionPane.showMessageDialog(
 				this,
 				Const.E_NICK,
 				Const.INTENTAR,
 				JOptionPane.ERROR_MESSAGE);
-		nombre = null;
+		name = null;
 		nickName = null;
-		tfNickName.requestFocusInWindow();
+		nickTf.requestFocusInWindow();
 	}
-	
-	private void cerrarDialogo() {
-		tfNombre.setText(null);
-		tfNickName.setText(null);
+
+	private void closeDialog() {
+		nameTf.setText(null);
+		nickTf.setText(null);
 		setVisible(false);
 	}
-	
-	private void guardarJugador() {
-		PlayerFile aj = new PlayerFile();
+
+	private void savePlayer() {
+		PlayerFile pf = new PlayerFile();
 		
-		if (aj.playerExists(nickName)) {
-			errorNickYaExiste();
+		if (pf.playerExists(nickName)) {
+			nickAlreadyExistsError();
 		} else {
-			Player jugador = new Player(nickName, nombre);
-			MementoPlayer memento = jugador.savePlayer();
-			aj.save(memento);
+			Player player = new Player(nickName, name);
+			MementoPlayer memento = player.savePlayer();
+			pf.save(memento);
 			try {
-				aj.writeFile();
+				pf.writeFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
 	}
-
 }

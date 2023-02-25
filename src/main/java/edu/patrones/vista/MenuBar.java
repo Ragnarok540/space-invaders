@@ -23,9 +23,9 @@ public class MenuBar extends JMenuBar implements ActionListener {
 	private JMenu helpMenu = new JMenu(Const.AYUDA);
 	private JMenuItem helpItem = new JMenuItem(Const.T_INSTRUCC);  
 	private JMenuItem aboutItem = new JMenuItem(Const.T_ACERCA);
-	private DialogoNuevoJugador dnj;
-	private DialogoSeleccionarJugador dsj;
-	private DialogoMejoresPuntajes dmp;
+	private NewPlayerDialog dnj;
+	private SelectPlayerDialog dsj;
+	private BestScoresDialog dmp;
 	private QuickStartDialog dir;
 	private JOptionPane helpDialog = new JOptionPane(Const.INSTRUCC);
 	private JOptionPane aboutDialog = new JOptionPane(Const.ACERCA);
@@ -53,8 +53,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		aboutItem.addActionListener(this);
 		this.add(helpMenu);
 		
-		dnj = new DialogoNuevoJugador(this.window);
-		dsj = new DialogoSeleccionarJugador(this.window, this.game);
+		dnj = new NewPlayerDialog(this.window);
+		dsj = new SelectPlayerDialog(this.window, this.game);
 		dir = new QuickStartDialog(this.window, this.game);
 	}
 
@@ -78,7 +78,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 			dialog = null;
 			break;
 		case Const.T_PUNT:
-			dmp = new DialogoMejoresPuntajes();
+			dmp = new BestScoresDialog();
 			dialog = dmp.createDialog(this, Const.T_PUNT);
 			break;
 		case Const.T_INSTRUCC:
