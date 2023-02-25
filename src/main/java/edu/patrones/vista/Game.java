@@ -23,7 +23,7 @@ import edu.patrones.jugador.Player;
 import edu.patrones.jugador.MementoPlayer;
 import edu.patrones.jugador.NullPlayer;
 
-public class Juego extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	private static final int WIDTH = 480;
@@ -40,7 +40,7 @@ public class Juego extends Canvas implements Runnable {
 
 	private BufferedImage image;
 
-	public Juego() {
+	public Game() {
 		super();
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		keyboard = new KeyboardReceiver(this);
@@ -199,7 +199,7 @@ public class Juego extends Canvas implements Runnable {
 	public static void main(String[] args) {
 		Dimension dimension = new Dimension(WIDTH, HEIGHT);
 		
-		Juego game = new Juego();
+		Game game = new Game();
 		game.setMinimumSize(dimension);
 		game.setMaximumSize(dimension);
 		game.setPreferredSize(dimension);
@@ -259,9 +259,6 @@ public class Juego extends Canvas implements Runnable {
 			if (shouldDraw) {
 				draw();
 			}
-
 		}
-
-	}
-	
+	}	
 }

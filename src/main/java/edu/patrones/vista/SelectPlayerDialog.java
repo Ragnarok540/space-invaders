@@ -22,9 +22,9 @@ public class SelectPlayerDialog extends JDialog implements PropertyChangeListene
 	private static final long serialVersionUID = 1L;
 	private JOptionPane optionPane;
 	private JComboBox<String> combo;
-	private Juego game;
+	private Game game;
 	
-	public SelectPlayerDialog(JFrame window, Juego game) {
+	public SelectPlayerDialog(JFrame window, Game game) {
 		super(window, true);
 		setTitle(Const.T_SELECC);
 

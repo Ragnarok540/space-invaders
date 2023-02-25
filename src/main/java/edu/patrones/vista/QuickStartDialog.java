@@ -24,9 +24,9 @@ public class QuickStartDialog extends JDialog implements PropertyChangeListener 
 	private JOptionPane optionPane;
 	private JTextField tfNickName;
 	private String nickName;
-	private Juego game;
+	private Game game;
 
-	public QuickStartDialog(JFrame window, Juego game) {
+	public QuickStartDialog(JFrame window, Game game) {
 		super(window, true);
 		this.game = game;
 		setTitle(Const.T_INGR);

@@ -3,13 +3,13 @@ package edu.patrones.teclado;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import edu.patrones.vista.Juego;
+import edu.patrones.vista.Game;
 
 public class KeyboardReceiver implements KeyListener {
 
 	private CommandInvoker invoker = new CommandInvoker();
 
-	public KeyboardReceiver(Juego juego) {
+	public KeyboardReceiver(Game juego) {
 		juego.addKeyListener(this);
 	}
 

@@ -23,17 +23,17 @@ public class MenuBar extends JMenuBar implements ActionListener {
 	private JMenu helpMenu = new JMenu(Const.AYUDA);
 	private JMenuItem helpItem = new JMenuItem(Const.T_INSTRUCC);  
 	private JMenuItem aboutItem = new JMenuItem(Const.T_ACERCA);
-	private NewPlayerDialog dnj;
-	private SelectPlayerDialog dsj;
+	private NewPlayerDialog npd;
+	private SelectPlayerDialog spd;
 	private BestScoresDialog dmp;
-	private QuickStartDialog dir;
+	private QuickStartDialog qsd;
 	private JOptionPane helpDialog = new JOptionPane(Const.INSTRUCC);
 	private JOptionPane aboutDialog = new JOptionPane(Const.ACERCA);
 	private JDialog dialog;
 	private JFrame window;
-	private Juego game;
+	private Game game;
 
-	public MenuBar(JFrame window, Juego game) throws HeadlessException {
+	public MenuBar(JFrame window, Game game) throws HeadlessException {
 		this.window = window;
 		this.game = game;
 		gameMenu.add(newPlayerItem);
@@ -53,16 +53,16 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		aboutItem.addActionListener(this);
 		this.add(helpMenu);
 		
-		dnj = new NewPlayerDialog(this.window);
-		dsj = new SelectPlayerDialog(this.window, this.game);
-		dir = new QuickStartDialog(this.window, this.game);
+		npd = new NewPlayerDialog(this.window);
+		spd = new SelectPlayerDialog(this.window, this.game);
+		qsd = new QuickStartDialog(this.window, this.game);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case Const.T_NUEVO:
-			dnj.setVisible(true);
+			npd.setVisible(true);
 			dialog = null;
 			break;
 		case Const.T_INIC:
@@ -70,11 +70,11 @@ public class MenuBar extends JMenuBar implements ActionListener {
 			dialog = null;
 			break;
 		case Const.T_SELECC:
-			dsj.setVisible(true);
+			spd.setVisible(true);
 			dialog = null;
 			break;
 		case Const.T_INGR:
-			dir.setVisible(true);
+			qsd.setVisible(true);
 			dialog = null;
 			break;
 		case Const.T_PUNT:
