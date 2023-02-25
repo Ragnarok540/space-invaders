@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IPlayerFileProxy {
 
-	public List<String[]> getData();
-	
+    public List<String[]> getData();
+    
 }

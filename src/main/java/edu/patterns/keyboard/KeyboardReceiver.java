@@ -7,41 +7,41 @@ import edu.patterns.gui.Game;
 
 public class KeyboardReceiver implements KeyListener {
 
-	private CommandInvoker invoker = new CommandInvoker();
+    private CommandInvoker invoker = new CommandInvoker();
 
-	public KeyboardReceiver(Game juego) {
-		juego.addKeyListener(this);
-	}
+    public KeyboardReceiver(Game juego) {
+        juego.addKeyListener(this);
+    }
 
-	@Override
-	public void keyPressed(KeyEvent ke) {
-		invoker.invoke(ke, true);
-	}
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        invoker.invoke(ke, true);
+    }
 
-	@Override
-	public void keyReleased(KeyEvent ke) {
-		invoker.invoke(ke, false);
-	}
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        invoker.invoke(ke, false);
+    }
 
-	@Override
-	public void keyTyped(KeyEvent ke) {
+    @Override
+    public void keyTyped(KeyEvent ke) {
 
-	}
+    }
 
-	public KeyCommand getLeft() {
-		return invoker.getLeft();
-	}
+    public KeyCommand getLeft() {
+        return invoker.getLeft();
+    }
 
-	public KeyCommand getRight() {
-		return invoker.getRight();
-	}
+    public KeyCommand getRight() {
+        return invoker.getRight();
+    }
 
-	public KeyCommand getShoot() {
-		return invoker.getShoot();
-	}
+    public KeyCommand getShoot() {
+        return invoker.getShoot();
+    }
 
-	public KeyCommand getPause() {
-		return invoker.getPause();
-	}
+    public KeyCommand getPause() {
+        return invoker.getPause();
+    }
 
 }
