@@ -3,7 +3,7 @@ package edu.patrones.modelo;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import edu.patrones.imagen.FlyweightModel;
+import edu.patrones.image.FlyweightModel;
 
 public abstract class Entity {
 

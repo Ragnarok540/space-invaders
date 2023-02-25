@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import edu.patrones.imagen.FlyweightFactory;
-import edu.patrones.imagen.FlyweightModel;
+import edu.patrones.image.FlyweightFactory;
+import edu.patrones.image.FlyweightModel;
 
 
 public class ModelFacade {
@@ -38,7 +38,6 @@ public class ModelFacade {
 		bullet.setModel(model);
 
 		createEnemies();
-
 	}
 
 	private void createEnemies() {
@@ -63,18 +62,23 @@ public class ModelFacade {
 					type = 1;
 					model = fFactory.getModel("octopus");
 				}
+
 				enemy = eFactory.createEnemy(type);
 				enemy.setPosX(posX);
 				enemy.setPosY(posY);
-				if (model != null) enemy.setModel(model);
+
+				if (model != null) {
+					enemy.setModel(model);
+				}
+
 				entities.add(enemy);
 				posX += 40;
 				model = null;
-			} 
+			}
+
 			posX = 5;
 			posY += 30;
 		}
-
 	}
 
 	public ArrayList<Entity> getEntities() {
@@ -136,7 +140,6 @@ public class ModelFacade {
 	 * 
 	 */
 	public void verifyEnemyCollisions() {
-
 		List<Entity> bullets = entities.stream()
 				.filter(x -> x instanceof BulletPrototype)
 				.filter(x -> x.isEliminated() == false)
@@ -151,17 +154,16 @@ public class ModelFacade {
 		Rectangle r2;
 
 		for (Entity bullet: bullets) {
-
 			BulletPrototype b = (BulletPrototype) bullet;
 
-			if (b.isType() == false) continue;
+			if (b.isType() == false) {
+				continue;
+			}
 
 			r1 = b.getRectangle();
 
 			for (Entity enemy: enemies) {
-
 				Enemy e = (Enemy) enemy;
-
 				r2 = e.getRectangle();
 
 				if (r1.intersects(r2)) {
@@ -175,15 +177,11 @@ public class ModelFacade {
 
 					System.out.println("enemy collision !!!");
 				}
-
 			}
-
 		}
-
 	}
 
 	public void verifyPlayerCollisions() {
-
 		List<Entity> bullets = entities.stream()
 				.filter(x -> x instanceof BulletPrototype)
 				.filter(x -> x.isEliminated() == false)
@@ -193,13 +191,13 @@ public class ModelFacade {
 		Rectangle r2;
 
 		for (Entity bullet: bullets) {
-
 			BulletPrototype b = (BulletPrototype) bullet;
 
-			if (b.isType() == true) continue;
+			if (b.isType() == true) {
+				continue;
+			}
 
 			r1 = b.getRectangle();
-
 			r2 = playerShip.getRectangle();
 
 			if (r1.intersects(r2)) {
@@ -207,9 +205,6 @@ public class ModelFacade {
 				playerShip.hurt();
 				System.out.println("player collision!!!");
 			}
-
 		}
-
 	}
-
 }
