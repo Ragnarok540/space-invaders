@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import edu.patrones.intefaces.IPlayerNullObject;
+import edu.patrones.interfaces.IPlayerNullObject;
 import edu.patrones.jugador.PlayerFile;
 import edu.patrones.jugador.Player;
 import edu.patrones.jugador.MementoPlayer;

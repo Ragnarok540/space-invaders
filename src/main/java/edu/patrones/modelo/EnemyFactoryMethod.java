@@ -1,6 +1,6 @@
 package edu.patrones.modelo;
 
-import edu.patrones.intefaces.IEnemyFactoryMethod;
+import edu.patrones.interfaces.IEnemyFactoryMethod;
 
 public class EnemyFactoryMethod implements IEnemyFactoryMethod {
 

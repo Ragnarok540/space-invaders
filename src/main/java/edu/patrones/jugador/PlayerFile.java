@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import edu.patrones.intefaces.IPlayerFileProxy;
+import edu.patrones.interfaces.IPlayerFileProxy;
 
 public class PlayerFile implements IPlayerFileProxy {
 

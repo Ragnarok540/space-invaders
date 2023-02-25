@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import edu.patrones.intefaces.IPlayerFileProxy;
+import edu.patrones.interfaces.IPlayerFileProxy;
 
 public class PlayerFileProxy implements IPlayerFileProxy {
 

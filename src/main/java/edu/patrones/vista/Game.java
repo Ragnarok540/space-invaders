@@ -17,7 +17,7 @@ import edu.patrones.modelo.Enemy;
 import edu.patrones.modelo.Entity;
 import edu.patrones.modelo.ModelFacade;
 import edu.patrones.teclado.KeyboardReceiver;
-import edu.patrones.intefaces.IPlayerNullObject;
+import edu.patrones.interfaces.IPlayerNullObject;
 import edu.patrones.jugador.PlayerFile;
 import edu.patrones.jugador.Player;
 import edu.patrones.jugador.MementoPlayer;

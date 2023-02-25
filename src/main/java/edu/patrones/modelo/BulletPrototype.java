@@ -2,7 +2,7 @@ package edu.patrones.modelo;
 
 import java.awt.Graphics;
 
-import edu.patrones.intefaces.IBulletPrototype;
+import edu.patrones.interfaces.IBulletPrototype;
 
 public class BulletPrototype extends Entity implements IBulletPrototype {
 

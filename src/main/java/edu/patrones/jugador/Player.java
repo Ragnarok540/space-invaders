@@ -1,6 +1,6 @@
 package edu.patrones.jugador;
 
-import edu.patrones.intefaces.IPlayerNullObject;
+import edu.patrones.interfaces.IPlayerNullObject;
 
 public class Player implements IPlayerNullObject {
 

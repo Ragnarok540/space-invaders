@@ -1,4 +1,4 @@
-package edu.patrones.intefaces;
+package edu.patrones.interfaces;
 
 import java.util.List;
 
