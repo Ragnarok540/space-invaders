@@ -92,10 +92,6 @@ public class ModelFacade {
         return score;
     }
 
-    /**
-    * Sets the score of the current game.
-    * @param score Score value.
-    */
     public void setScore(int score) {
         this.score = score;
     }
@@ -139,9 +135,6 @@ public class ModelFacade {
         enemyShootingAcumulator = 0;
     }
 
-    /**
-     * 
-     */
     public void verifyEnemyCollisions() {
         List<Entity> bullets = entities.stream()
                 .filter(x -> x instanceof BulletPrototype)

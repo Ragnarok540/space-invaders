@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FlyweightFactory {
-
     private HashMap<String, FlyweightModel> models;
 
     public FlyweightFactory() {
@@ -12,34 +11,30 @@ public class FlyweightFactory {
     }
 
     public FlyweightModel getModel(String type) {
-
         if (models.get(type) != null) {
-
             return models.get(type);
-
         } else {
-
             ArrayList<String> paths = new ArrayList<>();
 
             switch (type) {
             case "playerShip":
-                paths.add("res/nave.png");
+                paths.add("res/sprites/ship.png");
                 break;
             case "bullet":
-                paths.add("res/missile.png");
-                paths.add("res/laser.png");
+                paths.add("res/sprites/missile.png");
+                paths.add("res/sprites/laser.png");
                 break;
             case "squid":
-                paths.add("res/cal0.png");
-                paths.add("res/cal1.png");
+                paths.add("res/sprites/squid_0.png");
+                paths.add("res/sprites/squid_1.png");
                 break;
             case "crab":
-                paths.add("res/can0.png");
-                paths.add("res/can1.png");
+                paths.add("res/sprites/crab_0.png");
+                paths.add("res/sprites/crab_1.png");
                 break;
             case "octopus":
-                paths.add("res/pul0.png");
-                paths.add("res/pul1.png");
+                paths.add("res/sprites/octopus_0.png");
+                paths.add("res/sprites/octopus_1.png");
                 break;
             default:
                 return null;
@@ -50,5 +45,4 @@ public class FlyweightFactory {
             return model;
         }
     }
-
 }

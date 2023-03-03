@@ -17,23 +17,24 @@ import edu.patterns.player.Player;
 import edu.patterns.player.MementoPlayer;
 import edu.patterns.player.NullPlayer;
 
-public class QuickStartDialog extends JDialog implements PropertyChangeListener {
+public final class QuickStartDialog extends JDialog
+    implements PropertyChangeListener {
 
     private static final long serialVersionUID = 1L;
-
+    private static final int WIDTH = 320;
+    private static final int HEIGHT = 160;
+    private static final int NICK_TF_LENGHT = 10;
+    private static final int MAX_NICK_LENGHT = 6;
     private JOptionPane optionPane;
     private JTextField tfNickName;
     private String nickName;
     private Game game;
 
-    public QuickStartDialog(JFrame window, Game game) {
+    public QuickStartDialog(final JFrame window, final Game game) {
         super(window, true);
         this.game = game;
         setTitle(Const.T_INGR);
-
-        
-        tfNickName = new JTextField(10);
-
+        tfNickName = new JTextField(NICK_TF_LENGHT);
         Object[] msg = {Const.T_NICKRAPIDO, tfNickName};
         Object[] options = {Const.T_INIC, Const.CANCELAR};
 
@@ -47,20 +48,20 @@ public class QuickStartDialog extends JDialog implements PropertyChangeListener 
         setContentPane(optionPane);
 
         addComponentListener(new ComponentAdapter() {
-            public void componentShown(ComponentEvent ce) {
+            public void componentShown(final ComponentEvent ce) {
                 tfNickName.requestFocusInWindow();
             }
-        });    
+        });
 
         optionPane.addPropertyChangeListener(this);
 
-        setSize(new Dimension(320, 160));
+        setSize(new Dimension(WIDTH, HEIGHT));
         setResizable(false);
         setLocationRelativeTo(window);
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent pce) {
+    public void propertyChange(final PropertyChangeEvent pce) {
         String prop = pce.getPropertyName();
         boolean source = pce.getSource() == optionPane;
         boolean vp = JOptionPane.VALUE_PROPERTY.equals(prop);
@@ -78,7 +79,7 @@ public class QuickStartDialog extends JDialog implements PropertyChangeListener 
             if (value.equals(Const.T_INIC)) {
                 nickName = tfNickName.getText();
                 boolean nickOk = nickName.matches(Const.NICK_REGEX);
-                boolean lnickOk = nickName.length() < 6;
+                boolean lnickOk = nickName.length() < MAX_NICK_LENGHT;
 
                 if (nickOk && lnickOk) {
                     loadPlayer();
@@ -102,8 +103,8 @@ public class QuickStartDialog extends JDialog implements PropertyChangeListener 
         nickName = null;
         tfNickName.requestFocusInWindow();
     }
-    
-    private void unexistentNickError(IPlayerNullObject player) {
+
+    private void unexistentNickError(final IPlayerNullObject player) {
         tfNickName.selectAll();
         JOptionPane.showMessageDialog(
                 this,
@@ -113,16 +114,16 @@ public class QuickStartDialog extends JDialog implements PropertyChangeListener 
         nickName = null;
         tfNickName.requestFocusInWindow();
     }
-    
+
     private void closeDialog() {
         tfNickName.setText(null);
         setVisible(false);
     }
-    
+
     private void loadPlayer() {
         PlayerFile aj = new PlayerFile();
         IPlayerNullObject player;
-        
+
         if (aj.playerExists(nickName)) {
             player = new Player();
             MementoPlayer jm = aj.open(nickName);

@@ -35,7 +35,6 @@ public class PlayerShipSingleton extends Ship {
 
     @Override
     public void move(String d) {
-
         switch (d) {
         case "D":
             if (posX < 440) {
@@ -49,7 +48,6 @@ public class PlayerShipSingleton extends Ship {
             break;
         default:
         }
-
     }
 
     public void hurt() {

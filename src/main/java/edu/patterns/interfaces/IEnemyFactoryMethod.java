@@ -1,7 +1,7 @@
 package edu.patterns.interfaces;
 
-import edu.patterns.model.*;
+import edu.patterns.model.Ship;
 
 public interface IEnemyFactoryMethod {
-    public Ship createEnemy(int type);
+    Ship createEnemy(int type);
 }
