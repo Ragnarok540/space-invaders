@@ -1,9 +1,8 @@
 package edu.patterns.player;
 
-import edu.patterns.interfaces.*;
+import edu.patterns.interfaces.IPlayerNullObject;
 
-public class NullPlayer implements IPlayerNullObject {
-
+public final class NullPlayer implements IPlayerNullObject {
     @Override
     public boolean isNull() {
         return true;
@@ -11,12 +10,12 @@ public class NullPlayer implements IPlayerNullObject {
 
     @Override
     public String getName() {
-        return "El jugador no existe";
+        return "The player does not exist";
     }
 
     @Override
     public String getNickName() {
-        return "El jugador no existe";
+        return "The player does not exist";
     }
 
     @Override
@@ -25,8 +24,8 @@ public class NullPlayer implements IPlayerNullObject {
     }
 
     @Override
-    public void openPlayer(MementoPlayer mementoPlayer) {
-        // TODO Auto-generated method stub
+    public void openPlayer(final MementoPlayer mementoPlayer) {
+
     }
 
     @Override
@@ -35,8 +34,7 @@ public class NullPlayer implements IPlayerNullObject {
     }
 
     @Override
-    public void setMaxScore(int maxScore) {
-        // TODO Auto-generated method stub
-    }
+    public void setMaxScore(final int maxScore) {
 
+    }
 }

@@ -1,10 +1,10 @@
 package edu.patterns.model;
 
-public class Octopus extends Enemy {
+public final class Octopus extends Enemy {
+    private static final int SCORE = 10;
 
     public Octopus() {
         super();
-        super.score = 10;
+        super.score = SCORE;
     }
-
 }

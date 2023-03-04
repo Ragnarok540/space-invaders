@@ -3,14 +3,14 @@ package edu.patterns.image;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FlyweightFactory {
+public final class FlyweightFactory {
     private HashMap<String, FlyweightModel> models;
 
     public FlyweightFactory() {
         models = new HashMap<>();
     }
 
-    public FlyweightModel getModel(String type) {
+    public FlyweightModel getModel(final String type) {
         if (models.get(type) != null) {
             return models.get(type);
         } else {

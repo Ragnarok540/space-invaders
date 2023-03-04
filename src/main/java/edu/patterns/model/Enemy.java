@@ -3,7 +3,6 @@ package edu.patterns.model;
 import java.awt.Graphics;
 
 public abstract class Enemy extends Ship {
-
     protected int velocity = 10;
     protected int score;
     private int acumulator = 0;
@@ -27,12 +26,11 @@ public abstract class Enemy extends Ship {
 
         move(null);
         state = !state;
-
         velocityAcumulator = 0;
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(final Graphics g) {
         if (state) {
             g.drawImage(model.getSprites()[0], posX, posY, null);
         } else {
@@ -41,7 +39,7 @@ public abstract class Enemy extends Ship {
     }
 
     @Override
-    public void move(String d)    {
+    public void move(final String d)    {
         if (direction) {
             acumulator++;
 
@@ -79,12 +77,11 @@ public abstract class Enemy extends Ship {
         return velocity;
     }
 
-    public void setVelocity(int velocity) {
+    public void setVelocity(final int velocity) {
         this.velocity = velocity;
     }
 
     public boolean isGameOver() {
         return gameOver;
     }
-
 }

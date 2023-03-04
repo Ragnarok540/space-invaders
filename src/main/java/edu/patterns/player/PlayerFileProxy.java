@@ -9,8 +9,7 @@ import java.util.stream.Collectors;
 
 import edu.patterns.interfaces.IPlayerFileProxy;
 
-public class PlayerFileProxy implements IPlayerFileProxy {
-
+public final class PlayerFileProxy implements IPlayerFileProxy {
     private PlayerFile pFile;
 
     public PlayerFileProxy() {
@@ -28,24 +27,23 @@ public class PlayerFileProxy implements IPlayerFileProxy {
         return data;
     }
 
-    public Object[][] convert(List<String[]> list) {
+    public Object[][] convert(final List<String[]> list) {
         Object[][] matrix = new Object[list.size()][4];
 
         for (int i = 0; i < list.size(); i++) {
-            matrix[i] = new Object[] {i + 1, 
-                    list.get(i)[2], 
-                    list.get(i)[0], 
-                    list.get(i)[1]};
+            matrix[i] = new Object[] {i + 1,
+                list.get(i)[2],
+                list.get(i)[0],
+                list.get(i)[1]};
         }
 
         return matrix;
     }
 
-    public SortedSet<String> nickNames(List<String[]> list) {
+    public SortedSet<String> nickNames(final List<String[]> list) {
         Supplier<TreeSet<String>> stringSet = () -> new TreeSet<String>();
         return list.stream()
-                .map(x -> x[0])
-                .collect(Collectors.toCollection(stringSet));
+            .map(x -> x[0])
+            .collect(Collectors.toCollection(stringSet));
     }
-
 }

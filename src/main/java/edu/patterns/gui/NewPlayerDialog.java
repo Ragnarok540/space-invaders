@@ -16,19 +16,24 @@ import edu.patterns.player.PlayerFile;
 import edu.patterns.player.Player;
 import edu.patterns.player.MementoPlayer;
 
-public class NewPlayerDialog extends JDialog implements PropertyChangeListener {
-
+public final class NewPlayerDialog extends JDialog
+    implements PropertyChangeListener {
     private static final long serialVersionUID = 1L;
+    private static final int WIDTH = 320;
+    private static final int HEIGHT = 160;
+    private static final int TF_LENGHT = 10;
+    private static final int MAX_NICK_LENGHT = 6;
+    private static final int MAX_NAME_LENGHT = 25;
     private JOptionPane optionPane;
     private JTextField nameTf, nickTf;
     private String name, nickName;
 
-    public NewPlayerDialog(JFrame window) {
+    public NewPlayerDialog(final JFrame window) {
         super(window, true);
         setTitle(Const.T_NUEVO);
 
-        nameTf = new JTextField(10);
-        nickTf = new JTextField(10);
+        nameTf = new JTextField(TF_LENGHT);
+        nickTf = new JTextField(TF_LENGHT);
 
         Object[] msg = {Const.M_NOMBRE, nameTf, Const.M_NICK, nickTf};
         Object[] options = {Const.CREAR, Const.CANCELAR};
@@ -50,13 +55,13 @@ public class NewPlayerDialog extends JDialog implements PropertyChangeListener {
 
         optionPane.addPropertyChangeListener(this);
 
-        setSize(new Dimension(320, 160));
+        setSize(new Dimension(WIDTH, HEIGHT));
         setResizable(false);
         setLocationRelativeTo(window);
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent pce) {
+    public void propertyChange(final PropertyChangeEvent pce) {
         String prop = pce.getPropertyName();
         boolean source = pce.getSource() == optionPane;
         boolean vp = JOptionPane.VALUE_PROPERTY.equals(prop);
@@ -74,11 +79,11 @@ public class NewPlayerDialog extends JDialog implements PropertyChangeListener {
             if (value.equals(Const.CREAR)) {
                 name = nameTf.getText();
                 boolean nombOk = name.matches(Const.NAME_REGEX);
-                boolean lNombOk = name.length() < 25;
+                boolean lNombOk = name.length() < MAX_NAME_LENGHT;
 
                 nickName = nickTf.getText();
                 boolean nickOk = nickName.matches(Const.NICK_REGEX);
-                boolean lnickOk = nickName.length() < 6;
+                boolean lnickOk = nickName.length() < MAX_NICK_LENGHT;
 
                 if (nombOk && lNombOk && nickOk && lnickOk) {
                     savePlayer();

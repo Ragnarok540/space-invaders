@@ -4,8 +4,7 @@ import java.awt.Graphics;
 
 import edu.patterns.interfaces.IBulletPrototype;
 
-public class BulletPrototype extends Entity implements IBulletPrototype {
-
+public final class BulletPrototype extends Entity implements IBulletPrototype {
     private boolean type;
 
     public BulletPrototype() {
@@ -17,7 +16,7 @@ public class BulletPrototype extends Entity implements IBulletPrototype {
         return type;
     }
 
-    public void setType(boolean type) {
+    public void setType(final boolean type) {
         this.type = type;
     }
 
@@ -27,7 +26,7 @@ public class BulletPrototype extends Entity implements IBulletPrototype {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(final Graphics g) {
         if (type) {
             g.drawImage(model.getSprites()[0], posX, posY, null);
         } else {
@@ -36,7 +35,7 @@ public class BulletPrototype extends Entity implements IBulletPrototype {
     }
 
     @Override
-    public void move(String d) {
+    public void move(final String d) {
         if (type) {
             posY--;
         } else {
@@ -46,7 +45,6 @@ public class BulletPrototype extends Entity implements IBulletPrototype {
 
     @Override
     public IBulletPrototype cloneBullet() {
-
         BulletPrototype bullet = null;
 
         try {
@@ -56,7 +54,5 @@ public class BulletPrototype extends Entity implements IBulletPrototype {
         }
 
         return bullet;
-
     }
-
 }

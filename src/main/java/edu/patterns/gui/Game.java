@@ -23,8 +23,7 @@ import edu.patterns.player.Player;
 import edu.patterns.player.MementoPlayer;
 import edu.patterns.player.NullPlayer;
 
-public class Game extends Canvas implements Runnable {
-
+public final class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
     private static final int WIDTH = 480;
     private static final int HEIGHT = 360;
@@ -37,7 +36,6 @@ public class Game extends Canvas implements Runnable {
     private int missileDelay = 60;
     private int missileAccumulator = 0;
     private int level = 10;
-
     private BufferedImage image;
 
     public Game() {
@@ -53,10 +51,9 @@ public class Game extends Canvas implements Runnable {
     
     private void end() {
         List<Entity> entities = model.getEntities().stream()
-                .filter(x -> x instanceof Enemy)
-                .filter(x -> x.isEliminated() == false)
-                .collect(Collectors.toList()); 
-        
+            .filter(x -> x instanceof Enemy)
+            .filter(x -> !x.isEliminated())
+            .collect(Collectors.toList());
         boolean gameOver = false;
         
         for (Entity entity: entities) {
@@ -66,34 +63,30 @@ public class Game extends Canvas implements Runnable {
                 break;
             }
         }
-        
+
         if (model.getPlayerShip().isEliminated() || gameOver) {
             this.stop();
             this.updateScore();
-            statusBar.setStatus(Const.GAME_OVER[0] + 
-                    model.getScore() + 
-                    Const.GAME_OVER[1]);
+            statusBar.setStatus(Const.GAME_OVER[0]
+                + model.getScore()
+                + Const.GAME_OVER[1]);
         }
     }
-    
+
     private void nextLevel() {
         level -= 3;
-        
         int currentScore = model.getScore();
-        
         model = new ModelFacade();
         model.setScore(currentScore);
         model.getPlayerShip().restore();
-        
         List<Entity> entities = model.getEntities().stream()
             .filter(x -> x instanceof Enemy)
             .collect(Collectors.toList());
-        
+
         for (Entity entity: entities) {
             Enemy enemy = (Enemy) entity;
             enemy.setVelocity(level);
         }
-
     }
     
     private void updateScore() {
@@ -112,7 +105,7 @@ public class Game extends Canvas implements Runnable {
 
     private void instant() {
         handleKeyboard();
-        
+
         for (Entity entity: model.getEntities()) {
             if (entity.isEliminated()) {
                 continue;
@@ -120,15 +113,14 @@ public class Game extends Canvas implements Runnable {
                 entity.instant();
             }
         }
-        
+
         model.enemyShooting();
         model.verifyEnemyCollisions();
         model.verifyPlayerCollisions();
-        
         statusBar.setStatus(player.getNickName(),
-                model.getScore(), 
-                model.getPlayerShip().getLives(),
-                launchingMissile);
+            model.getScore(),
+            model.getPlayerShip().getLives(),
+            launchingMissile);
         
         end();
 
@@ -145,26 +137,26 @@ public class Game extends Canvas implements Runnable {
         launchingMissile = false;
         missileAccumulator = 0;
     }
-    
+
     private void handleKeyboard() {
         if (keyboard.getPause().isDown()) {
             // TODO
         }
-        
+
         if (keyboard.getRight().isDown()) {
             model.getPlayerShip().move("D");
         }
-        
+
         if (keyboard.getLeft().isDown()) {
             model.getPlayerShip().move("I");
-        } 
-        
+        }
+
         if (keyboard.getShoot().isDown() && !launchingMissile) {
             model.playerShooting();
             launchingMissile = true;
         }
     }
-    
+
     private void draw() {
         BufferStrategy bs = getBufferStrategy();
 
@@ -174,7 +166,6 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
-
         g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
 
         for (Entity entity: model.getEntities()) {
@@ -186,17 +177,16 @@ public class Game extends Canvas implements Runnable {
         }
         
         Toolkit.getDefaultToolkit().sync();
-        
         g.dispose();
         bs.show();
     }
-    
-    public void setJugador(MementoPlayer mementoPlayer) {
+
+    public void setJugador(final MementoPlayer mementoPlayer) {
         player = new Player();
         player.openPlayer(mementoPlayer);
     }
-    
-    public static void main(String[] args) {
+
+    public static void main(final String[] args) {
         Dimension dimension = new Dimension(WIDTH, HEIGHT);
         
         Game game = new Game();
@@ -218,7 +208,7 @@ public class Game extends Canvas implements Runnable {
         ventana.setVisible(true);
     }
 
-    public void start_game() {
+    public void startGame() {
         running = true;
         new Thread(this).start();
     }
@@ -226,7 +216,7 @@ public class Game extends Canvas implements Runnable {
     public void stop() {
         running = false;
     }
-    
+
     @Override
     public void run() {
         long lastTime = System.nanoTime();
@@ -238,16 +228,15 @@ public class Game extends Canvas implements Runnable {
         initialize();
 
         while (running) {
-            
             now = System.nanoTime();
             notProcessed += (now - lastTime) / nsPerInstant;
             lastTime = now;
             shouldDraw = false;
-            
+
             while (notProcessed >= 1) {
                 instant();
                 notProcessed -= 1;
-                shouldDraw = true;                
+                shouldDraw = true;
             }
 
             try {
@@ -261,5 +250,4 @@ public class Game extends Canvas implements Runnable {
             }
         }
     }
-
 }

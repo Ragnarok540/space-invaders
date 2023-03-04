@@ -6,17 +6,11 @@ import java.awt.Rectangle;
 import edu.patterns.image.FlyweightModel;
 
 public abstract class Entity {
-
     protected int posX, posY, width, height;
-
     protected FlyweightModel model;
-
     protected boolean eliminated = false;
-
     public abstract void instant();
-
     public abstract void draw(Graphics g);
-
     public abstract void move(String d);
 
     public void eliminate() {
@@ -27,7 +21,7 @@ public abstract class Entity {
         return posX;
     }
 
-    public void setPosX(int posX) {
+    public void setPosX(final int posX) {
         this.posX = posX;
     }
 
@@ -35,7 +29,7 @@ public abstract class Entity {
         return posY;
     }
 
-    public void setPosY(int posY) {
+    public void setPosY(final int posY) {
         this.posY = posY;
     }
 
@@ -43,7 +37,7 @@ public abstract class Entity {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(final int width) {
         this.width = width;
     }
 
@@ -51,7 +45,7 @@ public abstract class Entity {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
@@ -59,7 +53,7 @@ public abstract class Entity {
         return model;
     }
 
-    public void setModel(FlyweightModel model) {
+    public void setModel(final FlyweightModel model) {
         this.model = model;
     }
 
@@ -70,5 +64,4 @@ public abstract class Entity {
     public Rectangle getRectangle() {
         return new Rectangle(posX, posY, width, height);
     }
-
 }

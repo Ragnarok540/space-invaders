@@ -19,11 +19,10 @@ import edu.patterns.player.NullPlayer;
 
 public final class QuickStartDialog extends JDialog
     implements PropertyChangeListener {
-
     private static final long serialVersionUID = 1L;
     private static final int WIDTH = 320;
     private static final int HEIGHT = 160;
-    private static final int NICK_TF_LENGHT = 10;
+    private static final int TF_LENGHT = 10;
     private static final int MAX_NICK_LENGHT = 6;
     private JOptionPane optionPane;
     private JTextField tfNickName;
@@ -34,7 +33,7 @@ public final class QuickStartDialog extends JDialog
         super(window, true);
         this.game = game;
         setTitle(Const.T_INGR);
-        tfNickName = new JTextField(NICK_TF_LENGHT);
+        tfNickName = new JTextField(TF_LENGHT);
         Object[] msg = {Const.T_NICKRAPIDO, tfNickName};
         Object[] options = {Const.T_INIC, Const.CANCELAR};
 
@@ -128,7 +127,7 @@ public final class QuickStartDialog extends JDialog
             player = new Player();
             MementoPlayer jm = aj.open(nickName);
             game.setJugador(jm);
-            game.start_game();
+            game.startGame();
         } else {
             player = new NullPlayer();
             unexistentNickError(player);

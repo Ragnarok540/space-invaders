@@ -17,30 +17,29 @@ import edu.patterns.player.PlayerFile;
 import edu.patterns.player.PlayerFileProxy;
 import edu.patterns.player.MementoPlayer;
 
-public class SelectPlayerDialog extends JDialog implements PropertyChangeListener {
-
+public final class SelectPlayerDialog extends JDialog
+    implements PropertyChangeListener {
     private static final long serialVersionUID = 1L;
+    private static final int WIDTH = 320;
+    private static final int HEIGHT = 160;
     private JOptionPane optionPane;
     private JComboBox<String> combo;
     private Game game;
-    
-    public SelectPlayerDialog(JFrame window, Game game) {
+
+    public SelectPlayerDialog(final JFrame window, final Game game) {
         super(window, true);
         setTitle(Const.T_SELECC);
-
         this.game = game;
-        
         combo = new JComboBox<>();
-        
         Object[] msg = {Const.SELECC_J, combo};
         Object[] options = {Const.SELECC, Const.CANCELAR};
 
         optionPane = new JOptionPane(msg,
-                JOptionPane.QUESTION_MESSAGE,
-                JOptionPane.OK_CANCEL_OPTION,
-                null,
-                options,
-                options[0]);
+            JOptionPane.QUESTION_MESSAGE,
+            JOptionPane.OK_CANCEL_OPTION,
+            null,
+            options,
+            options[0]);
 
         setContentPane(optionPane);
 
@@ -48,14 +47,13 @@ public class SelectPlayerDialog extends JDialog implements PropertyChangeListene
             public void componentShown(ComponentEvent ce) {
                 PlayerFileProxy pfp = new PlayerFileProxy();
                 List<String[]> data = pfp.getData();
-                SortedSet<String> nickNames = pfp.nickNames(data);
-                
+                SortedSet<String> nickNames = pfp.nickNames(data);    
                 combo.removeAllItems();
                 
                 for (String nick: nickNames) {
                     combo.addItem(nick);
                 }
-                
+
                 combo.setSelectedIndex(0);
                 combo.requestFocusInWindow();
             }
@@ -63,13 +61,13 @@ public class SelectPlayerDialog extends JDialog implements PropertyChangeListene
 
         optionPane.addPropertyChangeListener(this);
 
-        setSize(new Dimension(320, 160));
+        setSize(new Dimension(WIDTH, HEIGHT));
         setResizable(false);
         setLocationRelativeTo(window);
     }
-    
+
     @Override
-    public void propertyChange(PropertyChangeEvent pce) {
+    public void propertyChange(final PropertyChangeEvent pce) {
         String prop = pce.getPropertyName();
         boolean source = pce.getSource() == optionPane;
         boolean vp = JOptionPane.VALUE_PROPERTY.equals(prop);
@@ -95,16 +93,15 @@ public class SelectPlayerDialog extends JDialog implements PropertyChangeListene
             }
         }    
     }
-    
+
     private void closeDialog() {
         setVisible(false);
     }
 
-    private void loadPlayer(String selection) {
+    private void loadPlayer(final String selection) {
         PlayerFile aj = new PlayerFile();
         MementoPlayer jm = aj.open(selection);
         game.setJugador(jm);
-        game.start_game();
+        game.startGame();
     }
-    
 }

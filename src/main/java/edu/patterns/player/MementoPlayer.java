@@ -1,12 +1,11 @@
 package edu.patterns.player;
 
-public class MementoPlayer {
-
+public final class MementoPlayer {
     private String nickName;
     private String name;
     private String maxScore;
 
-    public MementoPlayer(String nickName, String name, String maxScore) {
+    public MementoPlayer(final String nickName, final String name, final String maxScore) {
         this.nickName = nickName;
         this.name = name;
         this.maxScore = maxScore;
@@ -23,5 +22,4 @@ public class MementoPlayer {
     public String getMaxScore() {
         return maxScore;
     }
-
 }

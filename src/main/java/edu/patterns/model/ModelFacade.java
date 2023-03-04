@@ -10,8 +10,8 @@ import edu.patterns.image.FlyweightFactory;
 import edu.patterns.image.FlyweightModel;
 
 
-public class ModelFacade {
-    private int enemyShootings = 60;
+public final class ModelFacade {
+    private static final int ENEMY_SHOOTING_DELAY = 60;
     private ArrayList<Entity> entities;
     private PlayerShipSingleton playerShip;
     private BulletPrototype bullet;
@@ -27,7 +27,7 @@ public class ModelFacade {
 
         entities = new ArrayList<>();
 
-        playerShip = PlayerShipSingleton.instancia();
+        playerShip = PlayerShipSingleton.instance();
         model = fFactory.getModel("playerShip");
         playerShip.setModel(model);
         entities.add(playerShip);
@@ -121,7 +121,7 @@ public class ModelFacade {
     public void enemyShooting() {
         enemyShootingAcumulator++;
 
-        if (enemyShootingAcumulator < enemyShootings) {
+        if (enemyShootingAcumulator < ENEMY_SHOOTING_DELAY) {
             return;
         }
 
@@ -138,13 +138,13 @@ public class ModelFacade {
     public void verifyEnemyCollisions() {
         List<Entity> bullets = entities.stream()
                 .filter(x -> x instanceof BulletPrototype)
-                .filter(x -> x.isEliminated() == false)
+                .filter(x -> !x.isEliminated())
                 .collect(Collectors.toList()); 
 
         List<Entity> enemies = entities.stream()
                 .filter(x -> x instanceof Enemy)
-                .filter(x -> x.isEliminated() == false)
-                .collect(Collectors.toList()); 
+                .filter(x -> !x.isEliminated())
+                .collect(Collectors.toList());
 
         Rectangle r1;
         Rectangle r2;
@@ -180,8 +180,8 @@ public class ModelFacade {
     public void verifyPlayerCollisions() {
         List<Entity> bullets = entities.stream()
                 .filter(x -> x instanceof BulletPrototype)
-                .filter(x -> x.isEliminated() == false)
-                .collect(Collectors.toList()); 
+                .filter(x -> !x.isEliminated())
+                .collect(Collectors.toList());
 
         Rectangle r1;
         Rectangle r2;

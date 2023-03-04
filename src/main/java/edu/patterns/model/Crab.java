@@ -1,10 +1,10 @@
 package edu.patterns.model;
 
-public class Crab extends Enemy {
+public final class Crab extends Enemy {
+    private static final int SCORE = 20;
 
     public Crab() {
         super();
-        super.score = 20;
+        super.score = SCORE;
     }
-
 }

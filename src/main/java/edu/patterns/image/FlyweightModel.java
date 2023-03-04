@@ -7,11 +7,10 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-public class FlyweightModel {
-    
+public final class FlyweightModel {
     private BufferedImage[] sprites;
 
-    public FlyweightModel(ArrayList<String> paths) {
+    public FlyweightModel(final ArrayList<String> paths) {
         sprites = new BufferedImage[paths.size()];
 
         int counter = 0;
@@ -28,5 +27,4 @@ public class FlyweightModel {
     public BufferedImage[] getSprites() {
         return sprites;
     }
-
 }

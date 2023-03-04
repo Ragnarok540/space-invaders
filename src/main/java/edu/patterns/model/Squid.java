@@ -1,10 +1,10 @@
 package edu.patterns.model;
 
-public class Squid extends Enemy {
+public final class Squid extends Enemy {
+    private static final int SCORE = 30;
 
     public Squid() {
         super();
-        super.score = 30;
+        super.score = SCORE;
     }
-
 }

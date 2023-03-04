@@ -2,8 +2,7 @@ package edu.patterns.model;
 
 import java.awt.Graphics;
 
-public class PlayerShipSingleton extends Ship {
-
+public final class PlayerShipSingleton extends Ship {
     private int lives = 3;
     private static PlayerShipSingleton playerShip = null;
 
@@ -14,7 +13,7 @@ public class PlayerShipSingleton extends Ship {
         height = 19;
     }
 
-    public static PlayerShipSingleton instancia() {
+    public static PlayerShipSingleton instance() {
         if (playerShip != null) {
             return playerShip;
         } else {
@@ -29,12 +28,12 @@ public class PlayerShipSingleton extends Ship {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(final Graphics g) {
         g.drawImage(model.getSprites()[0], posX, posY, null);
     }
 
     @Override
-    public void move(String d) {
+    public void move(final String d) {
         switch (d) {
         case "D":
             if (posX < 440) {
@@ -66,5 +65,4 @@ public class PlayerShipSingleton extends Ship {
     public int getLives() {
         return lives;
     }
-
 }

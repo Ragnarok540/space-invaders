@@ -8,7 +8,7 @@ import javax.swing.JTable;
 
 import edu.patterns.player.PlayerFileProxy;
 
-public class BestScoresDialog extends JOptionPane {
+public final class BestScoresDialog extends JOptionPane {
     private static final long serialVersionUID = 1L;
     private PlayerFileProxy pfp;
 

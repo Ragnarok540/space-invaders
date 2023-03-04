@@ -5,26 +5,25 @@ import java.awt.event.KeyListener;
 
 import edu.patterns.gui.Game;
 
-public class KeyboardReceiver implements KeyListener {
-
+public final class KeyboardReceiver implements KeyListener {
     private CommandInvoker invoker = new CommandInvoker();
 
-    public KeyboardReceiver(Game juego) {
+    public KeyboardReceiver(final Game juego) {
         juego.addKeyListener(this);
     }
 
     @Override
-    public void keyPressed(KeyEvent ke) {
+    public void keyPressed(final KeyEvent ke) {
         invoker.invoke(ke, true);
     }
 
     @Override
-    public void keyReleased(KeyEvent ke) {
+    public void keyReleased(final KeyEvent ke) {
         invoker.invoke(ke, false);
     }
 
     @Override
-    public void keyTyped(KeyEvent ke) {
+    public void keyTyped(final KeyEvent ke) {
 
     }
 
@@ -43,5 +42,4 @@ public class KeyboardReceiver implements KeyListener {
     public KeyCommand getPause() {
         return invoker.getPause();
     }
-
 }

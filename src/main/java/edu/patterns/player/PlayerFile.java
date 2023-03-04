@@ -13,8 +13,7 @@ import java.util.stream.Stream;
 
 import edu.patterns.interfaces.IPlayerFileProxy;
 
-public class PlayerFile implements IPlayerFileProxy {
-
+public final class PlayerFile implements IPlayerFileProxy {
     private static final String CSV_FILE = "res/database.csv";
     private static final String DELIMITER = ",";
     private List<String[]> data;
@@ -30,29 +29,28 @@ public class PlayerFile implements IPlayerFileProxy {
                 return;        
             }
         }
-        this.data.add(new String[] {mPlayer.getNickName(), 
-                mPlayer.getName(), 
+
+        this.data.add(new String[] {mPlayer.getNickName(),
+                mPlayer.getName(),
                 mPlayer.getMaxScore()});
     }
 
-    public MementoPlayer open(String nickName) {
+    public MementoPlayer open(final String nickName) {
         for (String[] register: data) {
             if (register[0].equals(nickName)) {
-                return new MementoPlayer(register[0], 
-                        register[1], 
-                        register[2]);
+                return new MementoPlayer(register[0], register[1], register[2]);
             }
         }
         return null;
     }
 
-    private String joinComma(String[] data) {
-        return Stream.of(data)
-                .collect(Collectors.joining(","));
+    private String joinComma(final String[] data) {
+        return Stream.of(data).collect(Collectors.joining(","));
     }
 
     public void writeFile() throws IOException {
         File csvFile = new File(CSV_FILE);
+
         try (PrintWriter pw = new PrintWriter(csvFile)) {
             data.stream()
             .map(this::joinComma)
@@ -71,18 +69,23 @@ public class PlayerFile implements IPlayerFileProxy {
                 return true;
             }
         }
+
         return false;
     }
 
-    private List<String[]> readFile() throws FileNotFoundException, IOException {
+    private List<String[]> readFile() throws FileNotFoundException,
+        IOException {
         List<String[]> registers = new ArrayList<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
             String line;
+
             while ((line = br.readLine()) != null) {
                 String[] register = line.split(DELIMITER);
                 registers.add(register);
             }
         }
+
         return registers;
     }    
 
@@ -101,5 +104,4 @@ public class PlayerFile implements IPlayerFileProxy {
             e.printStackTrace();
         }
     }
-
 }

@@ -2,13 +2,12 @@ package edu.patterns.player;
 
 import edu.patterns.interfaces.IPlayerNullObject;
 
-public class Player implements IPlayerNullObject {
-
+public final class Player implements IPlayerNullObject {
     private String nickName;
     private String name;
     private int maxScore;
 
-    public Player(String nickName, String name) {
+    public Player(final String nickName, final String name) {
         super();
         this.nickName = nickName;
         this.name = name;
@@ -35,7 +34,7 @@ public class Player implements IPlayerNullObject {
     }
 
     @Override
-    public void setMaxScore(int maxScore) {
+    public void setMaxScore(final int maxScore) {
         if (maxScore > this.maxScore) {
             this.maxScore = maxScore;
         }
@@ -47,7 +46,7 @@ public class Player implements IPlayerNullObject {
     }
 
     @Override
-    public void openPlayer(MementoPlayer mementoPlayer) {
+    public void openPlayer(final MementoPlayer mementoPlayer) {
         this.nickName = mementoPlayer.getNickName();
         this.name = mementoPlayer.getName();
         this.maxScore = Integer.parseInt(mementoPlayer.getMaxScore());
@@ -57,5 +56,4 @@ public class Player implements IPlayerNullObject {
     public boolean isNull() {
         return false;
     }
-
 }

@@ -11,8 +11,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-public class MenuBar extends JMenuBar implements ActionListener {
-
+public final class MenuBar extends JMenuBar implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JMenu gameMenu = new JMenu(Const.JUEGO);
     private JMenuItem newPlayerItem = new JMenuItem(Const.T_NUEVO);  
@@ -33,40 +32,43 @@ public class MenuBar extends JMenuBar implements ActionListener {
     private JFrame window;
     private Game game;
 
-    public MenuBar(JFrame window, Game game) throws HeadlessException {
+    public MenuBar(final JFrame window, final Game game)
+        throws HeadlessException {
         this.window = window;
         this.game = game;
+
         gameMenu.add(newPlayerItem);
         newPlayerItem.addActionListener(this);
         gameMenu.add(selectPlayerItem);
         selectPlayerItem.addActionListener(this);
         gameMenu.add(quickStartItem);
         quickStartItem.addActionListener(this);
-        gameMenu.add(startGameItem);   
+        gameMenu.add(startGameItem);
         startGameItem.addActionListener(this);
         gameMenu.add(bestScoresItem);
         bestScoresItem.addActionListener(this);
-        this.add(gameMenu); 
+        this.add(gameMenu);
+
         helpMenu.add(helpItem);
         helpItem.addActionListener(this);
         helpMenu.add(aboutItem);
         aboutItem.addActionListener(this);
         this.add(helpMenu);
-        
+
         npd = new NewPlayerDialog(this.window);
         spd = new SelectPlayerDialog(this.window, this.game);
         qsd = new QuickStartDialog(this.window, this.game);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         switch (e.getActionCommand()) {
         case Const.T_NUEVO:
             npd.setVisible(true);
             dialog = null;
             break;
         case Const.T_INIC:
-            game.start_game();
+            game.startGame();
             dialog = null;
             break;
         case Const.T_SELECC:
