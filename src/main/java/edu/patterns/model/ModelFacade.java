@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import edu.patterns.image.FlyweightFactory;
 import edu.patterns.image.FlyweightModel;
 
-
 public final class ModelFacade {
     private static final int ENEMY_SHOOTING_DELAY = 60;
     private ArrayList<Entity> entities;
@@ -108,7 +107,7 @@ public final class ModelFacade {
     private Enemy randomEnemy() {
         List<Entity> enemies = entities.stream()
                 .filter(x -> x instanceof Enemy)
-                .filter(x -> x.isEliminated() == false)
+                .filter(x -> !x.isEliminated())
                 .collect(Collectors.toList());
 
         SecureRandom rand = new SecureRandom();
@@ -134,14 +133,14 @@ public final class ModelFacade {
 
     public void verifyEnemyCollisions() {
         List<Entity> bullets = entities.stream()
-                .filter(x -> x instanceof BulletPrototype)
-                .filter(x -> !x.isEliminated())
-                .collect(Collectors.toList());
+            .filter(x -> x instanceof BulletPrototype)
+            .filter(x -> !x.isEliminated())
+            .collect(Collectors.toList());
 
         List<Entity> enemies = entities.stream()
-                .filter(x -> x instanceof Enemy)
-                .filter(x -> !x.isEliminated())
-                .collect(Collectors.toList());
+            .filter(x -> x instanceof Enemy)
+            .filter(x -> !x.isEliminated())
+            .collect(Collectors.toList());
 
         Rectangle r1;
         Rectangle r2;

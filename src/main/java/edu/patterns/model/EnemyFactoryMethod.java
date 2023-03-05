@@ -5,7 +5,7 @@ import edu.patterns.interfaces.IEnemyFactoryMethod;
 public final class EnemyFactoryMethod implements IEnemyFactoryMethod {
     @Override
     public Enemy createEnemy(final String type) {
-        switch(type) {
+        switch (type) {
             case "octopus":
                 return new Octopus();
             case "crab":

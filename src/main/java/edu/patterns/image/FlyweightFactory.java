@@ -1,6 +1,5 @@
 package edu.patterns.image;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.patterns.model.Entity;
@@ -23,15 +22,15 @@ public final class FlyweightFactory {
     * This method obtains the model for a given entity, and only creates the
     * model the first time is called, otherwise it uses a model that is
     * already loaded.
-    * @param type The entity.
+    * @param entity The entity.
     * @return The model for the given entity.
     */
-    public FlyweightModel getModel(final Entity type) {
-        if (models.get(type) != null) {
-            return models.get(type);
+    public FlyweightModel getModel(final Entity entity) {
+        if (models.get(entity) != null) {
+            return models.get(entity);
         } else {
-            FlyweightModel model = new FlyweightModel(type.getPaths());
-            models.put(type.getName(), model);
+            FlyweightModel model = new FlyweightModel(entity.getPaths());
+            models.put(entity.getName(), model);
             return model;
         }
     }
