@@ -5,7 +5,8 @@ public final class MementoPlayer {
     private String name;
     private String maxScore;
 
-    public MementoPlayer(final String nickName, final String name, final String maxScore) {
+    public MementoPlayer(final String nickName, final String name,
+        final String maxScore) {
         this.nickName = nickName;
         this.name = name;
         this.maxScore = maxScore;

@@ -26,7 +26,7 @@ public final class StatusBar extends JPanel {
         final int lives, final boolean launchingMissile) {
         this.statusLabel.setText(Const.ESTADO[0]
                 + nick
-                + Const.ESTADO[1] 
+                + Const.ESTADO[1]
                 + score
                 + Const.ESTADO[2]
                 + lives

@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
 public final class MenuBar extends JMenuBar implements ActionListener {
     private static final long serialVersionUID = 1L;
     private JMenu gameMenu = new JMenu(Const.JUEGO);
-    private JMenuItem newPlayerItem = new JMenuItem(Const.T_NUEVO);  
+    private JMenuItem newPlayerItem = new JMenuItem(Const.T_NUEVO);
     private JMenuItem selectPlayerItem = new JMenuItem(Const.T_SELECC);
     private JMenuItem quickStartItem = new JMenuItem(Const.T_INGR);
-    private JMenuItem startGameItem = new JMenuItem(Const.T_INIC);  
+    private JMenuItem startGameItem = new JMenuItem(Const.T_INIC);
     private JMenuItem bestScoresItem = new JMenuItem(Const.T_PUNT);
     private JMenu helpMenu = new JMenu(Const.AYUDA);
-    private JMenuItem helpItem = new JMenuItem(Const.T_INSTRUCC);  
+    private JMenuItem helpItem = new JMenuItem(Const.T_INSTRUCC);
     private JMenuItem aboutItem = new JMenuItem(Const.T_ACERCA);
     private NewPlayerDialog npd;
     private SelectPlayerDialog spd;

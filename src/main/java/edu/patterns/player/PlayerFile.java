@@ -26,7 +26,7 @@ public final class PlayerFile implements IPlayerFileProxy {
         for (String[] register: data) {
             if (register[0].contentEquals(mPlayer.getNickName())) {
                 register[2] = mPlayer.getMaxScore();
-                return;        
+                return;
             }
         }
 
@@ -87,7 +87,7 @@ public final class PlayerFile implements IPlayerFileProxy {
         }
 
         return registers;
-    }    
+    }
 
     private void loadFile() {
         try {

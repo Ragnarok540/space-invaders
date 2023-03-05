@@ -102,7 +102,8 @@ public final class ModelFacade {
 
     public void playerShooting() {
         BulletPrototype clonedBullet = (BulletPrototype) bullet.cloneBullet();
-        clonedBullet.setPosX(playerShip.getPosX() + (playerShip.getWidth() / 2) - 5);
+        clonedBullet.setPosX(playerShip.getPosX()
+            + (playerShip.getWidth() / 2) - 5);
         clonedBullet.setPosY(playerShip.getPosY() - bullet.getHeight() - 5);
         clonedBullet.setType(true);
         entities.add(clonedBullet);
@@ -139,7 +140,7 @@ public final class ModelFacade {
         List<Entity> bullets = entities.stream()
                 .filter(x -> x instanceof BulletPrototype)
                 .filter(x -> !x.isEliminated())
-                .collect(Collectors.toList()); 
+                .collect(Collectors.toList());
 
         List<Entity> enemies = entities.stream()
                 .filter(x -> x instanceof Enemy)

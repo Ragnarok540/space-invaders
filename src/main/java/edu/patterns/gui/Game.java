@@ -48,14 +48,14 @@ public final class Game extends Canvas implements Runnable {
     private void initialize() {
         model = new ModelFacade();
     }
-    
+
     private void end() {
         List<Entity> entities = model.getEntities().stream()
             .filter(x -> x instanceof Enemy)
             .filter(x -> !x.isEliminated())
             .collect(Collectors.toList());
         boolean gameOver = false;
-        
+
         for (Entity entity: entities) {
             Enemy enemy = (Enemy) entity;
             if (enemy.isGameOver()) {
@@ -88,7 +88,7 @@ public final class Game extends Canvas implements Runnable {
             enemy.setVelocity(level);
         }
     }
-    
+
     private void updateScore() {
         if (!player.isNull()) {
             player.setMaxScore(model.getScore());
@@ -99,7 +99,7 @@ public final class Game extends Canvas implements Runnable {
                 pf.writeFile();
             } catch (IOException e) {
                 e.printStackTrace();
-            } 
+            }
         }
     }
 
@@ -121,7 +121,7 @@ public final class Game extends Canvas implements Runnable {
             model.getScore(),
             model.getPlayerShip().getLives(),
             launchingMissile);
-        
+
         end();
 
         if (model.isLastEnemy()) {
@@ -130,7 +130,7 @@ public final class Game extends Canvas implements Runnable {
 
         missileAccumulator++;
 
-        if (missileAccumulator < missileDelay) {    
+        if (missileAccumulator < missileDelay) {
             return;
         }
 
@@ -175,7 +175,7 @@ public final class Game extends Canvas implements Runnable {
                 entity.draw(g);
             }
         }
-        
+
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
         bs.show();
@@ -188,7 +188,7 @@ public final class Game extends Canvas implements Runnable {
 
     public static void main(final String[] args) {
         Dimension dimension = new Dimension(WIDTH, HEIGHT);
-        
+
         Game game = new Game();
         game.setMinimumSize(dimension);
         game.setMaximumSize(dimension);

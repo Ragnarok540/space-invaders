@@ -51,7 +51,7 @@ public final class NewPlayerDialog extends JDialog
             public void componentShown(ComponentEvent ce) {
                 nameTf.requestFocusInWindow();
             }
-        });    
+        });
 
         optionPane.addPropertyChangeListener(this);
 
@@ -129,7 +129,7 @@ public final class NewPlayerDialog extends JDialog
 
     private void savePlayer() {
         PlayerFile pf = new PlayerFile();
-        
+
         if (pf.playerExists(nickName)) {
             nickAlreadyExistsError();
         } else {

@@ -9,7 +9,7 @@ public abstract class Enemy extends Ship {
     private boolean direction = true;
     private int velocityAcumulator = 0;
     private boolean gameOver = false;
-    protected boolean state = true; 
+    protected boolean state = true;
 
     public Enemy() {
         width = 32;

@@ -8,8 +8,19 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public final class FlyweightModel {
+    /**
+    * Array of images used to represent an entity.
+    * @see edu.patterns.model.Entity
+    */
     private BufferedImage[] sprites;
 
+    /**
+    * Constructor for the Flyweight Model, used to manage the sprites that
+    * represent the entities in the game. Each Entity object that is
+    * visually represented has a corresponding FlyweightModel object.
+    * @param paths The locations of the images to be used as sprites.
+    * @see edu.patterns.model.Entity
+    */
     public FlyweightModel(final ArrayList<String> paths) {
         sprites = new BufferedImage[paths.size()];
 
@@ -18,12 +29,16 @@ public final class FlyweightModel {
             try {
                 sprites[counter++] = ImageIO.read(new File(path));
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
     }
 
+    /**
+    * Array of images used to represent an entity.
+    * @return The array of images.
+    * @see edu.patterns.model.Entity
+    */
     public BufferedImage[] getSprites() {
         return sprites;
     }

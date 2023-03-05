@@ -44,12 +44,12 @@ public final class SelectPlayerDialog extends JDialog
         setContentPane(optionPane);
 
         addComponentListener(new ComponentAdapter() {
-            public void componentShown(ComponentEvent ce) {
+            public void componentShown(final ComponentEvent ce) {
                 PlayerFileProxy pfp = new PlayerFileProxy();
                 List<String[]> data = pfp.getData();
-                SortedSet<String> nickNames = pfp.nickNames(data);    
+                SortedSet<String> nickNames = pfp.nickNames(data);
                 combo.removeAllItems();
-                
+
                 for (String nick: nickNames) {
                     combo.addItem(nick);
                 }
@@ -83,15 +83,13 @@ public final class SelectPlayerDialog extends JDialog
             optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
 
             if (value.equals(Const.SELECC)) {
-                
                 String selection = (String) combo.getSelectedItem();
                 loadPlayer(selection);
                 closeDialog();
-                
             } else {
                 closeDialog();
             }
-        }    
+        }
     }
 
     private void closeDialog() {
