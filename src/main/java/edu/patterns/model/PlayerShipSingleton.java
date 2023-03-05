@@ -2,15 +2,22 @@ package edu.patterns.model;
 
 import java.awt.Graphics;
 
+import java.util.ArrayList;
+
 public final class PlayerShipSingleton extends Ship {
     private int lives = 3;
     private static PlayerShipSingleton playerShip = null;
 
     private PlayerShipSingleton() {
-        posX = 230;
-        posY = 330;
-        width = 35;
-        height = 19;
+        super();
+        super.posX = 230;
+        super.posY = 330;
+        super.width = 35;
+        super.height = 19;
+        super.name = "playerShip";
+        ArrayList<String> pathsArray = new ArrayList<>();
+        pathsArray.add("res/sprites/ship.png");
+        super.paths = pathsArray;
     }
 
     public static PlayerShipSingleton instance() {

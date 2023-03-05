@@ -2,14 +2,22 @@ package edu.patterns.model;
 
 import java.awt.Graphics;
 
+import java.util.ArrayList;
+
 import edu.patterns.interfaces.IBulletPrototype;
 
 public final class BulletPrototype extends Entity implements IBulletPrototype {
     private boolean type;
 
     public BulletPrototype() {
-        width = 11;
-        height = 17;
+        super();
+        super.width = 11;
+        super.height = 17;
+        super.name = "bullet";
+        ArrayList<String> pathsArray = new ArrayList<>();
+        pathsArray.add("res/sprites/missile.png");
+        pathsArray.add("res/sprites/laser.png");
+        super.paths = pathsArray;
     }
 
     public boolean isType() {

@@ -3,12 +3,16 @@ package edu.patterns.model;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import java.util.ArrayList;
+
 import edu.patterns.image.FlyweightModel;
 
 public abstract class Entity {
     protected int posX, posY, width, height;
     protected FlyweightModel model;
     protected boolean eliminated = false;
+    protected String name;
+    protected ArrayList<String> paths;
     public abstract void instant();
     public abstract void draw(Graphics g);
     public abstract void move(String d);
@@ -55,6 +59,22 @@ public abstract class Entity {
 
     public void setModel(final FlyweightModel model) {
         this.model = model;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public ArrayList<String> getPaths() {
+        return paths;
+    }
+
+    public void setPaths(final ArrayList<String> paths) {
+        this.paths = paths;
     }
 
     public boolean isEliminated() {

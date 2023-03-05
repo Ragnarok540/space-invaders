@@ -28,12 +28,12 @@ public final class ModelFacade {
         entities = new ArrayList<>();
 
         playerShip = PlayerShipSingleton.instance();
-        model = fFactory.getModel("playerShip");
+        model = fFactory.getModel(playerShip);
         playerShip.setModel(model);
         entities.add(playerShip);
 
         bullet = new BulletPrototype();
-        model = fFactory.getModel("bullet");
+        model = fFactory.getModel(bullet);
         bullet.setModel(model);
 
         createEnemies();
@@ -42,34 +42,30 @@ public final class ModelFacade {
     private void createEnemies() {
         EnemyFactoryMethod eFactory = new EnemyFactoryMethod();
 
-        Enemy enemy;
+        Enemy enemy = null;
         FlyweightModel model = null;
 
         int posX = 5;
         int posY = 5;
-        int type = 0;
 
         for (int i = 5; i > 0; i--) {
             for (int j = 0; j < 10; j++) {
                 if (i == 5) {
-                    type = 3;
-                    model = fFactory.getModel("squid");
+                    enemy = eFactory.createEnemy("squid");
                 } else if (i == 4 || i == 3) {
-                    type = 2;
-                    model = fFactory.getModel("crab");
+                    enemy = eFactory.createEnemy("crab");
                 } else if (i == 2 || i == 1) {
-                    type = 1;
-                    model = fFactory.getModel("octopus");
+                    enemy = eFactory.createEnemy("octopus");
                 }
 
-                enemy = eFactory.createEnemy(type);
-                enemy.setPosX(posX);
-                enemy.setPosY(posY);
+                model = fFactory.getModel(enemy);
 
                 if (model != null) {
                     enemy.setModel(model);
                 }
 
+                enemy.setPosX(posX);
+                enemy.setPosY(posY);
                 entities.add(enemy);
                 posX += 40;
                 model = null;
