@@ -3,8 +3,14 @@ package edu.patterns.model;
 import java.util.ArrayList;
 
 public final class Crab extends Enemy {
+    /**
+    * Points earned for killing this enemy.
+    */
     private static final int SCORE = 20;
 
+    /**
+    * Constructor for the Crab enemy.
+    */
     public Crab() {
         super();
         super.score = SCORE;

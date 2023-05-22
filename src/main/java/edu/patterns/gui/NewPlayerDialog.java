@@ -78,14 +78,14 @@ public final class NewPlayerDialog extends JDialog
 
             if (value.equals(Const.CREAR)) {
                 name = nameTf.getText();
-                boolean nombOk = name.matches(Const.NAME_REGEX);
-                boolean lNombOk = name.length() < MAX_NAME_LENGHT;
+                boolean nameOk = name.matches(Const.NAME_REGEX);
+                boolean lNameOk = name.length() < MAX_NAME_LENGHT;
 
                 nickName = nickTf.getText();
                 boolean nickOk = nickName.matches(Const.NICK_REGEX);
                 boolean lnickOk = nickName.length() < MAX_NICK_LENGHT;
 
-                if (nombOk && lNombOk && nickOk && lnickOk) {
+                if (nameOk && lNameOk && nickOk && lnickOk) {
                     savePlayer();
                     closeDialog();
                 } else {

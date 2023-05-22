@@ -3,8 +3,14 @@ package edu.patterns.model;
 import java.util.ArrayList;
 
 public final class Squid extends Enemy {
+    /**
+    * Points earned for killing this enemy.
+    */
     private static final int SCORE = 30;
 
+    /**
+    * Constructor for the Squid enemy.
+    */
     public Squid() {
         super();
         super.score = SCORE;

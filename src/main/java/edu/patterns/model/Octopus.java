@@ -3,8 +3,14 @@ package edu.patterns.model;
 import java.util.ArrayList;
 
 public final class Octopus extends Enemy {
+    /**
+    * Points earned for killing this enemy.
+    */
     private static final int SCORE = 10;
 
+    /**
+    * Constructor for the Octopus enemy.
+    */
     public Octopus() {
         super();
         super.score = SCORE;
