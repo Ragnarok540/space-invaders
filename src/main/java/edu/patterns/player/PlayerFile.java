@@ -44,8 +44,8 @@ public final class PlayerFile implements IPlayerFileProxy {
         return null;
     }
 
-    private String joinComma(final String[] data) {
-        return Stream.of(data).collect(Collectors.joining(","));
+    private String joinDelimiter(final String[] data) {
+        return Stream.of(data).collect(Collectors.joining(DELIMITER));
     }
 
     public void writeFile() throws IOException {
@@ -53,7 +53,7 @@ public final class PlayerFile implements IPlayerFileProxy {
 
         try (PrintWriter pw = new PrintWriter(csvFile)) {
             data.stream()
-            .map(this::joinComma)
+            .map(this::joinDelimiter)
             .forEach(pw::println);
         }
     }

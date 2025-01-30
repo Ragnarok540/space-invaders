@@ -97,9 +97,9 @@ public final class SelectPlayerDialog extends JDialog
     }
 
     private void loadPlayer(final String selection) {
-        PlayerFile aj = new PlayerFile();
-        MementoPlayer jm = aj.open(selection);
-        game.setJugador(jm);
+        PlayerFile pf = new PlayerFile();
+        MementoPlayer mp = pf.open(selection);
+        game.setPlayer(mp);
         game.startGame();
     }
 }

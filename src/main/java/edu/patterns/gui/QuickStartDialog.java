@@ -120,13 +120,13 @@ public final class QuickStartDialog extends JDialog
     }
 
     private void loadPlayer() {
-        PlayerFile aj = new PlayerFile();
+        PlayerFile pf = new PlayerFile();
         IPlayerNullObject player;
 
-        if (aj.playerExists(nickName)) {
+        if (pf.playerExists(nickName)) {
             player = new Player();
-            MementoPlayer jm = aj.open(nickName);
-            game.setJugador(jm);
+            MementoPlayer mp = pf.open(nickName);
+            game.setPlayer(mp);
             game.startGame();
         } else {
             player = new NullPlayer();

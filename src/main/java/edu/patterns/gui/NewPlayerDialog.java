@@ -25,8 +25,10 @@ public final class NewPlayerDialog extends JDialog
     private static final int MAX_NICK_LENGHT = 6;
     private static final int MAX_NAME_LENGHT = 25;
     private JOptionPane optionPane;
-    private JTextField nameTf, nickTf;
-    private String name, nickName;
+    private JTextField nameTf;
+    private JTextField nickTf;
+    private String name;
+    private String nickName;
 
     public NewPlayerDialog(final JFrame window) {
         super(window, true);

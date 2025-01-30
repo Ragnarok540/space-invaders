@@ -181,7 +181,7 @@ public final class Game extends Canvas implements Runnable {
         bs.show();
     }
 
-    public void setJugador(final MementoPlayer mementoPlayer) {
+    public void setPlayer(final MementoPlayer mementoPlayer) {
         player = new Player();
         player.openPlayer(mementoPlayer);
     }
@@ -194,18 +194,18 @@ public final class Game extends Canvas implements Runnable {
         game.setMaximumSize(dimension);
         game.setPreferredSize(dimension);
 
-        JFrame ventana = new JFrame(Const.TITULO);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setJMenuBar(new MenuBar(ventana, game));
-        ventana.setLayout(new BorderLayout());
+        JFrame window = new JFrame(Const.TITULO);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setJMenuBar(new MenuBar(window, game));
+        window.setLayout(new BorderLayout());
         statusBar = new StatusBar();
-        ventana.add(statusBar, BorderLayout.SOUTH);
-        ventana.add(game, BorderLayout.CENTER);
-        ventana.pack();
+        window.add(statusBar, BorderLayout.SOUTH);
+        window.add(game, BorderLayout.CENTER);
+        window.pack();
 
-        ventana.setResizable(false);
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
+        window.setResizable(false);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
     }
 
     public void startGame() {
