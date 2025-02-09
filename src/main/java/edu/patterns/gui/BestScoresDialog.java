@@ -15,9 +15,9 @@ public final class BestScoresDialog extends JOptionPane {
     public BestScoresDialog() {
         pfp = new PlayerFileProxy();
         List<String[]> data = pfp.getData();
-        Object[][] datos = pfp.convert(data);
-        JTable tabla = new JTable(datos, Const.COL_NAMES);
-        JScrollPane scroll = new JScrollPane(tabla);
+        Object[][] tableData = pfp.convert(data);
+        JTable table = new JTable(tableData, Const.COL_NAMES);
+        JScrollPane scroll = new JScrollPane(table);
         this.setMessage(scroll);
     }
 }

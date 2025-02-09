@@ -24,7 +24,7 @@ public final class MenuBar extends JMenuBar implements ActionListener {
     private JMenuItem aboutItem = new JMenuItem(Const.T_ACERCA);
     private NewPlayerDialog npd;
     private SelectPlayerDialog spd;
-    private BestScoresDialog dmp;
+    private BestScoresDialog bsd;
     private QuickStartDialog qsd;
     private JOptionPane helpDialog = new JOptionPane(Const.INSTRUCC);
     private JOptionPane aboutDialog = new JOptionPane(Const.ACERCA);
@@ -58,6 +58,7 @@ public final class MenuBar extends JMenuBar implements ActionListener {
         npd = new NewPlayerDialog(this.window);
         spd = new SelectPlayerDialog(this.window, this.game);
         qsd = new QuickStartDialog(this.window, this.game);
+        bsd = new BestScoresDialog();
     }
 
     @Override
@@ -80,8 +81,7 @@ public final class MenuBar extends JMenuBar implements ActionListener {
             dialog = null;
             break;
         case Const.T_PUNT:
-            dmp = new BestScoresDialog();
-            dialog = dmp.createDialog(this, Const.T_PUNT);
+            dialog = bsd.createDialog(this, Const.T_PUNT);
             break;
         case Const.T_INSTRUCC:
             dialog = helpDialog.createDialog(this, Const.T_INSTRUCC);
