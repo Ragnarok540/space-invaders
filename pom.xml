@@ -76,6 +76,9 @@
         <plugin>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>3.2.1</version>
+            <configuration>
+                <configLocation>sun_checks_custom.xml</configLocation>
+            </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
